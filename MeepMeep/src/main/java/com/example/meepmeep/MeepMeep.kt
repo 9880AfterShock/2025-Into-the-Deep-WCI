@@ -1,34 +1,33 @@
-package com.example.meepmeep
+package com.example.meepmeeptesting
 
-import com.acmerobotics.roadrunner.Pose2d
 import com.noahbres.meepmeep.MeepMeep
-import com.noahbres.meepmeep.MeepMeep.Background
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder
+import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity
 
-object MeepMeep {
+object MeepMeepTesting {
     @JvmStatic
     fun main(args: Array<String>) {
-        val meepMeep = MeepMeep(800)
+        val meepMeep: MeepMeep = MeepMeep(800)
 
-        val myBot =
+        val myBot: RoadRunnerBotEntity =
             DefaultBotBuilder(meepMeep) // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60.0, 60.0, Math.toRadians(180.0), Math.toRadians(180.0), 15.0)
+                .setConstraints(60, 60, Math.toRadians(180.0), Math.toRadians(180.0), 15)
                 .build()
 
         myBot.runAction(
-            myBot.drive.actionBuilder(Pose2d(0.0, 0.0, 0.0))
-                .lineToX(30.0)
+            myBot.getDrive().actionBuilder(Pose2d(0.0, 0.0, 0.0))
+                .lineToX(30)
                 .turn(Math.toRadians(90.0))
-                .lineToY(30.0)
+                .lineToY(30)
                 .turn(Math.toRadians(90.0))
-                .lineToX(0.0)
+                .lineToX(0)
                 .turn(Math.toRadians(90.0))
-                .lineToY(0.0)
+                .lineToY(0)
                 .turn(Math.toRadians(90.0))
                 .build()
         )
 
-        meepMeep.setBackground(Background.FIELD_POWERPLAY_OFFICIAL)
+        meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
             .setDarkMode(true)
             .setBackgroundAlpha(0.95f)
             .addEntity(myBot)
