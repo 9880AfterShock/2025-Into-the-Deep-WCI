@@ -9,22 +9,22 @@ object Raiser { //Prefix for commands
     @JvmField
     val encoderTicks = 1425.1 //calculate your own ratio
     val gearRatio = 100/20
-    val upPos = 45.0 //in degrees
+    val upPos = 55.0 //in degrees
+    val hangPos = 45.0 //in degrees
     val downPos = 0.0 //in degrees
-    var status = 0 // bandaid
-    var bandaid = -1135 //bandaid lol
+    var startOffset = 1150 //offset of the start pos from the level pos in encoder ticks
     private var downButtonCurrentlyPressed = false
     private var downButtonPreviouslyPressed = false
     private var upButtonCurrentlyPressed = false
     private var upButtonPreviouslyPressed = false
+    private var hangButtonCurrentlyPressed = false
+    private var hangButtonPreviouslyPressed = false
     lateinit var opmode: OpMode //opmode var innit
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
     fun initRaiser(opmode: OpMode){ //init motors
         motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
-        status = 0 //reset for the bandaid
-        //motor.targetPosition = (targetDegrees*encoderTicks).toInt()
-        motor.targetPosition = (status*bandaid) //bandaid
+        motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360 - startOffset).toInt()
         motor.mode = encoderMode //reset encoder
         motor.mode = motorMode //enable motor mode
         this.opmode = opmode
@@ -32,32 +32,33 @@ object Raiser { //Prefix for commands
     fun updateRaiser() {
         downButtonCurrentlyPressed = opmode.gamepad2.b //can change controls
         upButtonCurrentlyPressed = opmode.gamepad2.y //can change controls
+        hangButtonCurrentlyPressed = opmode.gamepad2.x //can change controls
 
         // If the button state is different than what it was, then act
-        if (!(downButtonCurrentlyPressed && upButtonCurrentlyPressed)) {
+        if (!((downButtonCurrentlyPressed && upButtonCurrentlyPressed) || (downButtonCurrentlyPressed && hangButtonCurrentlyPressed) || (upButtonCurrentlyPressed && hangButtonCurrentlyPressed))) {
             if ((downButtonCurrentlyPressed && !downButtonPreviouslyPressed) && MainLift.lift.currentPosition/MainLift.encoderTicks <= MainLift.maxLowPos) { //make so it cannot be lowered beyond the limit of the size constraints
-                //targetDegrees = downPos //in degrees
-                status = 1 //bandaid
+                targetDegrees = downPos
+            }
+            if ((hangButtonCurrentlyPressed && !hangButtonPreviouslyPressed) && MainLift.lift.currentPosition/MainLift.encoderTicks <= MainLift.maxHangPos) { //make so it cannot be lowered beyond the limit of the size constraints
+                targetDegrees = hangPos
             }
             if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed) {
-                //targetDegrees = upPos
-                status = 0 //bandaid
+                targetDegrees = upPos
                 }
             }
 
         downButtonPreviouslyPressed = downButtonCurrentlyPressed
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
+        hangButtonPreviouslyPressed = hangButtonCurrentlyPressed
 
-        if (motor.currentPosition <= bandaid + 30 && status == 1) { //bandaid fix, 50 is margin of error
-            motor.power = 0.0
+        if ((motor.currentPosition- startOffset)/encoderTicks/gearRatio*360<= 5.0 && targetDegrees == 0.0) { //5 is degrees margin of error
+            motor.power = 0.0 //let motor rest
         } else {
-            motor.power = 1.0
+            motor.power = 0.7 //turn motor on
         }
-        //motor.setPower(1.0) //turn motor on
-        motor.targetPosition = (bandaid * status) //bandaid, starts up rn
-        //motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360).toInt()
-        opmode.telemetry.addData("Raiser Position (0 is up, 1 is down)", motor.currentPosition) //bandaid
-        //disabled for band aid opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
-        //opmode.telemetry.addData("encoder ticks", motor.currentPosition) //testing -837 (bandaid)
+
+        motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360 - startOffset).toInt()
+        opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
+        opmode.telemetry.addData("raiser power", motor.power)
     }
 }

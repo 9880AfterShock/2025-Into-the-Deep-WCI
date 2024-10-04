@@ -18,6 +18,8 @@ object MainLift { //Prefix for commands
     var maxPos = 7.0 //all the way up
     @JvmField
     var maxLowPos = 3.5 //maximum position when lowered
+    @JvmField
+    var maxHangPos = 4.5 //maximum position when in hanging mode //temp values, CHANGE!
     lateinit var opmode: OpMode //opmode var innit
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
@@ -46,8 +48,11 @@ object MainLift { //Prefix for commands
         if (pos>maxPos) {
             pos = maxPos
         }
-        if (pos>maxLowPos && Raiser.status == 1) {
+        if (pos>maxLowPos && Raiser.targetDegrees == Raiser.downPos) {
             pos = maxLowPos
+        }
+        if (pos>maxHangPos && Raiser.targetDegrees == Raiser.hangPos) {
+            pos = maxHangPos
         }
         if (pos<minPos) {
             pos = minPos
