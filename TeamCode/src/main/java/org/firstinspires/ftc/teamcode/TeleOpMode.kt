@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.Raiser
 import org.firstinspires.ftc.teamcode.SpecimenClaw
 import org.firstinspires.ftc.teamcode.SpecimenLift
 import org.firstinspires.ftc.teamcode.SpecimenSwivel
-//import org.firstinspires.ftc.teamcode.Wrist
+import org.firstinspires.ftc.teamcode.Wrist
 import org.firstinspires.ftc.teamcode.SampleColorSensor
 //import org.firstinspires.ftc.teamcode.SampleType
 //import org.firstinspires.ftc.teamcode.SampleTypeSensor
@@ -37,7 +37,7 @@ class TeleOpMode : LinearOpMode() {
         Claw.initClaw(this)
         MainLift.initLift(this)
         Raiser.initRaiser(this)
-        //Wrist.initWrist(this)
+        Wrist.initWrist(this)
         SampleColorSensor.initColorSensor(this, 2.0F)
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
@@ -57,7 +57,7 @@ class TeleOpMode : LinearOpMode() {
             Claw.updateClaw()
             MainLift.updateLift()
             Raiser.updateRaiser()
-            //Wrist.updateWrist()
+            Wrist.updateWrist()
             SampleColorSensor.updateColorSensor()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()

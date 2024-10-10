@@ -34,7 +34,7 @@ object Raiser { //Prefix for commands
         hangButtonCurrentlyPressed = opmode.gamepad2.x //can change controls
 
         if (!((downButtonCurrentlyPressed && upButtonCurrentlyPressed) || (downButtonCurrentlyPressed && hangButtonCurrentlyPressed) || (upButtonCurrentlyPressed && hangButtonCurrentlyPressed))) {
-            if ((downButtonCurrentlyPressed && !downButtonPreviouslyPressed) /* && MainLift.lift.currentPosition/MainLift.encoderTicks <= MainLift.maxLowPos */) { //make so it cannot be lowered beyond the limit of the size constraints
+            if ((downButtonCurrentlyPressed && !downButtonPreviouslyPressed) && MainLift.lift.currentPosition/MainLift.encoderTicks <= MainLift.maxLowPos) { //make so it cannot be lowered beyond the limit of the size constraints
                 targPos = downPos
             }
             if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed) {

@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.hardware.Servo
-//import kotlin.concurrent.thread not needed lol
-
+import com.qualcomm.robotcore.hardware.DcMotor
+import org.firstinspires.ftc.teamcode.MainLift.pos
 
 object Wrist {
-    private lateinit var wrist: Servo
+    private lateinit var wrist: DcMotor
+    val encoderTicks = 537.7 //calculate your own ratio
     @JvmField
-    var positions = arrayOf (0, 90, 180) //positions, most fzorward to most backward
+    var positions = arrayOf (0, 90, 180) //positions, most forward to most backward
     @JvmField
     var initPos = 200 //innit pos prob 200-220 or so
     var currentPos = -1 //innit pos placeholder
@@ -19,10 +19,14 @@ object Wrist {
     private var forwardWristButtonPreviouslyPressed = false
 
     lateinit var opmode:OpMode
-
+    var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
+    var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION
     fun initWrist(opmode: OpMode){
         currentPos = -1 //reset pos to innit, change for teleop after auto
-        wrist = opmode.hardwareMap.get(Servo::class.java, "Wrist") //config name
+        wrist = opmode.hardwareMap.get(DcMotor::class.java, "wrist") //config name
+        wrist.targetPosition = (pos * encoderTicks).toInt()
+        wrist.mode = encoderMode //reset encoder
+        wrist.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
 
@@ -39,11 +43,15 @@ object Wrist {
             changePosition("backward")
         }
         //}
+        wrist.power = 0.5
+
 
         forwardWristButtonPreviouslyPressed = forwardWristButtonCurrentlyPressed
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
+        opmode.telemetry.addData("is it wiring???", wrist.currentPosition)// yes, but not-
+        //right now
     }
 
     private fun changePosition(direction: String){
@@ -67,9 +75,9 @@ object Wrist {
     }
     private fun updatePosition(targetPosition: Int){
         if (targetPosition == -1) {
-            wrist.position = initPos.toDouble() / 270 //change both
+            wrist.targetPosition = (-encoderTicks*((initPos-220)/360)).toInt()
         } else {
-            wrist.position = targetPosition.toDouble() / 270 //change both
+            wrist.targetPosition = (-encoderTicks*((targetPosition-220)/360)).toInt()
         }
         state = targetPosition.toString()
     }
