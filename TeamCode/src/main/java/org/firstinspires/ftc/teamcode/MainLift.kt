@@ -48,10 +48,10 @@ object MainLift { //Prefix for commands
         if (pos>maxPos) {
             pos = maxPos
         }
-        if (pos>maxLowPos && Raiser.targetDegrees == Raiser.downPos) {
+        if (pos>maxLowPos && Raiser.targPos == Raiser.downPos) {
             pos = maxLowPos
         }
-        if (pos>maxHangPos && Raiser.targetDegrees == Raiser.hangPos) {
+        if (pos>maxHangPos && Raiser.targPos == Raiser.hangPos) {
             pos = maxHangPos
         }
         if (pos<minPos) {
