@@ -51,6 +51,8 @@ object Wrist {
 
         opmode.telemetry.addData("Wrist State", state)
         opmode.telemetry.addData("is it wiring???", wrist.currentPosition)// yes, but not-
+        opmode.telemetry.addData("hand target", wrist.targetPosition)// yes, but not-
+        opmode.telemetry.addData("WRIST POWA", wrist.power)// yes, but not-
         //right now
     }
 
@@ -75,7 +77,7 @@ object Wrist {
     }
     private fun updatePosition(targetPosition: Int){
         if (targetPosition == -1) {
-            wrist.targetPosition = (-encoderTicks*((initPos-220)/360)).toInt()
+            wrist.targetPosition = (-encoderTicks*((initPos-220)/360)).toInt() //this is the broken elif area
         } else {
             wrist.targetPosition = (-encoderTicks*((targetPosition-220)/360)).toInt()
         }
