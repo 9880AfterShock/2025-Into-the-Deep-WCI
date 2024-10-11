@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.MainLift.pos
 
 object Wrist {
     private lateinit var wrist: DcMotor
-    val encoderTicks = 537.7 //calculate your own ratio
+    val encoderTicks = 752.8 //calculate your own ratio
     @JvmField
     var positions = arrayOf (0, 90, 180) //positions, most forward to most backward
     @JvmField

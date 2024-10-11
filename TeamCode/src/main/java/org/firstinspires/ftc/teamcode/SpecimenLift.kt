@@ -12,8 +12,8 @@ object SpecimenLift { //Prefix for commands
     var minPos = 0.0 //all the way down
     @JvmField
     var maxPos = 3.5 //GOOD and working
-    var minDrop = 2.4 //lower drop pos in rotations
-    var maxDrop = 2.5 // higher drop pos in rotations
+    var minDrop = 2.7 //lower drop pos in rotations
+    var maxDrop = 2.9 // higher drop pos in rotations
     lateinit var opmode: OpMode //opmode var innit
     private var downButtonCurrentlyPressed = false
     private var downButtonPreviouslyPressed = false
