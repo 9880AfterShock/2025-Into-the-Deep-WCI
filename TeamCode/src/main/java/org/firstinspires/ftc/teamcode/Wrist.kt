@@ -10,10 +10,9 @@ object Wrist {
     @JvmField
     var positions = arrayOf (0, 90, 180) //positions, most forward to most backward
     @JvmField
-    var initPos = 200 //innit pos prob 200-220 or so
+    var initPos = 220 //innit pos prob 200-220 or so
     var currentPos = -1 //innit pos placeholder
     private var state = "Init"
-    private var trueState = "Init"
     private var backwardWristButtonCurrentlyPressed = false
     private var backwardWristButtonPreviouslyPressed = false
     private var forwardWristButtonCurrentlyPressed = false
@@ -44,16 +43,12 @@ object Wrist {
             changePosition("backward")
         }
         //}
-        wrist.power = 0.5
 
 
         forwardWristButtonPreviouslyPressed = forwardWristButtonCurrentlyPressed
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
-        opmode.telemetry.addData("Wrist current pos", wrist.currentPosition)
-        opmode.telemetry.addData("Wrist target pos", trueState)
-        opmode.telemetry.addData("Wrist power", wrist.power)
         //right now
     }
 
@@ -84,6 +79,6 @@ object Wrist {
             wrist.targetPosition = ((-encoderTicks*(-targetPosition+initPos))/360).toInt()
         }
         state = targetPosition.toString()
-        trueState = wrist.targetPosition.toString()
+        wrist.power = 0.25
     }
 }
