@@ -13,6 +13,7 @@ object Wrist {
     var initPos = 200 //innit pos prob 200-220 or so
     var currentPos = -1 //innit pos placeholder
     private var state = "Init"
+    private var trueState = "Init"
     private var backwardWristButtonCurrentlyPressed = false
     private var backwardWristButtonPreviouslyPressed = false
     private var forwardWristButtonCurrentlyPressed = false
@@ -50,9 +51,9 @@ object Wrist {
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
-        opmode.telemetry.addData("is it wiring???", wrist.currentPosition)// yes, but not-
-        opmode.telemetry.addData("hand target", wrist.targetPosition)// yes, but not-
-        opmode.telemetry.addData("WRIST POWA", wrist.power)// yes, but not-
+        opmode.telemetry.addData("Wrist current pos", wrist.currentPosition)
+        opmode.telemetry.addData("Wrist target pos", trueState)
+        opmode.telemetry.addData("Wrist power", wrist.power)
         //right now
     }
 
@@ -77,10 +78,12 @@ object Wrist {
     }
     private fun updatePosition(targetPosition: Int){
         if (targetPosition == -1) {
-            wrist.targetPosition = (-encoderTicks*((initPos-220)/360)).toInt() //this is the broken elif area
+            //this is the broken elif area
+            wrist.targetPosition = ((-encoderTicks*(-initPos+initPos))/360).toInt()
         } else {
-            wrist.targetPosition = (-encoderTicks*((targetPosition-220)/360)).toInt()
+            wrist.targetPosition = ((-encoderTicks*(-targetPosition+initPos))/360).toInt()
         }
         state = targetPosition.toString()
+        trueState = wrist.targetPosition.toString()
     }
 }
