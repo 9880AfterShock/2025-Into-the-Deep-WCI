@@ -11,7 +11,9 @@ object SpecimenLift { //Prefix for commands
     @JvmField
     var minPos = 0.0 //all the way down
     @JvmField
-    var maxPos = 3.5 //rn part way up
+    var maxPos = 3.5 //GOOD and working
+    var minDrop = 2.4 //lower drop pos in rotations
+    var maxDrop = 2.5 // higher drop pos in rotations
     lateinit var opmode: OpMode //opmode var innit
     private var downButtonCurrentlyPressed = false
     private var downButtonPreviouslyPressed = false
@@ -42,6 +44,8 @@ object SpecimenLift { //Prefix for commands
             }
         }
 
+        checkDrop()
+
         downButtonPreviouslyPressed = downButtonCurrentlyPressed
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
 
@@ -50,6 +54,12 @@ object SpecimenLift { //Prefix for commands
         lift.power = 0.7 //turn motor on
         lift.targetPosition = (pos*encoderTicks).toInt()
         opmode.telemetry.addData("Specimen Lift target position", pos) //Set telemetry
+    }
+
+    private fun checkDrop() {
+        if ((maxDrop > lift.currentPosition/encoderTicks) && (lift.currentPosition/encoderTicks > minDrop) && (lift.targetPosition/encoderTicks == minPos)){
+            SpecimenClaw.open()
+        }
     }
 
 }

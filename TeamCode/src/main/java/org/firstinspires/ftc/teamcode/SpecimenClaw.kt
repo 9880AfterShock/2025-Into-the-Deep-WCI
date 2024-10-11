@@ -20,7 +20,7 @@ object SpecimenClaw {
         this.opmode = opmode
         state = "Closed"
     }
-    private fun open() {
+    fun open() {
         claw.position = openPos
         state = "Open"
     }
