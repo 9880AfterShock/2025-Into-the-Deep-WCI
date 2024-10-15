@@ -30,8 +30,6 @@ object Raiser { //Prefix for commands
     }
     fun initRaiserAfterAuto(opmode: OpMode){ //init motors
         motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
-        targPos = 0
-        motor.targetPosition = targPos
         this.opmode = opmode
     }
     fun updateRaiser() {

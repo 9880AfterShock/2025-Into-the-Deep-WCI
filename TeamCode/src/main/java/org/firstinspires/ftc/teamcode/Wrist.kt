@@ -30,7 +30,6 @@ object Wrist {
         this.opmode = opmode
     }
     fun initWristAfterAuto(opmode: OpMode){
-        currentPos = -1 //reset pos to innit, change for teleop after auto
         wrist = opmode.hardwareMap.get(DcMotor::class.java, "wrist") //config name
         wrist.targetPosition = (pos * encoderTicks).toInt()
         this.opmode = opmode

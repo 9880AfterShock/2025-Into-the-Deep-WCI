@@ -32,9 +32,7 @@ object MainLift { //Prefix for commands
         this.opmode = opmode
     }
     fun initLiftAfterAuto(opmode: OpMode){ //init motors
-        pos = 0.0
         lift = opmode.hardwareMap.get(DcMotor::class.java, "mainLift") //config name
-        lift.targetPosition = (pos*encoderTicks).toInt()
         this.opmode = opmode
     }
     fun updateLift(){
