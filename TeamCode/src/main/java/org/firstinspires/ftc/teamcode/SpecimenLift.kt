@@ -31,6 +31,7 @@ object SpecimenLift { //Prefix for commands
     }
     fun initLiftAfterAuto(opmode: OpMode){ //init motors
         lift = opmode.hardwareMap.get(DcMotor::class.java, "specimenLift") //config name
+        lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
     fun updateLift(){

@@ -33,6 +33,7 @@ object MainLift { //Prefix for commands
     }
     fun initLiftAfterAuto(opmode: OpMode){ //init motors
         lift = opmode.hardwareMap.get(DcMotor::class.java, "mainLift") //config name
+        lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
     fun updateLift(){

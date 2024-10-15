@@ -31,7 +31,7 @@ object Wrist {
     }
     fun initWristAfterAuto(opmode: OpMode){
         wrist = opmode.hardwareMap.get(DcMotor::class.java, "wrist") //config name
-        wrist.targetPosition = (pos * encoderTicks).toInt()
+        wrist.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
     fun updateWrist() {
