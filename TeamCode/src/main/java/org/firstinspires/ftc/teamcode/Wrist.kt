@@ -29,7 +29,12 @@ object Wrist {
         wrist.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
-
+    fun initWristAfterAuto(opmode: OpMode){
+        currentPos = -1 //reset pos to innit, change for teleop after auto
+        wrist = opmode.hardwareMap.get(DcMotor::class.java, "wrist") //config name
+        wrist.targetPosition = (pos * encoderTicks).toInt()
+        this.opmode = opmode
+    }
     fun updateWrist() {
         // Check the status of the claw button on the game pad
         forwardWristButtonCurrentlyPressed = opmode.gamepad1.right_bumper //change these to change the button

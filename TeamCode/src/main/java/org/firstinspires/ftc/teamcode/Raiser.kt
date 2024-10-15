@@ -28,6 +28,12 @@ object Raiser { //Prefix for commands
         motor.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
+    fun initRaiserAfterAuto(opmode: OpMode){ //init motors
+        motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
+        targPos = 0
+        motor.targetPosition = targPos
+        this.opmode = opmode
+    }
     fun updateRaiser() {
         downButtonCurrentlyPressed = opmode.gamepad2.b //can change controls
         upButtonCurrentlyPressed = opmode.gamepad2.y //can change controls

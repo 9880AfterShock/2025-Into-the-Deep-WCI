@@ -29,6 +29,12 @@ object SpecimenLift { //Prefix for commands
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
+    fun initLiftAfterAuto(opmode: OpMode){ //init motors
+        pos = 0.0
+        lift = opmode.hardwareMap.get(DcMotor::class.java, "specimenLift") //config name
+        lift.targetPosition = (pos*encoderTicks).toInt()
+        this.opmode = opmode
+    }
     fun updateLift(){
 
         //can change controls

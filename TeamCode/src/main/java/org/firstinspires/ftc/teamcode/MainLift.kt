@@ -31,6 +31,12 @@ object MainLift { //Prefix for commands
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
+    fun initLiftAfterAuto(opmode: OpMode){ //init motors
+        pos = 0.0
+        lift = opmode.hardwareMap.get(DcMotor::class.java, "mainLift") //config name
+        lift.targetPosition = (pos*encoderTicks).toInt()
+        this.opmode = opmode
+    }
     fun updateLift(){
 //can change controls
         if (opmode.gamepad2.dpad_up && !opmode.gamepad2.dpad_down) {
