@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.hardware.NormalizedRGBA
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.Claw
 import org.firstinspires.ftc.teamcode.MainLift
@@ -15,8 +16,10 @@ import org.firstinspires.ftc.teamcode.SpecimenLift
 import org.firstinspires.ftc.teamcode.SpecimenSwivel
 import org.firstinspires.ftc.teamcode.Wrist
 import org.firstinspires.ftc.teamcode.SampleColorSensor
-//import org.firstinspires.ftc.teamcode.SampleType
-//import org.firstinspires.ftc.teamcode.SampleTypeSensor
+import org.firstinspires.ftc.teamcode.SampleType
+import org.firstinspires.ftc.teamcode.SampleTypeSensor
+import org.firstinspires.ftc.teamcode.TeamColor
+
 
 @TeleOp(name = "9880 TeleOpMode Into-the-Deep") //change string for display name
 //Toggle Disabled to make appear in list or not.
@@ -37,11 +40,11 @@ class TeleOpMode : LinearOpMode() {
         MainLift.initLift(this)
         Raiser.initRaiser(this)
         Wrist.initWrist(this)
-        SampleColorSensor.initColorSensor(this, 2.0F)
+        SampleColorSensor.initColorSensor(this, 3.0F)
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
         SpecimenSwivel.initSwivel(this) //added because changes
-        //SampleTypeSensor.initTypeSensor(Color.valueOf(1F,0F,0F),Color.valueOf(0F, 0F, 1F),Color.valueOf(1F,1F,0F), 0.1F)
+        SampleTypeSensor.initTypeSensor(0.1F,0.6F,0.3F,0.1F)
         // init commands here
 
         //Wait for start
@@ -61,21 +64,21 @@ class TeleOpMode : LinearOpMode() {
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
             //SpecimenSwivel.updateSwivel() //not needed rn
-//            val color: SampleType = SampleTypeSensor.getSampleType()
-//            var colorstr = ""
-//            if (color == SampleType.NONE) {
-//                colorstr = "Unknown"
-//            } else if (color == SampleType.FRIENDLY) {
-//                colorstr = "Alliance"
-//            } else if (color == SampleType.NEUTRAL) {
-//                colorstr = "Neutral"
-//            } else if (color == SampleType.OPPONENT) {
-//                colorstr = "Opposition"
-//            }
-
-            // Show the elapsed time (and other telemetry) on driver station
+          val color: SampleType = SampleTypeSensor.getSampleType()
+            val colorval: NormalizedRGBA = SampleColorSensor.getColor()
+            var colorstr = ""
+            if (color == SampleType.NONE) {
+                colorstr = "Unknown"
+            } else if (color == SampleType.FRIENDLY) {
+                colorstr = "Alliance"
+            } else if (color == SampleType.NEUTRAL) {
+                colorstr = "Neutral"
+            } else if (color == SampleType.OPPONENT) {
+                colorstr = "Opposition"
+            }
+            telemetry.addData("Hue:", TeamColor.RGBToHSV(TeamColor.fromRGB(colorval.red, colorval.green, colorval.blue)).hue)
             telemetry.addData("Status", "Run Time: $runtime")
-            //telemetry.addData("TargetedSample:", colorstr)
+            telemetry.addData("TargetedSample:", colorstr)
             telemetry.update()
         }
     }
