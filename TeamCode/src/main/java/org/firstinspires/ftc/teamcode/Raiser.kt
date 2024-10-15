@@ -60,5 +60,6 @@ object Raiser { //Prefix for commands
         }
         motor.targetPosition = (targPos)
         opmode.telemetry.addData("Raiser Position", targPos) //change to enum
+        opmode.telemetry.addData("TRUE RAISER POS", motor.currentPosition) //change to enum
     }
 }
