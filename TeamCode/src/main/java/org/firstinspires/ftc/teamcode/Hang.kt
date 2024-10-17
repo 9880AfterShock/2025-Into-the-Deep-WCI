@@ -23,7 +23,7 @@ object Hang {
             hanging = true
         }
         if (hanging) {
-            if (MainLift.lift.currentPosition <= 0.5*MainLift.encoderTicks) {
+            if (MainLift.lift.currentPosition <= 1.0*MainLift.encoderTicks) {
                 Raiser.targPos = Raiser.upPos
             }
         }
