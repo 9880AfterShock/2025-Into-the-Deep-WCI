@@ -26,7 +26,7 @@ object SpecimenClaw {
     }
     private fun close(){
         claw.position = closePos //claw doesnt move
-        state = "Close" //this runs
+        state = "Closed" //this runs
     }
     private fun swap(){
         if (state == "Open") {
