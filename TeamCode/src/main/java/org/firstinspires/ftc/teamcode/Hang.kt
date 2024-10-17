@@ -18,6 +18,7 @@ object Hang {
         hangButtonCurrentlyPressed = opmode.gamepad2.b //can change controls
         if (hangButtonCurrentlyPressed && !hangButtonPreviouslyPressed && !hanging) {
             MainLift.pos = 0.0
+            MainLift.currentSpeed = 0.0
             Raiser.targPos = Raiser.downPos
             hanging = true
         }
@@ -25,11 +26,9 @@ object Hang {
             opmode.telemetry.addData("HANGING!!!", 1)
             if (MainLift.lift.currentPosition <= 0.5*MainLift.encoderTicks) {
                 Raiser.targPos = Raiser.upPos
-                if (unHangButtonCurrentlyPressed && !unHangButtonPreviouslyPressed) {
-                    hanging=false
-                }
             }
         }
+
         hangButtonPreviouslyPressed = hangButtonCurrentlyPressed
         unHangButtonPreviouslyPressed = unHangButtonCurrentlyPressed
     }
