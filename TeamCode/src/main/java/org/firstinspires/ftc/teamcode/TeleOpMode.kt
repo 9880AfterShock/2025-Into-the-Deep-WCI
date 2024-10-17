@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.NormalizedRGBA
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.Claw
+import org.firstinspires.ftc.teamcode.Hang
 import org.firstinspires.ftc.teamcode.MainLift
 import org.firstinspires.ftc.teamcode.MecanumDriveTrain
 import org.firstinspires.ftc.teamcode.Raiser
@@ -45,6 +46,7 @@ class TeleOpMode : LinearOpMode() {
         SpecimenClaw.initClaw(this)
         SpecimenSwivel.initSwivel(this) //added because changes
         SampleTypeSensor.initTypeSensor(0.1F,0.6F,0.3F,0.1F)
+        Hang.initHang(this)
         // init commands here
 
         //Wait for start
@@ -64,6 +66,7 @@ class TeleOpMode : LinearOpMode() {
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
             //SpecimenSwivel.updateSwivel() //not needed rn
+            Hang.checkHang()
           val color: SampleType = SampleTypeSensor.getSampleType()
             val colorval: NormalizedRGBA = SampleColorSensor.getColor()
             var colorstr = ""
