@@ -23,7 +23,6 @@ object Hang {
             hanging = true
         }
         if (hanging) {
-            opmode.telemetry.addData("HANGING!!!", 1)
             if (MainLift.lift.currentPosition <= 0.5*MainLift.encoderTicks) {
                 Raiser.targPos = Raiser.upPos
             }
@@ -31,5 +30,7 @@ object Hang {
 
         hangButtonPreviouslyPressed = hangButtonCurrentlyPressed
         unHangButtonPreviouslyPressed = unHangButtonCurrentlyPressed
+
+        opmode.telemetry.addData("Hanging", hanging.toString())
     }
 }
