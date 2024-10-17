@@ -16,7 +16,7 @@ object Hang {
     fun checkHang(){
         hangButtonCurrentlyPressed = (opmode.gamepad2.right_trigger.toDouble() > 0.1) //can change controls
         unHangButtonCurrentlyPressed = (opmode.gamepad2.left_trigger.toDouble() > 0.1) //can change controls
-        if (hangButtonCurrentlyPressed && !hangButtonPreviouslyPressed && !hanging) {
+        if (hangButtonCurrentlyPressed && !hangButtonPreviouslyPressed && !hanging) { //not working???
             MainLift.pos = 0.0
             MainLift.currentSpeed = 0.0
             Raiser.targPos = Raiser.downPos
