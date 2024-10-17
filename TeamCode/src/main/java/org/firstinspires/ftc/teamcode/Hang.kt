@@ -27,9 +27,6 @@ object Hang {
             if (MainLift.lift.currentPosition <= 0.5*MainLift.encoderTicks) {
                 Raiser.targPos = Raiser.upPos
             }
-            if (unHangButtonCurrentlyPressed && !unHangButtonPreviouslyPressed) {
-                hanging = false
-            }
         }
 
         hangButtonPreviouslyPressed = hangButtonCurrentlyPressed
