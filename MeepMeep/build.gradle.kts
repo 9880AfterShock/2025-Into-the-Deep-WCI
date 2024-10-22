@@ -11,11 +11,11 @@ repositories {
     }
 }
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_18 // both use 17, 18 just works? unsupported officall and 17 works too
+    targetCompatibility = JavaVersion.VERSION_18 // both use 17, 18 just works? unsupported officall and 17 works too
 }
 dependencies {
-    //implementation(project(":FtcRobotController"))
+    //implementation(project(":FtcRobotController")) //both commented out
     //implementation("com.acmerobotics.dashboard:dashboard:0.4.16")
     implementation("com.acmerobotics.roadrunner:MeepMeep:0.1.6")
 }

@@ -103,8 +103,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8 // 1_7 and 1_8 works with meep, not telop?
+        targetCompatibility JavaVersion.VERSION_1_8 // 1_7 and 1_8 works with meep, not telop?
     }
 
     packagingOptions {

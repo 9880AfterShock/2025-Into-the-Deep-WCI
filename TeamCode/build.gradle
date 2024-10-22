@@ -14,9 +14,13 @@
 // Include common definitions from above.
 apply from: '../build.common.gradle'
 apply from: '../build.dependencies.gradle'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
+    kotlinOptions {
+        jvmTarget = '17' // same and acurite
+    }
 
     packagingOptions {
         jniLibs.useLegacyPackaging true
@@ -30,10 +34,11 @@ repositories {
 }
 
 dependencies {
-    implementation project(':FtcRobotController')
+    implementation project(':FtcRobotController') // not commented out here, commented out in other ones though
 
     implementation "com.acmerobotics.roadrunner:ftc:0.1.14"
     implementation "com.acmerobotics.roadrunner:core:1.0.0"
     implementation "com.acmerobotics.roadrunner:actions:1.0.0"
     implementation "com.acmerobotics.dashboard:dashboard:0.4.16"
+    implementation 'androidx.core:core-ktx:1.13.1'
 }
