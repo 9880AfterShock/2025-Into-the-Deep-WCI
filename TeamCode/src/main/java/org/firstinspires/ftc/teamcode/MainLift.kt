@@ -11,7 +11,7 @@ object MainLift { //Prefix for commands
     var currentSpeed = 0.0 //Starting speed, WHY ARE YOU MAKING A FALLING LIFT???
     @JvmField
     var speed = 0.05 //update speed
-    val encoderTicks = 751.8 //calculate your own ratio///// old us 537.7
+    val encoderTicks = 751.8 //calculate your own ratio
     @JvmField
     var minPos = 0.0 //folded all the way in
     @JvmField
