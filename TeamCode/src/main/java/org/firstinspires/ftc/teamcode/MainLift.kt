@@ -19,7 +19,7 @@ object MainLift { //Prefix for commands
     @JvmField
     var maxLowPos = 3.5 //maximum position when lowered
     @JvmField
-    var maxHangPos = 4.5 //maximum position when in hanging mode //temp values, CHANGE!
+    var maxHangPos = 3.5 //maximum position when in hanging mode //temp values, CHANGE!
     lateinit var opmode: OpMode //opmode var innit
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
