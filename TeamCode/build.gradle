@@ -19,7 +19,7 @@ apply plugin: 'org.jetbrains.kotlin.android'
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = '17' // same and acurite
     }
 
     packagingOptions {
@@ -34,7 +34,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(':FtcRobotController')
+    implementation project(':FtcRobotController') // not commented out here, commented out in other ones though
 
     implementation "com.acmerobotics.roadrunner:ftc:0.1.14"
     implementation "com.acmerobotics.roadrunner:core:1.0.0"

@@ -17,8 +17,8 @@ android {
 
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7 //_1_8 works with meep
-        targetCompatibility JavaVersion.VERSION_1_7 //_1_8 works with meep
+        sourceCompatibility JavaVersion.VERSION_1_8 //_1_8 works with meep // sam uses 1_8
+        targetCompatibility JavaVersion.VERSION_1_8 //_1_8 works with meep // sam uses 1_8
     }
     namespace = 'com.qualcomm.ftcrobotcontroller'
 }

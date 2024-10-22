@@ -21,6 +21,7 @@ apply plugin: 'com.android.application'
 
 android {
 
+    //compileSdkVersion 29
     compileSdk 34
 
     signingConfigs {
@@ -102,8 +103,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7 //_1_8 works with meep Invoke-customs are only supported starting with Android 0 (--min-api 26)
-        targetCompatibility JavaVersion.VERSION_1_7 //_1_8 works with meep
+        sourceCompatibility JavaVersion.VERSION_1_8 // 1_7 and 1_8 works with meep, not telop?
+        targetCompatibility JavaVersion.VERSION_1_8 // 1_7 and 1_8 works with meep, not telop?
     }
 
     packagingOptions {
