@@ -10,7 +10,7 @@ object SpecimenClaw {
     var openPos = 0.7 //the positions
     @JvmField
     var closePos = 1.0 //the positions
-    private var state = "Closed"
+    var state = "Closed"
     private var clawButtonCurrentlyPressed = false
     private var clawButtonPreviouslyPressed = false
 
@@ -26,7 +26,7 @@ object SpecimenClaw {
     }
     private fun close(){
         claw.position = closePos //claw doesnt move
-        state = "Close" //this runs
+        state = "Closed" //this runs
     }
     private fun swap(){
         if (state == "Open") {
