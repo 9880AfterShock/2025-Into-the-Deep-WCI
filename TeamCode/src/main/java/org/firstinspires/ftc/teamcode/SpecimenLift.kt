@@ -44,7 +44,7 @@ object SpecimenLift { //Prefix for commands
             if ((downButtonCurrentlyPressed && !downButtonPreviouslyPressed)) {
                 pos = minPos
             }
-            if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed) {
+            if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed && SpecimenClaw.state == "Closed") {
                 pos = maxPos
             }
         }
