@@ -6,7 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor
 object Raiser { //Prefix for commands
     private lateinit var motor: DcMotor //Init Motor Var
 
+    @JvmField //idke why i neeed this for java but whatever
     var targPos = 0 // in encoder ticks
+    @JvmField
     var upPos = 0 // in encoder ticks
     var downPos = -1135
     var hangPos = -500

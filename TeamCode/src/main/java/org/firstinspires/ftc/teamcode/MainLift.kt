@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor
 
 object MainLift { //Prefix for commands
     lateinit var lift: DcMotor //Init Motor Var
+    @JvmField
     var pos = 0.0 //starting Position
     var currentSpeed = 0.0 //Starting speed, WHY ARE YOU MAKING A FALLING LIFT???
     @JvmField
