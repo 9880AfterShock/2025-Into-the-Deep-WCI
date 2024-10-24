@@ -8,7 +8,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 /**
  * Concurrent task for cooperative multitasking with some FTC dashboard hooks. Actions may have mutable state.
  */
-@JvmDefaultWithoutCompatibility
+//@JvmDefaultWithoutCompatibility
 fun interface Action {
     /**
      * Runs a single uninterruptible block. Returns true if the action should run again and false if it has completed.
@@ -188,28 +188,28 @@ class TrajectoryActionBuilder private constructor(
         baseAccelConstraint: AccelConstraint,
         poseMap: PoseMap = IdentityPoseMap(),
     ) :
-        this(
-            turnActionFactory,
-            trajectoryActionFactory,
-            trajectoryBuilderParams,
-            beginEndVel,
-            baseTurnConstraints,
-            baseVelConstraint,
-            baseAccelConstraint,
-            poseMap,
-            TrajectoryBuilder(
+            this(
+                turnActionFactory,
+                trajectoryActionFactory,
                 trajectoryBuilderParams,
-                beginPose, beginEndVel,
-                baseVelConstraint, baseAccelConstraint,
+                beginEndVel,
+                baseTurnConstraints,
+                baseVelConstraint,
+                baseAccelConstraint,
                 poseMap,
-            ),
-            0,
-            beginPose,
-            poseMap.map(beginPose),
-            poseMap.map(beginPose).heading,
-            emptyList(),
-            { it },
-        )
+                TrajectoryBuilder(
+                    trajectoryBuilderParams,
+                    beginPose, beginEndVel,
+                    baseVelConstraint, baseAccelConstraint,
+                    poseMap,
+                ),
+                0,
+                beginPose,
+                poseMap.map(beginPose),
+                poseMap.map(beginPose).heading,
+                emptyList(),
+                { it },
+            )
 
     private constructor(
         ab: TrajectoryActionBuilder,
@@ -221,23 +221,23 @@ class TrajectoryActionBuilder private constructor(
         ms: List<MarkerFactory>,
         cont: (Action) -> Action,
     ) :
-        this(
-            ab.turnActionFactory,
-            ab.trajectoryActionFactory,
-            ab.trajectoryBuilderParams,
-            ab.beginEndVel,
-            ab.baseTurnConstraints,
-            ab.baseVelConstraint,
-            ab.baseAccelConstraint,
-            ab.poseMap,
-            tb,
-            n,
-            lastPoseUnmapped,
-            lastPose,
-            lastTangent,
-            ms,
-            cont
-        )
+            this(
+                ab.turnActionFactory,
+                ab.trajectoryActionFactory,
+                ab.trajectoryBuilderParams,
+                ab.beginEndVel,
+                ab.baseTurnConstraints,
+                ab.baseVelConstraint,
+                ab.baseAccelConstraint,
+                ab.poseMap,
+                tb,
+                n,
+                lastPoseUnmapped,
+                lastPose,
+                lastTangent,
+                ms,
+                cont
+            )
 
     /**
      * Ends the current trajectory in progress. No-op if no trajectory segments are pending.
