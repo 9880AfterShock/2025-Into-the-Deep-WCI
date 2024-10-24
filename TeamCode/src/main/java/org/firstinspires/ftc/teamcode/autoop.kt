@@ -44,7 +44,6 @@ class BlueSideTestAuto : LinearOpMode() {
             .turn(Math.toRadians(180.0))
             .lineToX(47.5)
             .waitSeconds(3.0)
-
         var tab2: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
             .lineToY(37.0)
             .setTangent(Math.toRadians(0.0))
