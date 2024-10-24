@@ -3,11 +3,12 @@ package org.firstinspires.ftc.robotcontroller.external.samples
 
 
 // RR-specific imports
-import com.acmerobotics.roadrunner.Action
 
 // Non-RR imports
 import com.acmerobotics.dashboard.config.Config
+import com.acmerobotics.roadrunner.Action
 import com.acmerobotics.roadrunner.Pose2d
+import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
@@ -58,6 +59,20 @@ class BlueSideTestAuto : LinearOpMode() {
         var trajectoryActionCloseOut: Action = tab1.fresh()
             .strafeTo(Vector2d(48.0, 12.0))
             .build()
+
+        if (isStopRequested()) return
+
+        var startPosition = 1
+
+        val trajectoryActionChosen = if (startPosition == 1) {
+            tab1.build()
+        } else if (startPosition == 2) {
+            tab2.build()
+        } else {
+            tab3.build()
+        }
+
+
 
 
     }
