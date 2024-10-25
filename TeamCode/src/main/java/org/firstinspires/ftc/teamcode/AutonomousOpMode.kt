@@ -15,7 +15,7 @@ import com.acmerobotics.roadrunner.ftc.runBlocking
 
 @Config
 @Autonomous(name = "9880 Into-The-Deep Autonomous", group = "Autonomous")
-class BlueSideTestAuto : LinearOpMode() {
+class AutonomousOpMode : LinearOpMode() {
 
 // lift class
 
