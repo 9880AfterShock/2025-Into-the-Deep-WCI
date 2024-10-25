@@ -99,6 +99,7 @@ object Actions {
     /**
      * Returns [System.nanoTime] in seconds.
      */
+    @JvmStatic
     fun now() = System.nanoTime() * 1e-9
 
     /**
