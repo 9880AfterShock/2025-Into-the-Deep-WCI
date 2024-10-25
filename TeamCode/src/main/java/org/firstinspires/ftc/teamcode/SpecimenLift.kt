@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode
 
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 
@@ -7,20 +8,27 @@ import com.qualcomm.robotcore.hardware.DcMotor
 object SpecimenLift { //Prefix for commands
     lateinit var lift: DcMotor //Init Motor Var
     var pos = 0.0 //starting Position
+    var currentSpeed = 0.0 //Starting speed
+    @JvmField
+    var speed = 0.03 //update speed
     val encoderTicks = -537.7 //calculate your own ratio //negative to invert values
     @JvmField
-    var minPos = 0.0 //all the way down
+    var minPos = 0.0 //folded all the way in
     @JvmField
-    var maxPos = 3.5 //GOOD and working
+    var maxPos = 3.5 //all the way out at 45° angle
     var minDrop = 2.7 //lower drop pos in rotations
     var maxDrop = 2.9 // higher drop pos in rotations
     lateinit var opmode: OpMode //opmode var innit
-    private var downButtonCurrentlyPressed = false
-    private var downButtonPreviouslyPressed = false
-    private var upButtonCurrentlyPressed = false
-    private var upButtonPreviouslyPressed = false
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
+    private var upButtonCurrentlyPressed = false
+    private var upButtonPreviouslyPressed = false
+    private var downButtonCurrentlyPressed = false
+    private var downButtonPreviouslyPressed = false
+    private var upManualButton = false
+    private var downManualButton = false
+    private var zeroButtonCurrentlyPressed = false
+    private var zeroButtonPreviouslyPressed = false
     fun initLift(opmode: OpMode){ //init motors
         pos = 0.0
         lift = opmode.hardwareMap.get(DcMotor::class.java, "specimenLift") //config name
@@ -29,18 +37,27 @@ object SpecimenLift { //Prefix for commands
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
-    fun initLiftAfterAuto(opmode: OpMode){ //init motors
-        lift = opmode.hardwareMap.get(DcMotor::class.java, "specimenLift") //config name
-        lift.mode = motorMode //enable motor mode
-        this.opmode = opmode
-    }
     fun updateLift(){
 
         //can change controls
-        downButtonCurrentlyPressed = opmode.gamepad2.left_bumper
         upButtonCurrentlyPressed = opmode.gamepad2.right_bumper
+        downButtonCurrentlyPressed = opmode.gamepad2.left_bumper
+        upManualButton = false //not needed rn
+        downManualButton = opmode.gamepad2.dpad_left
+        zeroButtonCurrentlyPressed = opmode.gamepad2.dpad_right
 
-        if (!(downButtonCurrentlyPressed && upButtonCurrentlyPressed)) {
+        if (upManualButton && !downManualButton) { //manual
+            currentSpeed = speed
+        } else {
+            if (downManualButton && !upManualButton) {
+                currentSpeed = -speed
+            } else {
+                currentSpeed = 0.0
+            }
+        }
+        pos += currentSpeed
+
+        if (!(downButtonCurrentlyPressed && upButtonCurrentlyPressed)) { //preset
             if ((downButtonCurrentlyPressed && !downButtonPreviouslyPressed)) {
                 pos = minPos
             }
@@ -49,18 +66,28 @@ object SpecimenLift { //Prefix for commands
             }
         }
 
+        if ((zeroButtonCurrentlyPressed && !zeroButtonPreviouslyPressed)) { //stop and reset encoders
+            lift.mode = encoderMode
+            lift.mode = motorMode
+        }
+
+        if (pos>maxPos) { //keep in limits
+            pos = maxPos
+        }
+        if (pos<minPos) {
+            pos = minPos
+        }
+
         checkDrop()
 
-        downButtonPreviouslyPressed = downButtonCurrentlyPressed
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
+        downButtonPreviouslyPressed = downButtonCurrentlyPressed
+        zeroButtonPreviouslyPressed = zeroButtonCurrentlyPressed
 
-
-        //pos += currentSpeed
-        lift.power = 0.7 //turn motor on
+        lift.power = 1.0 //turn motor on
         lift.targetPosition = (pos*encoderTicks).toInt()
         opmode.telemetry.addData("Specimen Lift target position", pos) //Set telemetry
     }
-
     private fun checkDrop() {
         if ((maxDrop > lift.currentPosition/encoderTicks) && (lift.currentPosition/encoderTicks > minDrop) && (lift.targetPosition/encoderTicks == minPos)){
             SpecimenClaw.open()
