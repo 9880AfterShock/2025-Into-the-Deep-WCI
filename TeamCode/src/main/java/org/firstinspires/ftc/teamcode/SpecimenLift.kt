@@ -71,12 +71,12 @@ object SpecimenLift { //Prefix for commands
             lift.mode = motorMode
         }
 
-        if (pos>maxPos) { //keep in limits
-            pos = maxPos
-        }
-        if (pos<minPos) {
-            pos = minPos
-        }
+//        if (pos>maxPos) { //keep in limits
+//            pos = maxPos
+//        }
+//        if (pos<minPos) {
+//            pos = minPos
+//        }
 
         checkDrop()
 
