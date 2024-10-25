@@ -46,14 +46,10 @@ object SpecimenLift { //Prefix for commands
         downManualButton = opmode.gamepad2.dpad_left
         zeroButtonCurrentlyPressed = opmode.gamepad2.dpad_right
 
-        if (upManualButton && !downManualButton) { //manual
-            currentSpeed = speed
-        } else {
-            if (downManualButton && !upManualButton) {
-                currentSpeed = -speed
-            } else {
-                currentSpeed = 0.0
-            }
+        if (downManualButton) { //manual
+            currentSpeed = -speed
+        }else {
+            currentSpeed = 0.0
         }
         pos += currentSpeed
 
@@ -67,6 +63,8 @@ object SpecimenLift { //Prefix for commands
         }
 
         if ((zeroButtonCurrentlyPressed && !zeroButtonPreviouslyPressed)) { //stop and reset encoders
+            lift.power = 0.0
+            pos = 0.0
             lift.mode = encoderMode
             lift.mode = motorMode
         }
