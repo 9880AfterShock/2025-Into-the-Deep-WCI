@@ -14,7 +14,7 @@ import com.acmerobotics.roadrunner.ftc.runBlocking
 
 
 @Config
-@Autonomous(name = "BLUE_TEST_AUTO_PIXEL", group = "Autonomous")
+@Autonomous(name = "9880 Into-The-Deep Autonomous", group = "Autonomous")
 class BlueSideTestAuto : LinearOpMode() {
 
 // lift class
