@@ -9,7 +9,7 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder
 object MeepMeep {
     @JvmStatic
     fun main(args: Array<String>) {
-        val meepMeep = MeepMeep(800)
+        val meepMeep = MeepMeep(700)
 
         val myBot =
             DefaultBotBuilder(meepMeep) // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
