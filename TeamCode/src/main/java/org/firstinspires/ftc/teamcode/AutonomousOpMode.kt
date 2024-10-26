@@ -8,9 +8,9 @@ import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
+import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
-import com.acmerobotics.roadrunner.ftc.runBlocking
 
 
 @Config
@@ -23,6 +23,7 @@ class AutonomousOpMode : LinearOpMode() {
         // instantiate your MecanumDrive at a particular pose.
         val initialPose = Pose2d(11.8, 61.7, Math.toRadians(90.0))
         val drive = MecanumDrive(hardwareMap, initialPose)
+
         // actionBuilder builds from the drive steps passed to it
         var tab1: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
             .lineToYSplineHeading(33.0, Math.toRadians(0.0))
@@ -54,7 +55,13 @@ class AutonomousOpMode : LinearOpMode() {
             .strafeTo(Vector2d(48.0, 12.0))
             .build()
 
-        if (isStopRequested()) return
+        while (!isStopRequested && !opModeIsActive()) {
+            // Do nothing
+        }
+
+        waitForStart()
+
+        if (isStopRequested) return
 
         val startPosition = 1
 
@@ -65,6 +72,7 @@ class AutonomousOpMode : LinearOpMode() {
         } else {
             tab3.build()
         }
+
         runBlocking(
             SequentialAction(
                 trajectoryActionChosen,
@@ -74,8 +82,5 @@ class AutonomousOpMode : LinearOpMode() {
                 trajectoryActionCloseOut
             )
         )
-
-
-
     }
 }
