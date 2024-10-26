@@ -8,9 +8,9 @@ import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
+import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
-import com.acmerobotics.roadrunner.ftc.runBlocking
 
 
 @Config
@@ -21,10 +21,11 @@ class AutonomousOpMode : LinearOpMode() {
 
     override fun runOpMode() {
         // instantiate your MecanumDrive at a particular pose.
-        val initialPose = Pose2d(0.0, 0.0, Math.toRadians(0.0))
+        val initialPose = Pose2d(11.8, 61.7, Math.toRadians(90.0))
         val drive = MecanumDrive(hardwareMap, initialPose)
+
         // actionBuilder builds from the drive steps passed to it
-        /*var tab1: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
+        var tab1: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
             .lineToYSplineHeading(33.0, Math.toRadians(0.0))
             .waitSeconds(2.0)
             .setTangent(Math.toRadians(90.0))
@@ -52,41 +53,34 @@ class AutonomousOpMode : LinearOpMode() {
 
         var trajectoryActionCloseOut: Action = tab1.fresh()
             .strafeTo(Vector2d(48.0, 12.0))
-            .build()*/
+            .build()
 
-        if (isStopRequested()) return
+        while (!isStopRequested && !opModeIsActive()) {
+            // Do nothing
+        }
+
+        waitForStart()
+
+        if (isStopRequested) return
 
         val startPosition = 1
 
-        /*val trajectoryActionChosen = if (startPosition == 1) {
+        val trajectoryActionChosen = if (startPosition == 1) {
             tab1.build()
         } else if (startPosition == 2) {
             tab2.build()
         } else {
             tab3.build()
-        }*/
+        }
+
         runBlocking(
-            drive.actionBuilder(Pose2d(0.0, 0.0, 0.0))
-                .lineToX(30.0)
-                .turn(Math.toRadians(90.0))
-                .lineToY(30.0)
-                .turn(Math.toRadians(90.0))
-                .lineToX(0.0)
-                .turn(Math.toRadians(90.0))
-                .lineToY(0.0)
-                .turn(Math.toRadians(90.0))
-                .build()
-        )
-            //SequentialAction(
-//                trajectoryActionChosen,
+            SequentialAction(
+                trajectoryActionChosen,
 //                lift.liftUp(),
 //                claw.openClaw(),
 //                lift.liftDown(),
-//                trajectoryActionCloseOut
-            //)
-        //)
-
-
-
+                trajectoryActionCloseOut
+            )
+        )
     }
 }
