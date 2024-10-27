@@ -135,6 +135,8 @@ object SpecimenLift { //Prefix for commands
                 SpecimenLift.lift.targetPosition = MainLift.minPos.toInt() * MainLift.encoderTicks.toInt()
                 SpecimenLift.lift.power = 1.0
                 SpecimenLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
+                opmode.telemetry.addData("lift inited", 1)
+                opmode.telemetry.update()
             }
 
             MainLift.lift.targetPosition = currTargetInTicks
@@ -142,7 +144,7 @@ object SpecimenLift { //Prefix for commands
             MainLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
 
 
-            return true
+            return true// originally true, maybe set false?
         }
 
     }

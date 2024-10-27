@@ -23,6 +23,7 @@ class AutonomousOpModeBlue : LinearOpMode() {
     override fun runOpMode() {
         initSwivel(this) // swivel is inited at the start, this works
         SpecimenClaw.initClaw(this) //
+        SpecimenLift.initLift(this) //?????????????!
         // instantiate your MecanumDrive at a particular pose.
         //val initialPose = Pose2d(11.8, 61.7, Math.toRadians(90.0))
         val drive = MecanumDrive(hardwareMap, startPoseBlue)
@@ -82,17 +83,20 @@ class AutonomousOpModeBlue : LinearOpMode() {
         runBlocking(
             SequentialAction(
                 ParallelAction(
+                    SpecimenClaw.
                     startToClipBlue.build(),
                     // get things to move
                     SpecimenSwivel.autoSpecSwivOut(),
                 ),
                 ParallelAction(
 
-                    SpecimenLift.autoSpecLiftUp(), // might work
+                    SpecimenLift.autoSpecLiftUp(),
+                    SpecimenLift.LiftRun(),// now innited, never moves
                     waitSecondsFive.build(),
                     //SpecimenClaw.autoSpecClawSwap()
+
                     SpecimenLift.autoSpecLiftScore(),
-                    SpecimenClaw.autoSpecClawSwap(),
+                    //SpecimenClaw.autoSpecClawSwap(),
                     waitSecondsTwo.build()
                 ),
                 clipToParkBlue.build()

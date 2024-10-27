@@ -63,14 +63,14 @@ object SpecimenSwivel {
             swivel.position = outPos
             SpecimenSwivel.opmode.telemetry.addData("spec swiv", 1)
             SpecimenSwivel.opmode.telemetry.update()
-            return true
+            return false
         }
     }
     class autoSpecSwivIn: Action {
         override fun run(p: TelemetryPacket): Boolean {
             //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
             swivel.position = inPos
-            return true
+            return false
         }
     }
 }

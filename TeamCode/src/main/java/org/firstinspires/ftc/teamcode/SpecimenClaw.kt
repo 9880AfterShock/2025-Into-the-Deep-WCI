@@ -4,8 +4,6 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
-import org.firstinspires.ftc.teamcode.SpecimenSwivel.inPos
-import org.firstinspires.ftc.teamcode.SpecimenSwivel.swivel
 
 
 object SpecimenClaw {
@@ -28,13 +26,13 @@ object SpecimenClaw {
         claw.position = openPos
         state = "Open"
     }
-    private fun close(){
+     fun specClawClose(){
         claw.position = closePos //claw doesnt move
         state = "Closed" //this runs
     }
     private fun swap(){
         if (state == "Open") {
-            close()
+            specClawClose()
         } else {
             open()
         }
