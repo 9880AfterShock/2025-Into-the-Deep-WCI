@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 object Hang {
     var hanging = false
@@ -23,7 +24,7 @@ object Hang {
             hanging = true
         }
         if (hanging) {
-            if (MainLift.lift.currentPosition <= 1.0*MainLift.encoderTicks) {
+            if (MainLift.lift.currentPosition <= 1.0* MainLift.encoderTicks) {
                 Raiser.targPos = Raiser.upPos
             }
         }

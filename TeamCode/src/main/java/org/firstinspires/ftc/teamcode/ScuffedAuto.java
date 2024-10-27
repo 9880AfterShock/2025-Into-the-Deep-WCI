@@ -26,6 +26,7 @@ public class ScuffedAuto extends LinearOpMode {
         backLeftDrive  = hardwareMap.get(DcMotor.class, "leftRear");
         backRightDrive = hardwareMap.get(DcMotor.class, "rightRear");
         swivel = hardwareMap.get(com.qualcomm.robotcore.hardware.Servo.class, "Specimen Swivel");
+        specimenLift = hardwareMap.get(DcMotor.class, "specimenLift");
 
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -39,11 +40,11 @@ public class ScuffedAuto extends LinearOpMode {
         swivel.setPosition(1.0);
 
         frontLeftDrive.setPower(FORWARD_SPEED);
-        frontRightDrive.setPower(FORWARD_SPEED);
-        backLeftDrive.setPower(FORWARD_SPEED);
+        frontRightDrive.setPower(-FORWARD_SPEED);
+        backLeftDrive.setPower(-FORWARD_SPEED);
         backRightDrive.setPower(FORWARD_SPEED);
 
-        while (opModeIsActive() && (runtime.seconds() < 0.5)) {
+        while (opModeIsActive() && (runtime.seconds() < 0.6)) {
             sleep(10);
         }
 

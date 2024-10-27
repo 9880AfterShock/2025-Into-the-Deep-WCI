@@ -1,9 +1,10 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.subsystems
 
-
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
-
+import org.firstinspires.ftc.teamcode.Raiser
 
 object MainLift { //Prefix for commands
     lateinit var lift: DcMotor //Init Motor Var
@@ -37,6 +38,7 @@ object MainLift { //Prefix for commands
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
+
     fun updateLift(){
 //can change controls
         if (opmode.gamepad2.dpad_up && !opmode.gamepad2.dpad_down) {
@@ -67,6 +69,47 @@ object MainLift { //Prefix for commands
         lift.power = 1.0 //turn motor on
         lift.targetPosition = (pos*encoderTicks).toInt()
         opmode.telemetry.addData("Main Lift target position", pos) //Set telemetry
+    }
+
+    class LiftUp: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
+
+            return false
+        }
+    }
+
+    class LiftDown: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            LiftRun.currTargetInTicks = minPos.toInt() * encoderTicks.toInt()
+
+            return false
+        }
+    }
+
+    class LiftRun : Action {
+        var initialized: Boolean = false
+
+        companion object {
+            var currTargetInTicks = 0;
+        }
+
+        override fun run(p: TelemetryPacket): Boolean {
+
+            if (!initialized) {
+                lift.targetPosition = minPos.toInt() * encoderTicks.toInt()
+                lift.power = 1.0
+                lift.mode = DcMotor.RunMode.RUN_TO_POSITION
+            }
+
+            lift.targetPosition = currTargetInTicks
+            lift.power = 1.0
+            lift.mode = DcMotor.RunMode.RUN_TO_POSITION
+
+
+            return true
+        }
+
     }
 
 }

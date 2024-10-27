@@ -30,7 +30,7 @@ object Claw {
         claw.position = closePos //claw doesnt move
         state = "Close" //this runs
     }
-    private fun swap(){
+    /*private*/ fun clawSwap(){ //removed private and renamed for auto purposes -Oscar
         if (state == "Open") {
             close()
         } else {
@@ -46,7 +46,7 @@ object Claw {
         if (clawButtonCurrentlyPressed != clawButtonPreviouslyPressed) {
             // If the button is (now) down
             if (clawButtonCurrentlyPressed) {
-                swap()
+                clawSwap()
             }
         }
         clawButtonPreviouslyPressed = clawButtonCurrentlyPressed

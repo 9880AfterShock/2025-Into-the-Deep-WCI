@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode
 
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 
 object SpecimenLift { //Prefix for commands
@@ -90,6 +93,57 @@ object SpecimenLift { //Prefix for commands
         if ((maxDrop > lift.currentPosition/encoderTicks) && (lift.currentPosition/encoderTicks > minDrop) && (lift.targetPosition/encoderTicks == minPos)){
             SpecimenClaw.open()
         }
+    }
+    //
+    class autoSpecLiftUp: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            LiftRun.currTargetInTicks = SpecimenLift.maxPos.toInt() * MainLift.encoderTicks.toInt()
+
+            return false
+        }
+    }
+    class autoSpecLiftScore: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            LiftRun.currTargetInTicks = SpecimenLift.minPos.toInt() / encoderTicks.toInt()
+            if ((maxDrop > lift.currentPosition/encoderTicks) && (lift.currentPosition/encoderTicks > minDrop) && (lift.targetPosition/encoderTicks == minPos)) {
+                SpecimenClaw.open()
+            }
+
+            return false
+        }
+    }
+
+    class autoSpecLiftDown: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            LiftRun.currTargetInTicks = SpecimenLift.minPos.toInt() * MainLift.encoderTicks.toInt()
+
+            return false
+        }
+    }
+
+    class LiftRun : Action {
+        var initialized: Boolean = false
+
+        companion object {
+            var currTargetInTicks = 0;
+        }
+
+        override fun run(p: TelemetryPacket): Boolean {
+
+            if (!initialized) {
+                SpecimenLift.lift.targetPosition = MainLift.minPos.toInt() * MainLift.encoderTicks.toInt()
+                SpecimenLift.lift.power = 1.0
+                SpecimenLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
+            }
+
+            MainLift.lift.targetPosition = currTargetInTicks
+            MainLift.lift.power = 1.0
+            MainLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
+
+
+            return true
+        }
+
     }
 
 }
