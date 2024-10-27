@@ -37,7 +37,7 @@ public class TempAuto extends LinearOpMode {
         backLeftDrive.setPower(FORWARD_SPEED);
         backRightDrive.setPower(FORWARD_SPEED);
 
-        while (opModeIsActive() && (runtime.seconds() < 0.5)) {
+        while (opModeIsActive() && (runtime.seconds() < 0.6)) {
             sleep(10);
         }
 
