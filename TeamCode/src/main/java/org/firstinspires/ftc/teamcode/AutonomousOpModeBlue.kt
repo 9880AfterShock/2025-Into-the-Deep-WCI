@@ -9,6 +9,8 @@ import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+import org.firstinspires.ftc.teamcode.SpecimenClaw.opmode
+import org.firstinspires.ftc.teamcode.SpecimenClaw.state
 import org.firstinspires.ftc.teamcode.SpecimenSwivel.initSwivel
 
 
@@ -30,12 +32,20 @@ class AutonomousOpModeBlue : LinearOpMode() {
         // actionBuilder builds from the drive steps passed to it
         var startToClipBlue: TrajectoryActionBuilder = drive.actionBuilder(startPoseBlue)
             .splineToSplineHeading(clipPoseBlue, 0.125)
+            opmode.telemetry.addData("start to clip blue", 1)
+        opmode.telemetry.update()
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(5.0)
+        opmode.telemetry.addData("wait 5 seconds", 1)
+        opmode.telemetry.update()
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(2.0)
+        opmode.telemetry.addData("wait 2 seconds", 1)
+        opmode.telemetry.update()
         var clipToParkBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .splineToSplineHeading(parkPoseBlue, Math.PI)
+        opmode.telemetry.addData("clip to park", 1)
+        opmode.telemetry.update()
 
 
             // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
@@ -82,6 +92,7 @@ class AutonomousOpModeBlue : LinearOpMode() {
                     waitSecondsFive.build(),
                     //SpecimenClaw.autoSpecClawSwap()
                     SpecimenLift.autoSpecLiftScore(),
+                    SpecimenClaw.autoSpecClawSwap(),
                     waitSecondsTwo.build()
                 ),
                 clipToParkBlue.build()

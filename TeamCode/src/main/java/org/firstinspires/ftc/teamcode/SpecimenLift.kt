@@ -116,7 +116,8 @@ object SpecimenLift { //Prefix for commands
     class autoSpecLiftDown: Action {
         override fun run(p: TelemetryPacket): Boolean {
             LiftRun.currTargetInTicks = SpecimenLift.minPos.toInt() * MainLift.encoderTicks.toInt()
-
+            SpecimenLift.opmode.telemetry.addData("spec lift down", 1)
+            SpecimenLift.opmode.telemetry.update()
             return false
         }
     }

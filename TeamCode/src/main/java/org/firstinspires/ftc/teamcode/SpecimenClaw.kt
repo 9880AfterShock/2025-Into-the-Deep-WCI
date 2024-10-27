@@ -58,6 +58,8 @@ object SpecimenClaw {
         override fun run(p: TelemetryPacket): Boolean {
             //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
             swap()
+            SpecimenClaw.opmode.telemetry.addData("claw swap", 1)
+            SpecimenClaw.opmode.telemetry.update()
             return true
         }
     }
