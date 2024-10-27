@@ -59,7 +59,7 @@ public class ScuffedAuto extends LinearOpMode {
         backLeftDrive.setPower(-FORWARD_SPEED);
         backRightDrive.setPower(FORWARD_SPEED);
 
-        while (opModeIsActive() && (runtime.seconds() < 2.1)) {
+        while (opModeIsActive() && (runtime.seconds() < 2.035)) {
             sleep(10);
         }
 // tpp
