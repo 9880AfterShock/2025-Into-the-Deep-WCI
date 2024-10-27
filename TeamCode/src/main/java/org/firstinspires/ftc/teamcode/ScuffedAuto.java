@@ -72,7 +72,7 @@ public class ScuffedAuto extends LinearOpMode {
 
         specimenLift.setTargetPosition(0);
 
-        while (opModeIsActive() && specimenLift.getCurrentPosition() > (int)(2.9*-537.7)) {
+        while (opModeIsActive() && specimenLift.getCurrentPosition() < (int)(2.9*-537.7)) {
             sleep(10);
         }
 
