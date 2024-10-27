@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static java.lang.Math.round;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -14,8 +16,10 @@ public class ScuffedAuto extends LinearOpMode {
     private DcMotor backRightDrive  = null;
     Servo swivel;
     private DcMotor specimenLift = null;
+    Servo specimenClaw;
     static final double FORWARD_SPEED = 0.6;
     static final double STOP_SPEED = 0.0;
+    private double tempDouble = 0.0;
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
@@ -27,6 +31,7 @@ public class ScuffedAuto extends LinearOpMode {
         backRightDrive = hardwareMap.get(DcMotor.class, "rightRear");
         swivel = hardwareMap.get(com.qualcomm.robotcore.hardware.Servo.class, "Specimen Swivel");
         specimenLift = hardwareMap.get(DcMotor.class, "specimenLift");
+        specimenClaw = hardwareMap.get(com.qualcomm.robotcore.hardware.Servo.class, "Specimen Claw");
 
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -39,12 +44,50 @@ public class ScuffedAuto extends LinearOpMode {
 
         swivel.setPosition(1.0);
 
+        specimenClaw.setPosition(1.0);
+
+        tempDouble = 3.5*-537.7;
+
+        specimenLift.setTargetPosition((int)(3.5*-537.7));
+        specimenLift.setPower(1.0);
+
         frontLeftDrive.setPower(FORWARD_SPEED);
         frontRightDrive.setPower(-FORWARD_SPEED);
         backLeftDrive.setPower(-FORWARD_SPEED);
         backRightDrive.setPower(FORWARD_SPEED);
 
-        while (opModeIsActive() && (runtime.seconds() < 0.6)) {
+        while (opModeIsActive() && (runtime.seconds() < 0.4)) {
+            sleep(10);
+        }
+
+        frontLeftDrive.setPower(STOP_SPEED);
+        frontRightDrive.setPower(STOP_SPEED);
+        backLeftDrive.setPower(STOP_SPEED);
+        backRightDrive.setPower(STOP_SPEED);
+
+        specimenLift.setTargetPosition(0);
+
+        while (specimenLift.getCurrentPosition() > (int)(2.9*-537.7)) {
+            sleep(10);
+        }
+
+        specimenClaw.setPosition(0.7);
+
+        frontLeftDrive.setPower(-FORWARD_SPEED);
+        frontRightDrive.setPower(FORWARD_SPEED);
+        backLeftDrive.setPower(FORWARD_SPEED);
+        backRightDrive.setPower(-FORWARD_SPEED);
+
+        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
+            sleep(10);
+        }
+
+        frontLeftDrive.setPower(-FORWARD_SPEED);
+        frontRightDrive.setPower(-FORWARD_SPEED);
+        backLeftDrive.setPower(-FORWARD_SPEED);
+        backRightDrive.setPower(-FORWARD_SPEED);
+
+        while (opModeIsActive() && (runtime.seconds() < 1.8)) {
             sleep(10);
         }
 
