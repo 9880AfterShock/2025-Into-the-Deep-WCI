@@ -37,6 +37,8 @@ public class ScuffedAuto extends LinearOpMode {
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         backRightDrive.setDirection(DcMotor.Direction.FORWARD);
 
+        specimenLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         waitForStart();
 
         runtime.reset();
