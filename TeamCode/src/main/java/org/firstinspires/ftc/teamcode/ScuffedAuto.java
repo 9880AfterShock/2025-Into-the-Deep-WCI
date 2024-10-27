@@ -19,7 +19,6 @@ public class ScuffedAuto extends LinearOpMode {
     Servo specimenClaw;
     static final double FORWARD_SPEED = 0.6;
     static final double STOP_SPEED = 0.0;
-    private double tempDouble = 0.0;
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
@@ -46,8 +45,6 @@ public class ScuffedAuto extends LinearOpMode {
 
         specimenClaw.setPosition(1.0);
 
-        tempDouble = 3.5*-537.7;
-
         specimenLift.setTargetPosition((int)(3.5*-537.7));
         specimenLift.setPower(1.0);
 
@@ -65,9 +62,13 @@ public class ScuffedAuto extends LinearOpMode {
         backLeftDrive.setPower(STOP_SPEED);
         backRightDrive.setPower(STOP_SPEED);
 
+        while (opModeIsActive() && specimenLift.getCurrentPosition() > (int)3.4*-537.7) {
+            sleep(10);
+        }
+
         specimenLift.setTargetPosition(0);
 
-        while (specimenLift.getCurrentPosition() > (int)(2.9*-537.7)) {
+        while (opModeIsActive() && specimenLift.getCurrentPosition() > (int)(2.9*-537.7)) {
             sleep(10);
         }
 

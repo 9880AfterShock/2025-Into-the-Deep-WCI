@@ -89,7 +89,7 @@ object SpecimenLift { //Prefix for commands
         lift.targetPosition = (pos*encoderTicks).toInt()
         opmode.telemetry.addData("Specimen Lift target position", pos) //Set telemetry
     }
-    private fun checkDrop() {
+     fun checkDrop() {
         if ((maxDrop > lift.currentPosition/encoderTicks) && (lift.currentPosition/encoderTicks > minDrop) && (lift.targetPosition/encoderTicks == minPos)){
             SpecimenClaw.open()
         }
@@ -139,12 +139,12 @@ object SpecimenLift { //Prefix for commands
                 opmode.telemetry.update()
             }
 
-            MainLift.lift.targetPosition = currTargetInTicks
-            MainLift.lift.power = 1.0
-            MainLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
+            SpecimenLift.lift.targetPosition = currTargetInTicks
+            SpecimenLift.lift.power = 1.0
+            SpecimenLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
 
 
-            return true// originally true, maybe set false?
+            return false// originally true, maybe set false?
         }
 
     }
