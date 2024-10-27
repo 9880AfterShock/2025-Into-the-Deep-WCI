@@ -35,11 +35,11 @@ class AutonomousOpModeBlue : LinearOpMode() {
 
         // actionBuilder builds from the drive steps passed to it
         var startToClipBlue: TrajectoryActionBuilder = drive.actionBuilder(startPoseBlue)
-            .splineToSplineHeading(clipPoseBlue, 0.125)
-            opmode.telemetry.addData("start to clip blue", 1)
+        .splineToSplineHeading(clipPoseBlue, 0.125)
+        opmode.telemetry.addData("start to clip blue", 1)
         opmode.telemetry.update()
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .waitSeconds(5.0)
+        .waitSeconds(5.0)
         opmode.telemetry.addData("wait 5 seconds", 1)
         opmode.telemetry.update()
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)

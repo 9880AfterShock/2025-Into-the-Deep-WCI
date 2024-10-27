@@ -47,15 +47,17 @@ public class ScuffedAuto extends LinearOpMode {
 
         specimenClaw.setPosition(1.0);
 
-        specimenLift.setTargetPosition((int)(3.5*-537.7));
-        specimenLift.setPower(1.0);
-
         frontLeftDrive.setPower(FORWARD_SPEED);
         frontRightDrive.setPower(-FORWARD_SPEED);
         backLeftDrive.setPower(-FORWARD_SPEED);
         backRightDrive.setPower(FORWARD_SPEED);
 
-        while (opModeIsActive() && (runtime.seconds() < 0.4)) {
+        sleep(300);
+
+        specimenLift.setTargetPosition((int)(3.5*-537.7));
+        specimenLift.setPower(1.0);
+
+        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
             sleep(10);
         }
 
@@ -81,7 +83,7 @@ public class ScuffedAuto extends LinearOpMode {
         backLeftDrive.setPower(FORWARD_SPEED);
         backRightDrive.setPower(-FORWARD_SPEED);
 
-        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
+        while (opModeIsActive() && (runtime.seconds() < 2.6)) {
             sleep(10);
         }
 
@@ -90,7 +92,7 @@ public class ScuffedAuto extends LinearOpMode {
         backLeftDrive.setPower(-FORWARD_SPEED);
         backRightDrive.setPower(-FORWARD_SPEED);
 
-        while (opModeIsActive() && (runtime.seconds() < 1.8)) {
+        while (opModeIsActive() && (runtime.seconds() < 4)) {
             sleep(10);
         }
 
