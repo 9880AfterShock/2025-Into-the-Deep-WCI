@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 
 
 @Config
-@Autonomous(name = "9880 Into-The-Deep Autonomous", group = "Autonomous")
+@Autonomous(name = "9880 2024 Blue Basket", group = "Autonomous")
 class AutonomousOpMode : LinearOpMode() {
 
 // lift class
@@ -24,8 +24,9 @@ class AutonomousOpMode : LinearOpMode() {
         val initialPose = Pose2d(11.8, 61.7, Math.toRadians(90.0))
         val drive = MecanumDrive(hardwareMap, initialPose)
 
+
         // actionBuilder builds from the drive steps passed to it
-        var tab1: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
+        /*var tab1: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
             .lineToYSplineHeading(33.0, Math.toRadians(0.0))
             .waitSeconds(2.0)
             .setTangent(Math.toRadians(90.0))
@@ -81,6 +82,6 @@ class AutonomousOpMode : LinearOpMode() {
 //                lift.liftDown(),
                 trajectoryActionCloseOut
             )
-        )
+        )*/
     }
 }
