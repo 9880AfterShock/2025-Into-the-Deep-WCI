@@ -1,7 +1,11 @@
 package org.firstinspires.ftc.teamcode
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
+import org.firstinspires.ftc.teamcode.SpecimenSwivel.inPos
+import org.firstinspires.ftc.teamcode.SpecimenSwivel.swivel
 
 
 object SpecimenClaw {
@@ -49,5 +53,12 @@ object SpecimenClaw {
         }
         clawButtonPreviouslyPressed = clawButtonCurrentlyPressed
 
+    }
+    class autoSpecClawSwap: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
+            swap()
+            return true
+        }
     }
 }

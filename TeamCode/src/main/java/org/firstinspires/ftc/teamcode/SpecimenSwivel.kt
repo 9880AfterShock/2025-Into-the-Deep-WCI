@@ -1,11 +1,16 @@
 package org.firstinspires.ftc.teamcode
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
+import org.firstinspires.ftc.teamcode.subsystems.MainLift.LiftRun
+import org.firstinspires.ftc.teamcode.subsystems.MainLift.encoderTicks
+import org.firstinspires.ftc.teamcode.subsystems.MainLift.maxPos
 
 
 object SpecimenSwivel {
-    private lateinit var swivel: Servo
+    lateinit var swivel: Servo
     @JvmField
     var outPos = 1.0 //the positions
     @JvmField
@@ -50,5 +55,20 @@ object SpecimenSwivel {
             }
         }
         swivelButtonPreviouslyPressed = swivelButtonCurrentlyPressed
+    }
+
+    class autoSpecSwivOut: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
+            swivel.position = outPos
+            return true
+        }
+    }
+    class autoSpecSwivIn: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
+            swivel.position = inPos
+            return true
+        }
     }
 }

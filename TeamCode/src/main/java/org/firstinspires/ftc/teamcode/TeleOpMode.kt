@@ -7,19 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.NormalizedRGBA
 import com.qualcomm.robotcore.util.ElapsedTime
-import org.firstinspires.ftc.teamcode.Claw
-import org.firstinspires.ftc.teamcode.Hang
-import org.firstinspires.ftc.teamcode.MainLift
-import org.firstinspires.ftc.teamcode.MecanumDriveTrain
-import org.firstinspires.ftc.teamcode.Raiser
-import org.firstinspires.ftc.teamcode.SpecimenClaw
-import org.firstinspires.ftc.teamcode.SpecimenLift
-import org.firstinspires.ftc.teamcode.SpecimenSwivel
-import org.firstinspires.ftc.teamcode.Wrist
-import org.firstinspires.ftc.teamcode.SampleColorSensor
-import org.firstinspires.ftc.teamcode.SampleType
-import org.firstinspires.ftc.teamcode.SampleTypeSensor
-import org.firstinspires.ftc.teamcode.TeamColor
+import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 
 @TeleOp(name = "9880 TeleOpMode Into-the-Deep") //change string for display name
