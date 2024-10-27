@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.SpecimenSwivel.initSwivel
 
 
 @Config
-@Autonomous(name = "9880 2024 Red Basket", group = "Autonomous")
+@Autonomous(name = "9880 2024 Red Specimen", group = "Autonomous")
 class AutonomousOpModeRed : LinearOpMode() {
 
 // lift class

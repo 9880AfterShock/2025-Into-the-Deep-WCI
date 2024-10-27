@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 
 @Config
-@Autonomous(name = "9880 2024 Blue Basket", group = "Autonomous")
+@Autonomous(name = "9880 2024 Blue Specimen", group = "Autonomous")
 class AutonomousOpModeBlue : LinearOpMode() {
 
 // lift class
