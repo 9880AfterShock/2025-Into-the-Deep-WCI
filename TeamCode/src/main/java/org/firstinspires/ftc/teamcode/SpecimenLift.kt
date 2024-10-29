@@ -94,6 +94,19 @@ object SpecimenLift { //Prefix for commands
             SpecimenClaw.open()
         }
     }
+
+    class autoSpecimenLiftUp: Action{
+        override fun run(p: TelemetryPacket): Boolean {
+            //sams version
+            return false
+        }
+    }
+    class autoSpecimenLiftInit: Action{
+        override fun run(p: TelemetryPacket): Boolean {
+            //sams version
+            return false
+        }
+    }
     //
     class autoSpecLiftUp: Action {
         override fun run(p: TelemetryPacket): Boolean {
@@ -139,10 +152,9 @@ object SpecimenLift { //Prefix for commands
                 opmode.telemetry.update()
             }
 
-            SpecimenLift.lift.targetPosition = currTargetInTicks
-            SpecimenLift.lift.power = 1.0
-            SpecimenLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
-
+            lift.targetPosition = currTargetInTicks
+            lift.power = 1.0
+            lift.mode = DcMotor.RunMode.RUN_TO_POSITION
 
             return false// originally true, maybe set false?
         }
