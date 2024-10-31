@@ -97,13 +97,23 @@ object SpecimenLift { //Prefix for commands
 
     class autoSpecimenLiftUp: Action{
         override fun run(p: TelemetryPacket): Boolean {
-            //sams version
+            lift.targetPosition = (maxPos*encoderTicks).toInt()
+            return false
+        }
+    }
+    class autoSpecimenLiftDown: Action{
+        override fun run(p: TelemetryPacket): Boolean {
+            lift.targetPosition = (minPos*encoderTicks).toInt()
             return false
         }
     }
     class autoSpecimenLiftInit: Action{
         override fun run(p: TelemetryPacket): Boolean {
-            //sams version
+            pos = 0.0
+            lift = opmode.hardwareMap.get(DcMotor::class.java, "specimenLift") //config name
+            lift.targetPosition = (pos*encoderTicks).toInt()
+            lift.mode = encoderMode //reset encoder
+            lift.mode = motorMode //enable motor mode
             return false
         }
     }

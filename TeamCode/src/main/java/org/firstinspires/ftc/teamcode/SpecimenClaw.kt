@@ -26,13 +26,13 @@ object SpecimenClaw {
         claw.position = openPos
         state = "Open"
     }
-     fun specClawClose(){
-        claw.position = closePos //claw doesnt move
-        state = "Closed" //this runs
+     fun close(){
+        claw.position = closePos
+        state = "Closed"
     }
     private fun swap(){
         if (state == "Open") {
-            specClawClose()
+            close()
         } else {
             open()
         }
@@ -56,6 +56,24 @@ object SpecimenClaw {
         override fun run(p: TelemetryPacket): Boolean {
             //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
             swap()
+            SpecimenClaw.opmode.telemetry.addData("claw swap", 1)
+            SpecimenClaw.opmode.telemetry.update()
+            return true
+        }
+    }
+    class autoSpecClawOpen: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
+            open()
+            SpecimenClaw.opmode.telemetry.addData("claw swap", 1)
+            SpecimenClaw.opmode.telemetry.update()
+            return true
+        }
+    }
+    class autoSpecClawClose: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
+            close()
             SpecimenClaw.opmode.telemetry.addData("claw swap", 1)
             SpecimenClaw.opmode.telemetry.update()
             return true

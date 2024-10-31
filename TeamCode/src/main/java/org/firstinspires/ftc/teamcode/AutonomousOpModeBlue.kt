@@ -10,7 +10,6 @@ import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.SpecimenClaw.opmode
-import org.firstinspires.ftc.teamcode.SpecimenClaw.state
 import org.firstinspires.ftc.teamcode.SpecimenSwivel.initSwivel
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
@@ -24,7 +23,7 @@ class AutonomousOpModeBlue : LinearOpMode() {
     override fun runOpMode() {
         initSwivel(this) // swivel is inited at the start, this works
         SpecimenClaw.initClaw(this)
-        SpecimenClaw.specClawClose()// make sure
+        SpecimenClaw.close()// make sure
         SpecimenLift.initLift(this) //?????????????!
         MainLift.initLift(this)
         // instantiate your MecanumDrive at a particular pose.
@@ -86,18 +85,20 @@ class AutonomousOpModeBlue : LinearOpMode() {
         runBlocking(
             SequentialAction(
                 ParallelAction(
-
                     startToClipBlue.build(),
                     // get things to move
                     SpecimenSwivel.autoSpecSwivOut(),
+                    SpecimenClaw.autoSpecClawClose()
                 ),
-                ParallelAction(
-                    SpecimenLift.LiftRun(),// now innited, never moves
-                    SpecimenLift.autoSpecLiftUp(),
+                SequentialAction(
+                    //SpecimenLift.LiftRun(),// now innited, never moves
+                    //SpecimenLift.autoSpecLiftUp(),
+                    SpecimenLift.autoSpecimenLiftInit(),
+                    SpecimenLift.autoSpecimenLiftUp(),
                     waitSecondsFive.build(),
                     //SpecimenClaw.autoSpecClawSwap()
 
-                    SpecimenLift.autoSpecLiftScore(),
+                    SpecimenLift.autoSpecimenLiftDown(),
                     //SpecimenClaw.autoSpecClawSwap(),
                     waitSecondsTwo.build()
                 ),
