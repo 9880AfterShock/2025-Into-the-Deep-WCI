@@ -93,7 +93,6 @@ class AutonomousOpModeBlue : LinearOpMode() {
                 SequentialAction(
                     //SpecimenLift.LiftRun(),// now innited, never moves
                     //SpecimenLift.autoSpecLiftUp(),
-                    SpecimenLift.autoSpecimenLiftInit(),
                     SpecimenLift.autoSpecimenLiftUp(),
                     waitSecondsFive.build(),
                     //SpecimenClaw.autoSpecClawSwap()

@@ -61,8 +61,8 @@ object SpecimenSwivel {
         override fun run(p: TelemetryPacket): Boolean {
             //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
             swivel.position = outPos
-            opmode.telemetry.addData("spec swiv", 1)
-            opmode.telemetry.update()
+//            opmode.telemetry.addData("spec swiv", 1)
+//            opmode.telemetry.update()
             return false
         }
     }

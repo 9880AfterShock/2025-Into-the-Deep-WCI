@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
+import kotlin.math.abs
 
 
 object SpecimenLift { //Prefix for commands
@@ -36,6 +37,7 @@ object SpecimenLift { //Prefix for commands
         pos = 0.0
         lift = opmode.hardwareMap.get(DcMotor::class.java, "specimenLift") //config name
         lift.targetPosition = (pos*encoderTicks).toInt()
+        lift.power = 1.0
         lift.mode = encoderMode //reset encoder
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
@@ -98,24 +100,25 @@ object SpecimenLift { //Prefix for commands
     class autoSpecimenLiftUp: Action{
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (maxPos*encoderTicks).toInt()
-            return false
+            lift.power = 1.0
+            p.addLine("Lift targ pos "+lift.targetPosition)
+            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
+                return false
+            }
+            return true
         }
     }
     class autoSpecimenLiftDown: Action{
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (minPos*encoderTicks).toInt()
-            return false
+            lift.power = 1.0
+            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
+                lift.power = 0.0
+                return false
+            }
+            return true
         }
-    }
-    class autoSpecimenLiftInit: Action{
-        override fun run(p: TelemetryPacket): Boolean {
-            pos = 0.0
-            lift = opmode.hardwareMap.get(DcMotor::class.java, "specimenLift") //config name
-            lift.targetPosition = (pos*encoderTicks).toInt()
-            lift.mode = encoderMode //reset encoder
-            lift.mode = motorMode //enable motor mode
-            return false
-        }
+
     }
     //
     class autoSpecLiftUp: Action {
