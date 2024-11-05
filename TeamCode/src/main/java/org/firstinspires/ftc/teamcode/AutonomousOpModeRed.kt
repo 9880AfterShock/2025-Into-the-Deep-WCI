@@ -79,11 +79,8 @@ class AutonomousOpModeRed : LinearOpMode() {
                     SpecimenClaw.autoSpecClawClose(),
                 ),
                 SequentialAction(
-                    SpecimenLift.autoSpecimenLiftUp(),
-                    waitSecondsFive.build(),
-                    SpecimenLift.autoSpecimenLiftDown(),
-                    waitSecondsTwo.build(),
-                    SpecimenClaw.autoSpecClawOpen()
+                    SpecimenLift.autoSpecimenLiftUp(5000),
+                    SpecimenLift.autoSpecimenLiftDown(2000),
                 ),
                 clipToParkRed.build()
 
