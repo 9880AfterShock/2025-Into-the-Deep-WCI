@@ -41,6 +41,8 @@ object SpecimenLift { //Prefix for commands
         lift.mode = encoderMode //reset encoder
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
+        opmode.telemetry.addData("lift innited", 1.2)
+        opmode.telemetry.update()
     }
     fun updateLift(){
 
@@ -101,10 +103,10 @@ object SpecimenLift { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (maxPos*encoderTicks).toInt()
             lift.power = 1.0
-            p.addLine("Lift targ pos "+lift.targetPosition)
-            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
-                return false
-            }
+//            p.addLine("Lift targ pos "+lift.targetPosition)
+//            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
+//                return false
+//            }
             return true
         }
     }

@@ -78,8 +78,9 @@ class AutonomousOpModeRed : LinearOpMode() {
                     // get things to move
                     SpecimenSwivel.autoSpecSwivOut(),
                     SpecimenClaw.autoSpecClawClose(),
+                    SpecimenLift.autoSpecimenLiftUp(), // might work
                 ),
-                SequentialAction(
+                SequentialAction( //this does not run
                     SpecimenLift.autoSpecimenLiftUp(), // might work
                     waitSecondsFive.build(),
                     //SpecimenClaw.autoSpecClawSwap()
