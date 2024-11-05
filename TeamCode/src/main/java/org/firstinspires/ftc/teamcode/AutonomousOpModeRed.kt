@@ -75,15 +75,12 @@ class AutonomousOpModeRed : LinearOpMode() {
             SequentialAction(
                 ParallelAction(
                     startToClipRed.build(),
-                    // get things to move
                     SpecimenSwivel.autoSpecSwivOut(),
                     SpecimenClaw.autoSpecClawClose(),
-                    SpecimenLift.autoSpecimenLiftUp(), // might work
                 ),
-                SequentialAction( //this does not run
-                    SpecimenLift.autoSpecimenLiftUp(), // might work
+                SequentialAction(
+                    SpecimenLift.autoSpecimenLiftUp(),
                     waitSecondsFive.build(),
-                    //SpecimenClaw.autoSpecClawSwap()
                     SpecimenLift.autoSpecimenLiftDown(),
                     waitSecondsTwo.build(),
                     SpecimenClaw.autoSpecClawOpen()

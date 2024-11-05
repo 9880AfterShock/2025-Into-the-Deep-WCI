@@ -103,22 +103,14 @@ object SpecimenLift { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (maxPos*encoderTicks).toInt()
             lift.power = 1.0
-//            p.addLine("Lift targ pos "+lift.targetPosition)
-//            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
-//                return false
-//            }
-            return true
+            return false
         }
     }
     class autoSpecimenLiftDown: Action{
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (minPos*encoderTicks).toInt()
             lift.power = 1.0
-            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
-                lift.power = 0.0
-                return false
-            }
-            return true
+            return false
         }
 
     }

@@ -59,10 +59,8 @@ object SpecimenSwivel {
 
     class autoSpecSwivOut: Action {
         override fun run(p: TelemetryPacket): Boolean {
-            //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
             swivel.position = outPos
-//            opmode.telemetry.addData("spec swiv", 1)
-//            opmode.telemetry.update()
+            p.put("swivel done", 1.0)
             return false
         }
     }

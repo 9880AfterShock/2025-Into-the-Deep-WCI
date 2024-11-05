@@ -72,11 +72,9 @@ object SpecimenClaw {
     }
     class autoSpecClawClose: Action {
         override fun run(p: TelemetryPacket): Boolean {
-            //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
             close()
-//            SpecimenClaw.opmode.telemetry.addData("claw swap", 1)
-//            SpecimenClaw.opmode.telemetry.update()
-            return true
+            p.put("claw done", 1.0)
+            return false
         }
     }
 }
