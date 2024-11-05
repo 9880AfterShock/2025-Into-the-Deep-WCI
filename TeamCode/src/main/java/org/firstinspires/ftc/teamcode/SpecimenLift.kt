@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
+import java.lang.Thread.sleep
 import kotlin.math.abs
 
 
@@ -41,6 +42,8 @@ object SpecimenLift { //Prefix for commands
         lift.mode = encoderMode //reset encoder
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
+        opmode.telemetry.addData("lift innited", 1.2)
+        opmode.telemetry.update()
     }
     fun updateLift(){
 
@@ -97,81 +100,25 @@ object SpecimenLift { //Prefix for commands
         }
     }
 
-    class autoSpecimenLiftUp: Action{
+    class autoSpecimenLiftUp(var waitTime: Long): Action{
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (maxPos*encoderTicks).toInt()
             lift.power = 1.0
-            p.addLine("Lift targ pos "+lift.targetPosition)
-            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
-                return false
-            }
-            return true
+            sleep(waitTime)
+            return false
         }
     }
-    class autoSpecimenLiftDown: Action{
+    class autoSpecimenLiftDown(var waitTime: Long): Action{
         override fun run(p: TelemetryPacket): Boolean {
-            lift.targetPosition = (minPos*encoderTicks).toInt()
+            lift.targetPosition = (minPos * encoderTicks).toInt()
             lift.power = 1.0
-            if (abs(lift.targetPosition - lift.currentPosition) < 50) {
-                lift.power = 0.0
-                return false
+            while (true) {
+                if ((maxDrop > lift.currentPosition / encoderTicks) && (lift.currentPosition / encoderTicks > minDrop) && (lift.targetPosition / encoderTicks == minPos)) {
+                    SpecimenClaw.open()
+                    sleep(waitTime)
+                    return false
+                }
             }
-            return true
-        }
-
-    }
-    //
-    class autoSpecLiftUp: Action {
-        override fun run(p: TelemetryPacket): Boolean {
-            LiftRun.currTargetInTicks = SpecimenLift.maxPos.toInt() * MainLift.encoderTicks.toInt()
-
-            return false
         }
     }
-    class autoSpecLiftScore: Action {
-        override fun run(p: TelemetryPacket): Boolean {
-            LiftRun.currTargetInTicks = SpecimenLift.minPos.toInt() / encoderTicks.toInt()
-            if ((maxDrop > lift.currentPosition/encoderTicks) && (lift.currentPosition/encoderTicks > minDrop) && (lift.targetPosition/encoderTicks == minPos)) {
-                SpecimenClaw.open()
-            }
-
-            return false
-        }
-    }
-
-    class autoSpecLiftDown: Action {
-        override fun run(p: TelemetryPacket): Boolean {
-            LiftRun.currTargetInTicks = SpecimenLift.minPos.toInt() * MainLift.encoderTicks.toInt()
-            SpecimenLift.opmode.telemetry.addData("spec lift down", 1)
-            SpecimenLift.opmode.telemetry.update()
-            return false
-        }
-    }
-
-    class LiftRun : Action {
-        var initialized: Boolean = false
-
-        companion object {
-            var currTargetInTicks = 0;
-        }
-
-        override fun run(p: TelemetryPacket): Boolean {
-
-            if (!initialized) {
-                SpecimenLift.lift.targetPosition = MainLift.minPos.toInt() * MainLift.encoderTicks.toInt()
-                SpecimenLift.lift.power = 1.0
-                SpecimenLift.lift.mode = DcMotor.RunMode.RUN_TO_POSITION
-                opmode.telemetry.addData("lift inited", 1)
-                opmode.telemetry.update()
-            }
-
-            lift.targetPosition = currTargetInTicks
-            lift.power = 1.0
-            lift.mode = DcMotor.RunMode.RUN_TO_POSITION
-
-            return false// originally true, maybe set false?
-        }
-
-    }
-
 }
