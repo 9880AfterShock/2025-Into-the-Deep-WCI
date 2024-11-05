@@ -16,7 +16,12 @@ object MeepMeep {
                 .setConstraints(60.0, 60.0, Math.toRadians(180.0), Math.toRadians(0.0), 14.5)
                 .build()
         myBot.runAction(
-            myBot.drive.actionBuilder((Pose2d(0.4, 59.2, 0.0)))
+            myBot.drive.actionBuilder((Pose2d(14.0, -61.0, Math.PI)))
+                .splineToSplineHeading(Pose2d(0.0, -31.0, Math.toRadians(180.0)),Math.PI/2)
+                .waitSeconds(1.0)
+                .splineToSplineHeading(Pose2d(60.0, -60.0, Math.PI * 1.5), 0.0)
+                .build()
+            /*myBot.drive.actionBuilder((Pose2d(0.4, 59.2, 0.0)))
                 .splineToLinearHeading(Pose2d(-5.0,34.8,Math.toRadians(180.0)),0.0)
                 .waitSeconds(2.0)
                 .strafeToLinearHeading(Vector2d(-34.8,40.4),Math.toRadians(90.0))
@@ -33,7 +38,7 @@ object MeepMeep {
                 .waitSeconds(2.0)
                 .strafeToLinearHeading(Vector2d(-60.0,60.0,),Math.toRadians(180.0))
                 .build()
-        )
+        */)
 
         meepMeep.setBackground(Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
             .setDarkMode(true)
