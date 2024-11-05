@@ -87,13 +87,13 @@ class AutonomousOpModeBlue : LinearOpMode() {
                 ParallelAction(
                     startToClipBlue.build(),
                     // get things to move
-                    SpecimenSwivel.autoSpecSwivOut(),
+                    SpecimenSwivel.autoSpecSwivOut(1),
                     SpecimenClaw.autoSpecClawClose()
                 ),
                 SequentialAction(
                     //SpecimenLift.LiftRun(),// now innited, never moves
                     //SpecimenLift.autoSpecLiftUp(),
-                    SpecimenLift.autoSpecimenLiftUp(1),
+                    SpecimenLift.autoSpecimenLiftUp(1 ,1),
                     waitSecondsFive.build(),
                     //SpecimenClaw.autoSpecClawSwap()
 

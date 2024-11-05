@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.LiftRun
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.encoderTicks
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.maxPos
+import java.lang.Thread.sleep
 
 
 object SpecimenSwivel {
@@ -57,9 +58,10 @@ object SpecimenSwivel {
         swivelButtonPreviouslyPressed = swivelButtonCurrentlyPressed
     }
 
-    class autoSpecSwivOut: Action {
+    class autoSpecSwivOut(var waitTime: Long): Action {
         override fun run(p: TelemetryPacket): Boolean {
             swivel.position = outPos
+            sleep(waitTime)
             p.put("swivel done", 1.0)
             return false
         }

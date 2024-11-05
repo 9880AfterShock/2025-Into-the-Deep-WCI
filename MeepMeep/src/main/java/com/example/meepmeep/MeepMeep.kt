@@ -13,7 +13,7 @@ object MeepMeep {
         val meepMeep = MeepMeep(700)
         val myBot =
             DefaultBotBuilder(meepMeep) // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(60.0, 60.0, Math.toRadians(180.0), Math.toRadians(0.0), 17.0)
+                .setConstraints(60.0, 60.0, Math.toRadians(180.0), Math.toRadians(0.0), 14.5)
                 .build()
         myBot.runAction(
             myBot.drive.actionBuilder((Pose2d(0.4, 59.2, 0.0)))
