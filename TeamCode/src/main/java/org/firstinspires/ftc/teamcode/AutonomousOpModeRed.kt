@@ -6,10 +6,10 @@ import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
+import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
-import org.firstinspires.ftc.teamcode.SpecimenSwivel
 
 
 @Config
@@ -36,7 +36,10 @@ class AutonomousOpModeRed : LinearOpMode() {
             .waitSeconds(5.0)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
             .waitSeconds(2.0)
-        var clipToParkRed: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
+        var backToRed: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
+            .strafeTo(Vector2d(0.0, -30.0)/*backVecRed*/)
+            .waitSeconds(1.0)
+        var clipToParkRed: TrajectoryActionBuilder = drive.actionBuilder(backPoseRed)
             .splineToSplineHeading(parkPoseRed, Math.toRadians(-50.0))
 
 
@@ -75,12 +78,17 @@ class AutonomousOpModeRed : LinearOpMode() {
             SequentialAction(
                 ParallelAction(
                     startToClipRed.build(),
-                    SpecimenSwivel.autoSpecSwivOut(),
-                    SpecimenClaw.autoSpecClawClose(),
+                    SequentialAction(
+                        SpecimenSwivel.autoSpecSwivOut(),
+                        SpecimenClaw.autoSpecClawClose(),
+                        SpecimenLift.autoSpecimenLiftUp(/*3500*/),
+                    ),
                 ),
-                SequentialAction(
-                    SpecimenLift.autoSpecimenLiftUp(3500),
+                ParallelAction(
+                    //SpecimenLift.autoSpecimenLiftUp(/*3500*/),
+                    backToRed.build(),
                     SpecimenLift.autoSpecimenLiftDown(2000),
+
                 ),
                 clipToParkRed.build()
 

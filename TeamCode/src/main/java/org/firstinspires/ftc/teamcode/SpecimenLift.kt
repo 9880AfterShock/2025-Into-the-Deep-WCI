@@ -100,11 +100,11 @@ object SpecimenLift { //Prefix for commands
         }
     }
 
-    class autoSpecimenLiftUp(var waitTime: Long): Action{
+    class autoSpecimenLiftUp(/*var waitTime: Long*/): Action{
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (maxPos*encoderTicks).toInt()
             lift.power = 1.0
-            sleep(waitTime)
+            //sleep(waitTime)
             return false
         }
     }
