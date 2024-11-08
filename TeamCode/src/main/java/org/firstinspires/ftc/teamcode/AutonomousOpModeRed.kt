@@ -31,15 +31,18 @@ class AutonomousOpModeRed : LinearOpMode() {
 
         // actionBuilder builds from the drive steps passed to it
         var startToClipRed: TrajectoryActionBuilder = drive.actionBuilder(startPoseRed)
+            .setTangent(Math.PI/2)
             .splineToSplineHeading(clipPoseRed, Math.toRadians(90.0))
+            .waitSeconds(1.0)
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
             .waitSeconds(5.0)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
             .waitSeconds(2.0)
-        var backToRed: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
-            .strafeTo(Vector2d(0.0, -30.0)/*backVecRed*/)
-            .waitSeconds(1.0)
-        var clipToParkRed: TrajectoryActionBuilder = drive.actionBuilder(backPoseRed)
+//        var backToRed: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
+//            .strafeToConstantHeading(Vector2d(0.0, -30.0)/*backVecRed*/)
+//            .waitSeconds(1.0)
+        var clipToParkRed: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
+            .setTangent(3*Math.PI/2)// change meEEeeeEE!!!!!!!
             .splineToSplineHeading(parkPoseRed, Math.toRadians(-50.0))
 
 
@@ -86,7 +89,7 @@ class AutonomousOpModeRed : LinearOpMode() {
                 ),
                 ParallelAction(
                     //SpecimenLift.autoSpecimenLiftUp(/*3500*/),
-                    backToRed.build(),
+                    //backToRed.build(),
                     SpecimenLift.autoSpecimenLiftDown(2000),
 
                 ),

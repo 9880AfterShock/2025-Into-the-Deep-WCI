@@ -16,10 +16,14 @@ object SpecimenSwivel {
     var outPos = 1.0 //the positions
     @JvmField
     var inPos = 0.7 //the positions
+    @JvmField
+    var partialPos = 0.85
     var inited = false
     private var state = "In"
     private var swivelButtonCurrentlyPressed = false
     private var swivelButtonPreviouslyPressed = false
+    private var swivelPartButtonCurrentlyPressed = false
+    private var swivelPartButtonPreviouslyPressed = false
 
     lateinit var opmode:OpMode
     fun initSwivel(opmode: OpMode){
@@ -32,9 +36,13 @@ object SpecimenSwivel {
         swivel.position = outPos
         state = "Out"
     }
-    private fun moveIn(){
+    fun moveIn(){
         swivel.position = inPos //swivel doesnt move
         state = "In" //this runs
+    }
+    fun movePart(){
+        swivel.position = partialPos //swivel doesnt move
+        state = "partial" //this runs
     }
     private fun swap(){
         if (state == "Out") {
@@ -45,6 +53,7 @@ object SpecimenSwivel {
     }
     fun updateSwivel() {
         opmode.telemetry.addData("Swivel Position", state)
+        swivelPartButtonCurrentlyPressed = opmode.gamepad1.x
         // Check the status of the claw button on the gamepad
         swivelButtonCurrentlyPressed = opmode.gamepad1.y //change this to change the button //disabled for safety
 
@@ -56,6 +65,16 @@ object SpecimenSwivel {
             }
         }
         swivelButtonPreviouslyPressed = swivelButtonCurrentlyPressed
+        if (swivelPartButtonCurrentlyPressed != swivelPartButtonPreviouslyPressed) {
+            // If the button is (now) down
+            if (swivelPartButtonCurrentlyPressed) {
+                movePart()
+            }
+        }
+        else{
+            swap()
+        }
+        swivelPartButtonPreviouslyPressed = swivelPartButtonCurrentlyPressed
     }
 
     class autoSpecSwivOut: Action {
