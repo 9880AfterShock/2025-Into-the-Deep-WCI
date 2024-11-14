@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
+import org.firstinspires.ftc.teamcode.SpecimenClaw
+import org.firstinspires.ftc.teamcode.SpecimenSwivel
 
 object Hang {
     var hanging = false
@@ -18,9 +20,11 @@ object Hang {
         hangButtonCurrentlyPressed = (opmode.gamepad2.right_trigger.toDouble() > 0.1) //can change controls
         unHangButtonCurrentlyPressed = (opmode.gamepad2.left_trigger.toDouble() > 0.1) //can change controls
         if (hangButtonCurrentlyPressed && !hangButtonPreviouslyPressed && !hanging) { //not working???
+            SpecimenClaw.close()
             MainLift.pos = 0.0
             MainLift.currentSpeed = 0.0
             Raiser.targPos = Raiser.downPos
+            SpecimenSwivel.movePart()
             hanging = true
         }
         if (hanging) {

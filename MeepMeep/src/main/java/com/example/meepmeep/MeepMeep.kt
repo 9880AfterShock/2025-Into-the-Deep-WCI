@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.Vector2d
 import com.noahbres.meepmeep.MeepMeep
 import com.noahbres.meepmeep.MeepMeep.Background
+import com.noahbres.meepmeep.core.toRadians
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder
 
 object MeepMeep {
@@ -17,9 +18,9 @@ object MeepMeep {
                 .build()
         myBot.runAction(
             myBot.drive.actionBuilder((Pose2d(14.0, -61.0, Math.PI)))
-                .splineToSplineHeading(Pose2d(0.0, -31.0, Math.toRadians(180.0)),Math.PI/2)
+                .splineToSplineHeading(Pose2d(7.0, -33.0, Math.toRadians(180.0)),Math.PI/2)
                 .waitSeconds(1.0)
-                .splineToSplineHeading(Pose2d(60.0, -60.0, Math.PI * 1.5), 0.0)
+                .splineToSplineHeading(Pose2d(60.0, -60.0, Math.PI), 0.0.toRadians())
                 .build()
             /*myBot.drive.actionBuilder((Pose2d(0.4, 59.2, 0.0)))
                 .splineToLinearHeading(Pose2d(-5.0,34.8,Math.toRadians(180.0)),0.0)
