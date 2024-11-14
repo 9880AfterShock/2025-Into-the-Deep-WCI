@@ -6,12 +6,10 @@ import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
+import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
-import org.firstinspires.ftc.teamcode.SpecimenClaw.opmode
-import org.firstinspires.ftc.teamcode.SpecimenSwivel.initSwivel
-import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 
 @Config
@@ -21,11 +19,10 @@ class AutonomousOpModeBlue : LinearOpMode() {
 // lift class
 
     override fun runOpMode() {
-        initSwivel(this) // swivel is inited at the start, this works
-        SpecimenClaw.initClaw(this)
-        SpecimenClaw.close()// make sure
-        SpecimenLift.initLift(this) //?????????????!
-        MainLift.initLift(this)
+        SpecimenSwivel.initSwivel(this) // swivel is inited at the start, this works
+        SpecimenClaw.initClaw(this) //
+        SpecimenLift.initLift(this)
+
         // instantiate your MecanumDrive at a particular pose.
         //val initialPose = Pose2d(11.8, 61.7, Math.toRadians(90.0))
         val drive = MecanumDrive(hardwareMap, startPoseBlue)
@@ -34,24 +31,25 @@ class AutonomousOpModeBlue : LinearOpMode() {
 
         // actionBuilder builds from the drive steps passed to it
         var startToClipBlue: TrajectoryActionBuilder = drive.actionBuilder(startPoseBlue)
-        .splineToSplineHeading(clipPoseBlue, Math.PI/-2)
-        opmode.telemetry.addData("start to clip blue", 1)
-        opmode.telemetry.update()
+            .waitSeconds(0.2)
+            .setTangent(Math.PI/-2)
+            .splineToSplineHeading(clipPoseBlue, Math.toRadians(-90.0))
+            .waitSeconds(1.0)
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-        .waitSeconds(5.0)
-        opmode.telemetry.addData("wait 5 seconds", 1)
-        opmode.telemetry.update()
+            .waitSeconds(5.0)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(2.0)
-        opmode.telemetry.addData("wait 2 seconds", 1)
-        opmode.telemetry.update()
-        var clipToParkBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .splineToSplineHeading(parkPoseBlue, Math.PI)
-        opmode.telemetry.addData("clip to park", 1)
-        opmode.telemetry.update()
+        var backToBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
+            .setTangent(Math.PI/2)
+            .splineToSplineHeading(backPoseBlue, Math.PI/2)
+            //.strafeToConstantHeading(Vector2d(0.0, -30.0)/*backVecBlue*/)
+            .waitSeconds(1.0)
+        var clipToParkBlue: TrajectoryActionBuilder = drive.actionBuilder(backPoseBlue)
+            .setTangent(Math.PI/2)// change meEEeeeEE!!!!!!!
+            .splineToSplineHeading(parkPoseBlue, Math.toRadians(130.0))
 
 
-            // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
+        // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
         /*var tab2: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
             .lineToY(37.0)
             .setTangent(Math.toRadians(0.0))
@@ -79,28 +77,26 @@ class AutonomousOpModeBlue : LinearOpMode() {
 
         if (isStopRequested) return
 
-       // val startPosition = 1
+        // val startPosition = 1
 
 
         runBlocking(
             SequentialAction(
                 ParallelAction(
                     startToClipBlue.build(),
-                    // get things to move
-                    SpecimenSwivel.autoSpecSwivOut(),
-                    SpecimenClaw.autoSpecClawClose()
+                    SequentialAction(
+                        SpecimenSwivel.autoSpecSwivOut(),
+                        SpecimenClaw.autoSpecClawClose(),
+                        SpecimenLift.autoSpecimenLiftUp(/*3500*/),
+                    ),
                 ),
-                SequentialAction(
-                    //SpecimenLift.LiftRun(),// now innited, never moves
-                    //SpecimenLift.autoSpecLiftUp(),
-                    SpecimenLift.autoSpecimenLiftUp(/*1*/),
-                    waitSecondsFive.build(),
-                    //SpecimenClaw.autoSpecClawSwap()
+                ParallelAction(
+                    //SpecimenLift.autoSpecimenLiftUp(/*3500*/),
+                    //backToBlue.build(),
+                    SpecimenLift.autoSpecimenLiftDown(2000),
 
-                    SpecimenLift.autoSpecimenLiftDown(1),
-                    //SpecimenClaw.autoSpecClawSwap(),
-                    waitSecondsTwo.build()
-                ),
+                    ),
+                backToBlue.build(),
                 clipToParkBlue.build()
 
                 //trajectoryActionChosen,
