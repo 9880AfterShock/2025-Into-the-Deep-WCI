@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.SpecimenLift.minPos
 import org.firstinspires.ftc.teamcode.SpecimenSwivel.inPos
 import org.firstinspires.ftc.teamcode.SpecimenSwivel.swivel
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
+import java.lang.Thread.sleep
 
 object Raiser { //Prefix for commands
     private lateinit var motor: DcMotor //Init Motor Var
@@ -77,6 +78,9 @@ object Raiser { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             motor.targetPosition = upPos
             motor.power = 1.0
+            while(motor.currentPosition >= upPos - 30){ //30 is margin of error
+                sleep(10)
+            }
             return false
         }
     }
