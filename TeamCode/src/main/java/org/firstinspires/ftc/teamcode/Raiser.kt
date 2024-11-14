@@ -1,7 +1,14 @@
 package org.firstinspires.ftc.teamcode
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import org.firstinspires.ftc.teamcode.SpecimenLift.encoderTicks
+import org.firstinspires.ftc.teamcode.SpecimenLift.lift
+import org.firstinspires.ftc.teamcode.SpecimenLift.minPos
+import org.firstinspires.ftc.teamcode.SpecimenSwivel.inPos
+import org.firstinspires.ftc.teamcode.SpecimenSwivel.swivel
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 object Raiser { //Prefix for commands
@@ -65,5 +72,12 @@ object Raiser { //Prefix for commands
         }
         motor.targetPosition = (targPos)
         opmode.telemetry.addData("Raiser Position", targPos) //change to enum
+    }
+    class autoRaiserReset: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            motor.targetPosition = upPos
+            motor.power = 1.0
+            return false
+        }
     }
 }
