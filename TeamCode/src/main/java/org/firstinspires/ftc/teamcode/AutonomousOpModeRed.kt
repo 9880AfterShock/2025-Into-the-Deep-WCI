@@ -40,7 +40,7 @@ class AutonomousOpModeRed : LinearOpMode() {
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
             .waitSeconds(5.0)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
-            .waitSeconds(2.0)
+            .waitSeconds(30.0)
         var backToRed: TrajectoryActionBuilder = drive.actionBuilder(clipPoseRed)
             .setTangent(Math.PI/-2)
             .splineToSplineHeading(backPoseRed, Math.PI/-2)
@@ -83,7 +83,6 @@ class AutonomousOpModeRed : LinearOpMode() {
 
         runBlocking(
             SequentialAction(
-                Raiser.autoRaiserReset(),
                 ParallelAction(
                     startToClipRed.build(),
                     SequentialAction(
@@ -100,6 +99,8 @@ class AutonomousOpModeRed : LinearOpMode() {
                 ),
                 SequentialAction(
                 clipToParkRed.build(),
+                Raiser.autoRaiserReset(),
+                waitSecondsTwo.build(),
                 //Raiser.autoRaiserReset(),
                 //trajectoryActionChosen,
                 //trajectoryActionCloseOut

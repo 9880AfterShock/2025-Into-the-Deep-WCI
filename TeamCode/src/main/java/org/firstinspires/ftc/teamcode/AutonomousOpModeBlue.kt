@@ -40,7 +40,7 @@ class AutonomousOpModeBlue : LinearOpMode() {
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(5.0)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .waitSeconds(2.0)
+            .waitSeconds(30.0)
         var backToBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .setTangent(Math.PI/2)
             .splineToSplineHeading(backPoseBlue, Math.PI/2)
@@ -84,7 +84,6 @@ class AutonomousOpModeBlue : LinearOpMode() {
 
         runBlocking(
             SequentialAction(
-                Raiser.autoRaiserReset(),
                 ParallelAction(
                     startToClipBlue.build(),
                     SequentialAction(
@@ -99,14 +98,9 @@ class AutonomousOpModeBlue : LinearOpMode() {
                     backToBlue.build(),
                     SpecimenLift.autoSpecimenLiftDown(2000),
                     ),
-
-                SequentialAction(
                     clipToParkBlue.build(),
-                    //Raiser.autoRaiserReset(),
-                    //trajectoryActionChosen,
-                    //trajectoryActionCloseOut
-                ),
-
+                Raiser.autoRaiserReset(),
+                waitSecondsTwo.build(),
                 //trajectoryActionChosen,
                 //trajectoryActionCloseOut
             )
