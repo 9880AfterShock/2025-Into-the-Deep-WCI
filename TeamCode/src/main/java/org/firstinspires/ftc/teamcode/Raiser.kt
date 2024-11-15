@@ -78,7 +78,7 @@ object Raiser { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             motor.targetPosition = upPos
             motor.power = 1.0
-            while(motor.currentPosition >= upPos - 30){ //30 is margin of error
+            while(motor.currentPosition <= upPos - 30){ //30 is margin of error
                 sleep(10)
             }
             return false
