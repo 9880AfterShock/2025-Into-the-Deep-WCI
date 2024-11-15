@@ -83,7 +83,6 @@ class AutonomousOpModeRed : LinearOpMode() {
 
         runBlocking(
             SequentialAction(
-                Raiser.autoRaiserReset(),
                 ParallelAction(
                     startToClipRed.build(),
                     SequentialAction(
@@ -100,7 +99,7 @@ class AutonomousOpModeRed : LinearOpMode() {
                 ),
                 SequentialAction(
                 clipToParkRed.build(),
-                //Raiser.autoRaiserReset(),
+                Raiser.autoRaiserReset(),
                 //trajectoryActionChosen,
                 //trajectoryActionCloseOut
                 ),
