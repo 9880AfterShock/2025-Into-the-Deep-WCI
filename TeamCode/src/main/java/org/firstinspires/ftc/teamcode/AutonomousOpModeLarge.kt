@@ -46,7 +46,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .strafeToLinearHeading(pushPrepPoseMidBig,Math.toRadians(90.0))
             .strafeToLinearHeading(pushPoseMidBig, Math.toRadians(90.0)) // got these
             .setTangent(Math.toRadians(45.0))
-            .splineToSplineHeading(specPickupPoseBig,Math.toRadians(90.0))
+            .splineToSplineHeading(specPickupPoseBig,Math.toRadians(90.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
             //.waitSeconds(0.5)
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
@@ -77,8 +77,8 @@ class AutonomousOpModeLarge : LinearOpMode() {
 //            //.strafeToConstantHeading(Vector2d(0.0, -30.0)/*backVecBlue*/)
 //            .waitSeconds(0.2)
         var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
-            .setTangent(Math.PI/2)// change meEEeeeEE!!!!!!!
-            .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(130.0))
+            .setTangent(Math.toRadians(135.0))// change meEEeeeEE!!!!!!!
+            .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(135.0))
 
 
         // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
@@ -133,7 +133,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
                     ),
                     grabToClipTheSecondBig.build(),
                 ),
-                SpecimenLift.autoSpecimenLiftDown(700),
+                SpecimenLift.autoSpecimenLiftDown(800),
                 clipToGrabTheSecondBig.build(),
                 SpecimenClaw.autoSpecClawClose(),
                 ParallelAction(
@@ -145,9 +145,11 @@ class AutonomousOpModeLarge : LinearOpMode() {
                     grabToClipTheThirdBig.build(),
                 ),
                 SpecimenLift.autoSpecimenLiftDown(800),
+                ParallelAction(
                 clipToParkBig.build(),
-                Raiser.autoRaiserReset(),
-                waitSecondsTwo.build(),
+                Raiser.autoRaiserReset(), // low voltage and ruins everything ::(
+                ),
+                waitSecondsTwo.build(), // put in sequential within parallel with raiser reset?
                 //trajectoryActionChosen,
                 //trajectoryActionCloseOut
             )
