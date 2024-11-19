@@ -23,12 +23,11 @@ object MeepMeep {
                 .waitSeconds(2.0)
                 .setTangent(Math.toRadians(160.0))
                 .splineToSplineHeading(Pose2d(-34.8,12.1, Math.PI/2),Math.toRadians(260.0))
-                .strafeTo(Vector2d(-34.8,12.1))
                 .strafeToLinearHeading(Vector2d(-43.9,12.1),Math.toRadians(90.0))
                 .strafeToLinearHeading(Vector2d(-43.9, 50.0), Math.toRadians(90.0))
                 .strafeToLinearHeading(Vector2d(-43.9,12.1),Math.toRadians(90.0))
                 .strafeToLinearHeading(Vector2d(-52.2,12.1),Math.toRadians(90.0))
-                .strafeToLinearHeading(Vector2d(-52.2, 50.0), Math.toRadians(90.0))
+                .strafeToLinearHeading(Vector2d(-52.2, 50.0), Math.toRadians(90.0)) // got these
                 .setTangent(Math.toRadians(45.0))
                 .splineToSplineHeading(Pose2d(-36.2,60.2, Math.PI),Math.toRadians(90.0))
                 .waitSeconds(2.0)
