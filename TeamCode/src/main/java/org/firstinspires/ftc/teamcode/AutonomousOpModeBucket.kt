@@ -14,22 +14,15 @@ import org.firstinspires.ftc.teamcode.Raiser
 
 
 @Config
-@Autonomous(name = "9880 2024 Blue Specimen", group = "Autonomous")
-class AutonomousOpModeBlue : LinearOpMode() {
+@Autonomous(name = "9880 2024 Blue Bucket", group = "Autonomous")
+class AutonomousOpModeBucket : LinearOpMode() {
 
 // lift class
 
     override fun runOpMode() {
-        SpecimenSwivel.initSwivel(this) // swivel is inited at the start, this works
-        SpecimenClaw.initClaw(this) //
-        SpecimenLift.initLift(this)
         Raiser.initRaiser(this)
 
-        // instantiate your MecanumDrive at a particular pose.
-        //val initialPose = Pose2d(11.8, 61.7, Math.toRadians(90.0))
         val drive = MecanumDrive(hardwareMap, startPoseBlue)
-
-
 
         // actionBuilder builds from the drive steps passed to it
         var startToClipBlue: TrajectoryActionBuilder = drive.actionBuilder(startPoseBlue)
@@ -97,13 +90,13 @@ class AutonomousOpModeBlue : LinearOpMode() {
                     //backToBlue.build(),
                     backToBlue.build(),
                     SpecimenLift.autoSpecimenLiftDown(2000),
-                    ),
-                    clipToParkBlue.build(),
-                    Raiser.autoRaiserReset(),
-                    waitSecondsThirty.build(),
-                    //trajectoryActionChosen,
-                    //trajectoryActionCloseOut
-                )
+                ),
+                clipToParkBlue.build(),
+                Raiser.autoRaiserReset(),
+                waitSecondsThirty.build(),
+                //trajectoryActionChosen,
+                //trajectoryActionCloseOut
             )
+        )
     }
 }
