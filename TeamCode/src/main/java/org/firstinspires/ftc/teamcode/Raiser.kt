@@ -79,7 +79,7 @@ object Raiser { //Prefix for commands
             motor.targetPosition = upPos
             motor.power = 1.0
             while(motor.currentPosition <= upPos - 30){ //30 is margin of error
-                sleep(10)
+                sleep(30000)
             }
             return false
         }

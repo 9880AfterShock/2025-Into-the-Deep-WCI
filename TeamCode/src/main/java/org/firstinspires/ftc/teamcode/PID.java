@@ -16,7 +16,8 @@ public class PID {
         double outp = value*this.p;
         this.prevint = (this.prevint+(desvalue-value))/2;
         double outi = this.prevint*this.i;
-        double outd = (desvalue-value)*this.d;
+        double outd = (this.lval-value)*this.d;
+        this.lval = value;
         return outd+outp+outi;
     }
 }
