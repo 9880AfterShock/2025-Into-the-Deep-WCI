@@ -79,8 +79,7 @@ class AutonomousOpModeRed : LinearOpMode() {
         if (isStopRequested) return
 
         // val startPosition = 1
-
-
+        
         runBlocking(
             SequentialAction(
                 ParallelAction(
