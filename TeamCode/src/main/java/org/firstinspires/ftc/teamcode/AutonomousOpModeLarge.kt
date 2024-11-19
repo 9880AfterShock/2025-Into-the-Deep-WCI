@@ -7,6 +7,7 @@ import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
+import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
@@ -35,7 +36,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .waitSeconds(0.2)
             .setTangent(Math.PI/-2)
             .splineToSplineHeading(clipPoseBlue, Math.toRadians(-90.0))
-            .waitSeconds(0.2)
+            //.waitSeconds(0.2)
         var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .setTangent(Math.toRadians(160.0))
             .splineToSplineHeading(pushPrepPoseBig,Math.toRadians(260.0))
@@ -46,14 +47,28 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .strafeToLinearHeading(pushPoseMidBig, Math.toRadians(90.0)) // got these
             .setTangent(Math.toRadians(45.0))
             .splineToSplineHeading(specPickupPoseBig,Math.toRadians(90.0))
+            //.waitSeconds(0.5)
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
-            .splineToLinearHeading(clipPoseBlue,Math.toRadians(-80.0))
+            .splineToLinearHeading(clipPoseBlue,Math.toRadians(-80.0))// issue?
+        var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specPickupPoseBig)
+            .setTangent(Math.toRadians(-35.0))
+            .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0))// issue?
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specPickupPoseBig)
+            .setTangent(Math.toRadians(-35.0))
+            .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
         var clipToGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .setTangent(Math.toRadians(110.0))
             .splineToSplineHeading(specPickupPoseBig, Math.toRadians(110.0))
+        var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecond)
+            .setTangent(Math.toRadians(110.0))
+            .splineToSplineHeading(specPickupPoseBig, Math.toRadians(110.0))
+            //.waitSeconds(0.5)
+        var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
+            .setTangent(Math.toRadians(110.0))
+            .splineToSplineHeading(specPickupPoseBig, Math.toRadians(110.0))
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .waitSeconds(5.0)
+            .waitSeconds(1.0)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(30.0)
 //        var backToBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
@@ -61,9 +76,9 @@ class AutonomousOpModeLarge : LinearOpMode() {
 //            .splineToSplineHeading(backPoseBlue, Math.PI/2)
 //            //.strafeToConstantHeading(Vector2d(0.0, -30.0)/*backVecBlue*/)
 //            .waitSeconds(0.2)
-        var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(backPoseBlue)
+        var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .setTangent(Math.PI/2)// change meEEeeeEE!!!!!!!
-            .splineToSplineHeading(parkPoseBlue, Math.toRadians(130.0))
+            .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(130.0))
 
 
         // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
@@ -107,29 +122,29 @@ class AutonomousOpModeLarge : LinearOpMode() {
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/),
                     ),
                 ),
-                SpecimenLift.autoSpecimenLiftDown(2000),
-
+                SpecimenLift.autoSpecimenLiftDown(800),
                 clipToPushGrabBig.build(),
                 SpecimenClaw.autoSpecClawClose(),
                 ParallelAction(
-                    grabToClipBig.build(),
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
-                        SpecimenLift.autoSpecimenLiftUp(/*3500*/),
+                        SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
                     ),
+                    grabToClipTheSecondBig.build(),
                 ),
-                SpecimenLift.autoSpecimenLiftDown(2000),
-                clipToGrabBig.build(),
+                SpecimenLift.autoSpecimenLiftDown(700),
+                clipToGrabTheSecondBig.build(),
                 SpecimenClaw.autoSpecClawClose(),
                 ParallelAction(
-                    grabToClipBig.build(),
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/),
                     ),
+                    grabToClipTheThirdBig.build(),
                 ),
+                SpecimenLift.autoSpecimenLiftDown(800),
                 clipToParkBig.build(),
                 Raiser.autoRaiserReset(),
                 waitSecondsTwo.build(),
