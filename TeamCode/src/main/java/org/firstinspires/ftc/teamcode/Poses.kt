@@ -6,6 +6,10 @@ import com.acmerobotics.roadrunner.Vector2d
 
 // Poses
 // blue side
+var startPoseBlueBucket = Pose2d(32.8, 59.2, 0.0)
+var neutralPoseBlue = Pose2d(35.0, 26.0,0.0)
+var bucketPoseBlue = Pose2d(47.1, 46.5, Math.toRadians(45.0))
+var bucketParkPoseBlue = Pose2d(26.0, 0.0, 0.0)
 var startPoseBlue = Pose2d(-14.0, 61.0, 0.0) // use for big
 var clipPoseBlue = Pose2d(-7.0, 33.25, 0.0) // use for big
 var backPoseBlue = Pose2d(0.0, 40.0, 0.0)
