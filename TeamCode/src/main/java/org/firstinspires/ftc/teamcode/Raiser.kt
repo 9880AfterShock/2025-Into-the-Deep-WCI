@@ -77,10 +77,10 @@ object Raiser { //Prefix for commands
     class autoRaiserReset: Action {
         override fun run(p: TelemetryPacket): Boolean {
             motor.targetPosition = upPos
-            motor.power = 1.0
-            while(motor.currentPosition <= upPos - 30){ //30 is margin of error
-                sleep(30000)
-            }
+            motor.power = 0.2
+//            while(motor.currentPosition <= upPos - 30){ //30 is margin of error
+//                sleep(30000)
+//            }
             return false
         }
     }

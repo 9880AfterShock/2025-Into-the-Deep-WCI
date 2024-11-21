@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
+import com.acmerobotics.roadrunner.TranslationalVelConstraint
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
@@ -137,7 +138,8 @@ class AutonomousOpModeLarge : LinearOpMode() {
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/),
                     ),
                     startToClipBig.build(),
-                ),
+                    Raiser.autoRaiserReset(),
+                    ),
                 ParallelAction(
                     SequentialAction(
                         waitSecondsFive.build(),
@@ -179,8 +181,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
                     SequentialAction(
                         SpecimenLift.autoSpecimenLiftDown(800),
                         waitSecondsFive.build(),
-                        //clipToParkBig.build(),
-                        Raiser.autoRaiserReset(),
+                        clipToParkBig.build(),
                         ),
                     ),
 
