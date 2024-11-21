@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
 import java.lang.Thread.sleep
 import kotlin.math.abs
@@ -109,6 +110,9 @@ object SpecimenLift { //Prefix for commands
         }
     }
     class autoSpecimenLiftDown(var waitTime: Long): Action{
+
+        val timer: ElapsedTime = ElapsedTime()
+
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (minPos * encoderTicks).toInt()
             lift.power = 1.0

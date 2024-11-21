@@ -4,10 +4,8 @@ package org.firstinspires.ftc.teamcode
 // Non-RR imports
 import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.ParallelAction
-import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
-import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
@@ -46,29 +44,33 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .strafeToLinearHeading(pushPrepPoseMidBig,Math.toRadians(90.0))
             .strafeToLinearHeading(pushPoseMidBig, Math.toRadians(90.0)) // got these
             .setTangent(Math.toRadians(45.0))
-            .splineToSplineHeading(specPickupPoseBig,Math.toRadians(90.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
+            .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
             //.waitSeconds(0.5)
-        var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specPickupPoseBig)
+        var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
+            .lineToX(-39.2)
+        var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
             .splineToLinearHeading(clipPoseBlue,Math.toRadians(-80.0))// issue?
-        var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specPickupPoseBig)
+        var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
+            .waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0))// issue?
-        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specPickupPoseBig)
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
+            .waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
         var clipToGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specPickupPoseBig, Math.toRadians(110.0))
+            .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
         var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecond)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specPickupPoseBig, Math.toRadians(110.0))
+            .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
             //.waitSeconds(0.5)
         var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specPickupPoseBig, Math.toRadians(110.0))
+            .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .waitSeconds(1.0)
+            .waitSeconds(0.40)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(30.0)
 //        var backToBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
@@ -111,44 +113,78 @@ class AutonomousOpModeLarge : LinearOpMode() {
 
         // val startPosition = 1
 
-
+//        ParallelAction(
+//            SequentialAction(
+//                SpecimenSwivel.autoSpecSwivOut(),
+//                SpecimenClaw.autoSpecClawClose(),
+//                //waitSecondsFive.build(),
+//                SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
+//            ),
+//            grabToClipTheSecondBig.build(),
+//        ),
+//        ParallelAction(
+//            SequentialAction(
+//                waitSecondsFive.build(),
+//                clipToGrabTheSecondBig.build(),
+//            ),
         runBlocking(
             SequentialAction(
                 ParallelAction(
-                    startToClipBig.build(),
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
+                        //waitSecondsFive.build(),
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/),
                     ),
+                    startToClipBig.build(),
                 ),
-                SpecimenLift.autoSpecimenLiftDown(800),
-                clipToPushGrabBig.build(),
+                ParallelAction(
+                    SequentialAction(
+                        waitSecondsFive.build(),
+                        clipToPushGrabBig.build(),
+                    ),
+                    SpecimenLift.autoSpecimenLiftDown(800),
+                ),
+                grabToGrabSlide.build(),
                 SpecimenClaw.autoSpecClawClose(),
                 ParallelAction(
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
+                        //waitSecondsFive.build(),
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
                     ),
                     grabToClipTheSecondBig.build(),
                 ),
-                SpecimenLift.autoSpecimenLiftDown(800),
-                clipToGrabTheSecondBig.build(),
+                ParallelAction(
+                    SequentialAction(
+                        waitSecondsFive.build(),
+                        clipToGrabTheSecondBig.build(),
+                    ),
+                    SpecimenLift.autoSpecimenLiftDown(800),
+                ),
+
+                grabToGrabSlide.build(),
                 SpecimenClaw.autoSpecClawClose(),
                 ParallelAction(
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
-                        SpecimenLift.autoSpecimenLiftUp(/*3500*/),
+                        //waitSecondsFive.build(),
+                        SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
                     ),
                     grabToClipTheThirdBig.build(),
                 ),
-                SpecimenLift.autoSpecimenLiftDown(800),
                 ParallelAction(
-                clipToParkBig.build(),
-                Raiser.autoRaiserReset(), // low voltage and ruins everything ::(
-                ),
+                    SequentialAction(
+                        SpecimenLift.autoSpecimenLiftDown(800),
+                        waitSecondsFive.build(),
+                        //clipToParkBig.build(),
+                        Raiser.autoRaiserReset(),
+                        ),
+                    ),
+
+                 // low voltage and ruins everything ::(
                 waitSecondsTwo.build(), // put in sequential within parallel with raiser reset?
                 //trajectoryActionChosen,
                 //trajectoryActionCloseOut
