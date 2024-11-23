@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
+import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
@@ -70,7 +71,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .setTangent(Math.toRadians(110.0))
             .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .waitSeconds(0.40)
+            .waitSeconds(0.90)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(30.0)
 //        var backToBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
@@ -81,6 +82,8 @@ class AutonomousOpModeLarge : LinearOpMode() {
         var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .setTangent(Math.toRadians(135.0))// change meEEeeeEE!!!!!!!
             .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(135.0))
+        var scoreFinalBackBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
+            .strafeToConstantHeading(Vector2d(5.0, 40.0))
 
 
         // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
@@ -138,12 +141,13 @@ class AutonomousOpModeLarge : LinearOpMode() {
                     ),
                     startToClipBig.build(),
                 ),
-                ParallelAction(
-                    SequentialAction(
-                        waitSecondsFive.build(),
-                        clipToPushGrabBig.build(),
-                    ),
-                    SpecimenLift.autoSpecimenLiftDown(800),
+                SequentialAction(
+                    //SequentialAction(
+                        //waitSecondsFive.build(),
+
+                    //),
+                    SpecimenLift.autoSpecimenLiftDown(100),
+                    clipToPushGrabBig.build(),
                 ),
                 grabToGrabSlide.build(),
                 SpecimenClaw.autoSpecClawClose(),
@@ -156,12 +160,13 @@ class AutonomousOpModeLarge : LinearOpMode() {
                     ),
                     grabToClipTheSecondBig.build(),
                 ),
-                ParallelAction(
+                //ParallelAction(
                     SequentialAction(
-                        waitSecondsFive.build(),
+                        //waitSecondsFive.build(),
+
+                    //),
+                    SpecimenLift.autoSpecimenLiftDown(100),
                         clipToGrabTheSecondBig.build(),
-                    ),
-                    SpecimenLift.autoSpecimenLiftDown(800),
                 ),
 
                 grabToGrabSlide.build(),
@@ -175,14 +180,15 @@ class AutonomousOpModeLarge : LinearOpMode() {
                     ),
                     grabToClipTheThirdBig.build(),
                 ),
-                ParallelAction(
+                //ParallelAction(
                     SequentialAction(
-                        SpecimenLift.autoSpecimenLiftDown(800),
-                        waitSecondsFive.build(),
+                        SpecimenLift.autoSpecimenLiftDown(100),
+                        scoreFinalBackBig.build(),
+                        //waitSecondsFive.build(),
                         //clipToParkBig.build(),
                         Raiser.autoRaiserReset(),
                         ),
-                    ),
+                    //),
 
                  // low voltage and ruins everything ::(
                 waitSecondsTwo.build(), // put in sequential within parallel with raiser reset?

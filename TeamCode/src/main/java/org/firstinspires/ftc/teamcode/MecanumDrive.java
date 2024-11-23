@@ -93,7 +93,7 @@ public final class MecanumDrive {
         // path controller gains
         public double axialGain = 12.5;// inches per second per inches of error for all 3 of the thingies
         public double lateralGain = 12.5;
-        public double headingGain = 8.0; // shared with turn, was 15.0
+        public double headingGain = 4.0; // shared with turn, was 15.0, then 8 was last successful number
 
         public double axialVelGain = 2.0;// inches per idk? maybe??? idk. :0 :0 :0
         public double lateralVelGain = 1.4;
