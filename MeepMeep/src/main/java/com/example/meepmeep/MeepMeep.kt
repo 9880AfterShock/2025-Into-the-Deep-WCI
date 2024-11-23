@@ -26,8 +26,8 @@ object MeepMeep {
                 .strafeToLinearHeading(Vector2d(35.0,46.0),0.0)
                 .splineToLinearHeading(Pose2d(47.1,46.5,Math.toRadians(45.0)),0.0)
                 .waitSeconds(3.0) //drop in bucket 2nd
-                .strafeToLinearHeading(Vector2d(35.0,0.0),0.0)
-                .strafeToLinearHeading(Vector2d(26.0,0.0),0.0)
+                .strafeToLinearHeading(Vector2d(35.0,0.0),Math.toRadians(135.0))
+                .strafeToLinearHeading(Vector2d(26.0,0.0), Math.toRadians(180.0))
                 .build()
 //                .setTangent(Math.PI/-2)
 //                .splineToLinearHeading(Pose2d(-5.0,34.8,Math.toRadians(0.0)),Math.PI/-2)
