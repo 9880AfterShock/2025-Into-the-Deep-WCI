@@ -30,7 +30,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
             .strafeToLinearHeading(Vector2d(35.0, 46.0), 0.0)
             .splineToLinearHeading(bucketPoseBlue, 0.0)
         var park = drive.actionBuilder(bucketPoseBlue)
-            .strafeToLinearHeading(Vector2d(35.0, 0.0), 0.0)
+            .strafeToLinearHeading(Vector2d(35.0, 0.0), Math.toRadians(135.0))
             .strafeToLinearHeading(bucketParkPoseBlue.position, bucketParkPoseBlue.heading)
 
         while (!isStopRequested && !opModeIsActive()) {
