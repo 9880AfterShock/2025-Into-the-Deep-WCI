@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import org.firstinspires.ftc.teamcode.Claw.open
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.pos
 
 object Wrist {
@@ -84,5 +87,11 @@ object Wrist {
         }
         state = targetPosition.toString()
         wrist.power = 0.25
+    }
+    class autoWristGoToPos: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            open()
+            return false
+        }
     }
 }

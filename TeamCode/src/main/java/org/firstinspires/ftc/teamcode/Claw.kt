@@ -4,9 +4,6 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
-import org.firstinspires.ftc.teamcode.Raiser.motor
-import org.firstinspires.ftc.teamcode.Raiser.upPos
-
 
 object Claw {
     private lateinit var claw: Servo
