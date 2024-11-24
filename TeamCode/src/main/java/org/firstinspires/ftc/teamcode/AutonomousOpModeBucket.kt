@@ -19,6 +19,8 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
     override fun runOpMode() {
         Raiser.initRaiser(this)
+        Wrist.initWrist(this)
+        Claw.initClaw(this)
 
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
         var firstBucket = drive.actionBuilder(startPoseBlueBucket)
@@ -45,8 +47,10 @@ class AutonomousOpModeBucket : LinearOpMode() {
             SequentialAction(
                 firstBucket.build(),
                 pickUpNeutral.build(),
+                Wrist.autoWristGoToPos(Wrist.positions[1]),
                 secondBucket.build(),
-                park.build()
+                park.build(),
+                Wrist.autoWristGoToPos(Wrist.initPos)
             )
         )
     }

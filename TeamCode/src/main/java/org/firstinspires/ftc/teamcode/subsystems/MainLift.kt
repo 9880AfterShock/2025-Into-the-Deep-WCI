@@ -71,6 +71,29 @@ object MainLift { //Prefix for commands
         opmode.telemetry.addData("Main Lift target position", pos) //Set telemetry
     }
 
+
+
+
+    class autoLiftUp: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            lift.targetPosition = (encoderTicks*maxPos).toInt()
+            lift.power = 1.0
+            return false
+        }
+    }
+    class autoLiftDown: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            lift.targetPosition = (encoderTicks*minPos).toInt()
+            lift.power = 1.0
+            return false
+        }
+    }
+
+
+
+
+
+    // all below are oscar's idk what they do lol
     class LiftUp: Action {
         override fun run(p: TelemetryPacket): Boolean {
             LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
