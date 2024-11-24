@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.Raiser
+import java.lang.Thread.sleep
 
 object MainLift { //Prefix for commands
     lateinit var lift: DcMotor //Init Motor Var
@@ -92,6 +93,9 @@ object MainLift { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (encoderTicks*maxLowPos).toInt()
             lift.power = 1.0
+            while (lift.currentPosition > (maxHangPos*encoderTicks).toInt() ) {
+                sleep(10)
+            }
             return false
         }
     }

@@ -5,6 +5,7 @@ package org.firstinspires.ftc.teamcode
 import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.SequentialAction
+import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
@@ -47,7 +48,11 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
         runBlocking(
             SequentialAction(
-                firstBucket.build(),
+                ParallelAction(
+                    Raiser.autoRaiserUp(),
+                    MainLift.autoLiftMax(),
+                    firstBucket.build(),
+                ),
                 pickUpNeutral.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
                 secondBucket.build(),
