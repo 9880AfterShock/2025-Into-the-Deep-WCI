@@ -37,8 +37,8 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .splineToSplineHeading(clipPoseBlue, Math.toRadians(-90.0))
             //.waitSeconds(0.2)
         var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .setTangent(Math.toRadians(160.0))
-            .splineToSplineHeading(pushPrepPoseBig,Math.toRadians(260.0))
+            .setTangent(Math.toRadians(140.0))
+            .splineToSplineHeading(pushPrepPoseBig,Math.toRadians(310.0))
             .strafeToLinearHeading(pushPrepPoseRightBig,Math.toRadians(90.0))
             .strafeToLinearHeading(pushPoseRightBig, Math.toRadians(90.0))
             .strafeToLinearHeading(pushPrepPoseRightBig,Math.toRadians(90.0))
@@ -48,7 +48,9 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
             //.waitSeconds(0.5)
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
-            .lineToX(-39.2)
+            .lineToX(-42.2)
+        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBig)
+            .lineToX(-41.2)
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
             .splineToLinearHeading(clipPoseBlue,Math.toRadians(-80.0))// issue?
@@ -56,7 +58,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .setTangent(Math.toRadians(-35.0))
             .waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0))// issue?
-        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBig)
             .setTangent(Math.toRadians(-35.0))
             .waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
@@ -65,7 +67,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
         var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecond)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
+            .splineToSplineHeading(specStartPickupPoseLastBig, Math.toRadians(110.0))
             //.waitSeconds(0.5)
         var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .setTangent(Math.toRadians(110.0))
@@ -132,6 +134,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
 //            ),
         runBlocking(
             SequentialAction(
+                Raiser.autoRaiserReset(),
                 ParallelAction(
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
@@ -169,7 +172,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
                         clipToGrabTheSecondBig.build(),
                 ),
 
-                grabToGrabSlide.build(),
+                grabToGrabSlideLast.build(),
                 SpecimenClaw.autoSpecClawClose(),
                 ParallelAction(
                     SequentialAction(
@@ -186,7 +189,6 @@ class AutonomousOpModeLarge : LinearOpMode() {
                         scoreFinalBackBig.build(),
                         //waitSecondsFive.build(),
                         //clipToParkBig.build(),
-                        Raiser.autoRaiserReset(),
                         ),
                     //),
 

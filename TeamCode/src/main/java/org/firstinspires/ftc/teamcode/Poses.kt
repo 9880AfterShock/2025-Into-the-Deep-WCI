@@ -28,8 +28,10 @@ var pushPrepPoseMidBig = Vector2d(-52.2,12.1) // good
 var pushPoseMidBig = Vector2d(-52.2, 50.0) //good
 var specStartPickupPoseBig = Pose2d(-35.2, 58.7, Math.PI) // good original x is -36.2
 var specEndPickupVecBig = Vector2d(-39.2, 58.5/*, Math.PI*/) // test for moving
-var specEndPickupPoseBig = Pose2d(-39.2,59.2, Math.PI) // test for moving
-var clipPoseBlueTheSecond = Pose2d(0.0, 33.35, 0.0)
-var clipPoseBlueTheThird = Pose2d(5.0, 34.35, 0.0)
+var specEndPickupPoseBig = Pose2d(-42.2,59.2, Math.PI) // test for moving
+var specStartPickupPoseLastBig = Pose2d(-38.2, 59.2, Math.PI)
+var specEndPickupPoseLastBig = Pose2d(-41.2, 60.2, Math.PI)
+var clipPoseBlueTheSecond = Pose2d(0.0, 33.0, 0.0)
+var clipPoseBlueTheThird = Pose2d(5.0, 33.85, 0.0)
 var parkPoseBlueBig = Pose2d(-53.0, 57.0, Math.toRadians(0.0)) // use for big
 // Paths
