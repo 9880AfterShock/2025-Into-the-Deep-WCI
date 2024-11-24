@@ -74,6 +74,20 @@ object Raiser { //Prefix for commands
         motor.targetPosition = (targPos)
         opmode.telemetry.addData("Raiser Position", targPos) //change to enum
     }
+    class autoRaiserUp: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            motor.targetPosition = upPos
+            motor.power = 0.7
+            return false
+        }
+    }
+    class autoRaiserDown: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            motor.targetPosition = downPos
+            motor.power = 0.7
+            return false
+        }
+    }
     class autoRaiserReset: Action {
         override fun run(p: TelemetryPacket): Boolean {
             motor.targetPosition = upPos

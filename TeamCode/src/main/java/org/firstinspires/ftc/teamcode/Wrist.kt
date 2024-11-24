@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.pos
@@ -77,12 +79,17 @@ object Wrist {
     }
     private fun updatePosition(targetPosition: Int){
         if (targetPosition == -1) {
-            //this is the broken elif area
             wrist.targetPosition = ((-encoderTicks*(-initPos+initPos))/360).toInt()
         } else {
             wrist.targetPosition = ((-encoderTicks*(-targetPosition+initPos))/360).toInt()
         }
         state = targetPosition.toString()
         wrist.power = 0.25
+    }
+    class autoWristGoToPos(var autoTargPos: Int): Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            updatePosition(autoTargPos)
+            return false
+        }
     }
 }

@@ -1,8 +1,9 @@
 package org.firstinspires.ftc.teamcode
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
-
 
 object Claw {
     private lateinit var claw: Servo
@@ -51,5 +52,17 @@ object Claw {
         }
         clawButtonPreviouslyPressed = clawButtonCurrentlyPressed
 
+    }
+    class autoClawOpen: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            open()
+            return false
+        }
+    }
+    class autoClawClose: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            close()
+            return false
+        }
     }
 }
