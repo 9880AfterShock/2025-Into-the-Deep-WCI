@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 
 @Config
@@ -21,6 +22,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
         Raiser.initRaiser(this)
         Wrist.initWrist(this)
         Claw.initClaw(this)
+        MainLift.initLift(this)
 
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
         var firstBucket = drive.actionBuilder(startPoseBlueBucket)

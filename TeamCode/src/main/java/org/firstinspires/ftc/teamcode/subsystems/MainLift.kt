@@ -74,16 +74,23 @@ object MainLift { //Prefix for commands
 
 
 
-    class autoLiftUp: Action {
+    class autoLiftMax: Action {
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (encoderTicks*maxPos).toInt()
             lift.power = 1.0
             return false
         }
     }
-    class autoLiftDown: Action {
+    class autoLiftMin: Action {
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (encoderTicks*minPos).toInt()
+            lift.power = 1.0
+            return false
+        }
+    }
+    class autoLiftMaxLow: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            lift.targetPosition = (encoderTicks*maxLowPos).toInt()
             lift.power = 1.0
             return false
         }
