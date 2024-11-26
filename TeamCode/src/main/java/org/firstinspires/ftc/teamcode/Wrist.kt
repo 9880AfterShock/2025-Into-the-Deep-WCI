@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.pos
+import java.lang.Thread.sleep
 
 object Wrist {
     private lateinit var wrist: DcMotor
@@ -89,6 +90,9 @@ object Wrist {
     class autoWristGoToPos(var autoTargPos: Int): Action {
         override fun run(p: TelemetryPacket): Boolean {
             updatePosition(autoTargPos)
+            while (kotlin.math.abs(wrist.currentPosition - wrist.targetPosition) > 20){
+                sleep(10)
+            }
             return false
         }
     }
