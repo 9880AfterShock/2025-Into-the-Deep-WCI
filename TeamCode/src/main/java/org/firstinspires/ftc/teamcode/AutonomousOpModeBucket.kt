@@ -29,13 +29,10 @@ class AutonomousOpModeBucket : LinearOpMode() {
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
         var preloadBucket = drive.actionBuilder(startPoseBlueBucket)
             .splineToLinearHeading(bucketPoseBlue, 0.0)
-        var pickUpNeutralFirst = drive.actionBuilder(bucketPoseBlue)
+        var pickUpNeutral = drive.actionBuilder(bucketPoseBlue)
             .strafeToLinearHeading(Vector2d(35.0, 46.5), 0.0)
-            .strafeToLinearHeading(neutralPoseBlueFirst.position, neutralPoseBlueFirst.heading)
-        var firstSpikeBucket = drive.actionBuilder(neutralPoseBlueFirst)
-            .strafeToLinearHeading(Vector2d(35.0, 46.0), 0.0)
-            .splineToLinearHeading(bucketPoseBlue, 0.0)
-        var secondSpikeBucket = drive.actionBuilder(neutralPoseBlueSecond)
+            .strafeToLinearHeading(neutralPoseBlue.position, neutralPoseBlue.heading)
+        var secondBucket = drive.actionBuilder(neutralPoseBlue)
             .strafeToLinearHeading(Vector2d(35.0, 46.0), 0.0)
             .splineToLinearHeading(bucketPoseBlue, 0.0)
         var pickUpNeutralSecond = drive.actionBuilder(bucketPoseBlue)
@@ -60,112 +57,41 @@ class AutonomousOpModeBucket : LinearOpMode() {
         if (isStopRequested) return
         runBlocking(
             SequentialAction(
-
-                //Go to bucket
                 ParallelAction(
-                    Claw.autoClawClose(),
-                    preloadBucket.build(),
                     Raiser.autoRaiserUp(),
-                    SpecimenSwivel.autoSpecSwivOut(),
                     MainLift.autoLiftMax(),
+                    firstBucket.build(),
                 ),
 
-
-                //Drop sample
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                waitSecondsOnePointThree.build(),
-                Claw.autoClawOpen(500),
+                Claw.autoClawOpen(),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
-                Wrist.autoWristGoToPos(Wrist.initPos),
 
-
-                //Go to pickup 1
-                MainLift.autoLiftMaxLow(),
                 ParallelAction(
-                    pickUpNeutralFirst.build(),
+                    pickUpNeutral.build(),
                     SequentialAction(
-                        MainLift.autoLiftPickup(1),
+                        MainLift.autoLiftMaxLow(),
                         Raiser.autoRaiserDown(),
                     ),
                     Wrist.autoWristGoToPos(Wrist.positions[1]),
                 ),
-
-                //Pickup Spike 1
-                Claw.autoClawOpen(300),
+                Claw.autoClawOpen(),
                 ParallelAction(
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
                     Claw.autoClawClose(),
                 ),
-                waitSecondsHalf.build(),
-                Wrist.autoWristGoToPos(Wrist.positions[1]),
-
-
-                //Back to bucket
                 ParallelAction(
-                    Wrist.autoWristGoToPos(Wrist.initPos),
                     SequentialAction(
                         Raiser.autoRaiserUp(),
                         MainLift.autoLiftMax(),
                     ),
-                    firstSpikeBucket.build(),
+                    secondBucket.build(),
                 ),
 
-
-                //Drop sample again
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                waitSecondsOnePointThree.build(),
-                Claw.autoClawOpen(500),
+                Claw.autoClawOpen(),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
-                Wrist.autoWristGoToPos(Wrist.initPos),
 
-
-                //Go to pickup 2
-                MainLift.autoLiftMaxLow(),
-                ParallelAction(
-                    pickUpNeutralSecond.build(),
-                    SequentialAction(
-                        MainLift.autoLiftPickup(2),
-                        Raiser.autoRaiserDown(),
-                    ),
-                    Wrist.autoWristGoToPos(Wrist.positions[1]),
-                ),
-
-
-                //Pickup Spike 2
-                Claw.autoClawOpen(300),
-                ParallelAction(
-                    Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    Claw.autoClawClose(),
-                ),
-                waitSecondsOne.build(),
-                Wrist.autoWristGoToPos(Wrist.positions[1]),
-
-
-                //Back to bucket
-                ParallelAction(
-                    Wrist.autoWristGoToPos(Wrist.initPos),
-                    SequentialAction(
-                        Raiser.autoRaiserUp(),
-                        MainLift.autoLiftMax(),
-                    ),
-                    secondSpikeBucket.build(),
-                ),
-
-
-                //Drop sample for the last time
-                Wrist.autoWristGoToPos(Wrist.positions[1]),
-                waitSecondsOnePointThree.build(),
-                Claw.autoClawOpen(500),
-                Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
-                Wrist.autoWristGoToPos(Wrist.initPos),
-
-
-
-
-                //Park pos
                 MainLift.autoLiftMin(),
                 park.build(),
                 Wrist.autoWristGoToPos(Wrist.initPos)
