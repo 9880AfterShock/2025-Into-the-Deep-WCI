@@ -91,13 +91,16 @@ public final class MecanumDrive {
         public double maxAngAccel = Math.PI;
 
         // path controller gains
-        public double axialGain = 12.5;// inches per second per inches of error for all 3 of the thingies, 12.5
-        public double lateralGain = 12.5;// 12,5
-        public double headingGain = 4.0; // shared with turn, was 15., 4.0
+        // old values might be fine for the gains. The vel gains are the primary issues.
+        // decreasing the vel gains are the most important. just like the D of PID. lower than 1.4.
+        // probly 1 or greater for vel gains.
+        public double axialGain = 1.0;// inches per second per inches of error for all 3 of the thingies, 12.5
+        public double lateralGain = 1.0;// 12,5
+        public double headingGain = 8.0; // shared with turn, was 15., 4.0
 
-        public double axialVelGain = 2.0;// inches per idk? maybe??? idk. :0 :0 :0
-        public double lateralVelGain = 1.4;
-        public double headingVelGain = 1.6; // shared with turn
+        public double axialVelGain = 2.0;// inches per idk? maybe??? idk. :0 :0 :0 //2.0
+        public double lateralVelGain = 1.4; // 1.4
+        public double headingVelGain = 1.0; // shared with turn // 1.6
     }
 
     public static Params PARAMS = new Params();
