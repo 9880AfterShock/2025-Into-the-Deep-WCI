@@ -21,7 +21,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
 // lift class
 
     override fun runOpMode() {
-        Raiser.initRaiser(this)
+        Raiser.initRaiser(this) //does run
         Wrist.initWrist(this)
         Claw.initClaw(this)
         MainLift.initLift(this)
@@ -48,16 +48,15 @@ class AutonomousOpModeBucket : LinearOpMode() {
         waitForStart()
 
         if (isStopRequested) return
-
         runBlocking(
             SequentialAction(
                 ParallelAction(
-                    Raiser.autoRaiserUp(),
-                    MainLift.autoLiftMax(),
-                    firstBucket.build(),
+                    Raiser.autoRaiserUp(), //this runs
+                    MainLift.autoLiftMax(), //not this?
+                    firstBucket.build(), //not tested
                 ),
 
-                Wrist.autoWristGoToPos(Wrist.positions[1]),
+                Wrist.autoWristGoToPos(Wrist.positions[1]), //not run
                 Claw.autoClawOpen(),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
 
