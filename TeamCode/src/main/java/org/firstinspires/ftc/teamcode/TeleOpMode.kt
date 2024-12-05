@@ -34,7 +34,7 @@ class TeleOpMode : LinearOpMode() {
         SpecimenClaw.initClaw(this)
         SpecimenSwivel.initSwivel(this) //added because changes
         SampleTypeSensor.initTypeSensor(0.1F,0.6F,0.3F,0.1F)
-        Hang.initHang(this)
+        //Hang.initHang(this)
         // init commands here
 
         //Wait for start
@@ -54,7 +54,7 @@ class TeleOpMode : LinearOpMode() {
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
             //SpecimenSwivel.updateSwivel() //not needed rn
-            Hang.checkHang()
+            //Hang.checkHang()
           val color: SampleType = SampleTypeSensor.getSampleType()
             val colorval: NormalizedRGBA = SampleColorSensor.getColor()
             var colorstr = ""
