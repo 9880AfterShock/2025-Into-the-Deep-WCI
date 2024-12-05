@@ -85,7 +85,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .setTangent(Math.toRadians(135.0))// change meEEeeeEE!!!!!!!
             .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(135.0))
         var scoreFinalBackBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
-            .strafeToConstantHeading(Vector2d(5.0, 40.0))
+            .strafeToConstantHeading(Vector2d(5.0, 45.0))//was 40
 
 
         // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
@@ -168,7 +168,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
                         //waitSecondsFive.build(),
 
                     //),
-                    SpecimenLift.autoSpecimenLiftDown(100),
+                    SpecimenLift.autoSpecimenLiftDown(90),//100
                         clipToGrabTheSecondBig.build(),
                 ),
 
@@ -185,7 +185,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
                 ),
                 //ParallelAction(
                     SequentialAction(
-                        SpecimenLift.autoSpecimenLiftDown(100),
+                        SpecimenLift.autoSpecimenLiftDown(90),//100
                         scoreFinalBackBig.build(),
                         //waitSecondsFive.build(),
                         //clipToParkBig.build(),
