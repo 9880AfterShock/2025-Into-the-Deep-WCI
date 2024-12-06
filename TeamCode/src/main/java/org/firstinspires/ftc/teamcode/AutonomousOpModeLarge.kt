@@ -50,7 +50,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
             .lineToX(-42.2)
         var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBig)
-            .lineToX(-41.2)
+            .lineToX(-42.2)//41.2
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
             .splineToLinearHeading(clipPoseBlue,Math.toRadians(-80.0))// issue?
@@ -168,7 +168,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
                         //waitSecondsFive.build(),
 
                     //),
-                    SpecimenLift.autoSpecimenLiftDown(90),//100
+                    SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
                         clipToGrabTheSecondBig.build(),
                 ),
 
@@ -185,7 +185,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
                 ),
                 //ParallelAction(
                     SequentialAction(
-                        SpecimenLift.autoSpecimenLiftDown(90),//100
+                        SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
                         scoreFinalBackBig.build(),
                         //waitSecondsFive.build(),
                         //clipToParkBig.build(),
