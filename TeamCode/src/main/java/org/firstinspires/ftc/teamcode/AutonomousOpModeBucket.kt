@@ -25,6 +25,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
         Wrist.initWrist(this)
         Claw.initClaw(this)
         MainLift.initLift(this)
+        SpecimenSwivel.initSwivel(this)
 
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
         var firstBucket = drive.actionBuilder(startPoseBlueBucket)
@@ -52,19 +53,21 @@ class AutonomousOpModeBucket : LinearOpMode() {
             SequentialAction(
                 ParallelAction(
                     firstBucket.build(),
-//                    Raiser.autoRaiserUp(),
-//                    MainLift.autoLiftMax(),
+                    Raiser.autoRaiserUp(),
+                    SpecimenSwivel.autoSpecSwivOut(),
+                    //MainLift.autoLiftMax(), this makes it go in a straight line
                 ),
 
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
                 Claw.autoClawOpen(),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
 
+                MainLift.autoLiftMaxLow(),
                 ParallelAction(
                     pickUpNeutral.build(),
                     SequentialAction(
-                        //MainLift.autoLiftMaxLow(),
-                        //Raiser.autoRaiserDown(),
+                        MainLift.autoLiftMin(),
+                        Raiser.autoRaiserDown(),
                     ),
                     //Wrist.autoWristGoToPos(Wrist.positions[1]),
                 ),
