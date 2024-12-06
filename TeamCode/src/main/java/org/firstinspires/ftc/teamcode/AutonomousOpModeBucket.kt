@@ -55,7 +55,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                     firstBucket.build(),
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
-                    //MainLift.autoLiftMax(), this makes it go in a straight line
+                    MainLift.autoLiftMax(),
                 ),
 
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
