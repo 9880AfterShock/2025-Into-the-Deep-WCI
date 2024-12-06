@@ -78,7 +78,7 @@ object Raiser { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             motor.targetPosition = upPos
             motor.power = 0.7
-            while (motor.currentPosition > motor.targetPosition - 50) { //offset
+            while (motor.currentPosition < motor.targetPosition - 50) { //offset
                 sleep(10)
             }
             return false

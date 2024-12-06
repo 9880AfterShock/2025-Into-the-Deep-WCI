@@ -52,42 +52,42 @@ class AutonomousOpModeBucket : LinearOpMode() {
             SequentialAction(
                 ParallelAction(
                     Raiser.autoRaiserUp(), //this runs
-                    MainLift.autoLiftMax(), //not this?
-                    firstBucket.build(), //not tested
+                    //MainLift.autoLiftMax(), //not this?
+                    firstBucket.build(), //not tested, but works probably
                 ),
 
-                Wrist.autoWristGoToPos(Wrist.positions[1]), //not run
-                Claw.autoClawOpen(),
-                Wrist.autoWristGoToPos(Wrist.positions[2]),
+                //Wrist.autoWristGoToPos(Wrist.positions[1]), //not run
+                //Claw.autoClawOpen(),
+                //Wrist.autoWristGoToPos(Wrist.positions[2]),
 
                 ParallelAction(
                     pickUpNeutral.build(),
                     SequentialAction(
-                        MainLift.autoLiftMaxLow(),
-                        Raiser.autoRaiserDown(),
+                        //MainLift.autoLiftMaxLow(),
+                        //Raiser.autoRaiserDown(),
                     ),
-                    Wrist.autoWristGoToPos(Wrist.positions[1]),
+                    //Wrist.autoWristGoToPos(Wrist.positions[1]),
                 ),
-                Claw.autoClawOpen(),
+                //Claw.autoClawOpen(),
                 ParallelAction(
-                    Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    Claw.autoClawClose(),
+                    //Wrist.autoWristGoToPos(Wrist.positions[0]),
+                    //Claw.autoClawClose(),
                 ),
                 ParallelAction(
                     SequentialAction(
-                        Raiser.autoRaiserUp(),
-                        MainLift.autoLiftMax(),
+                        //Raiser.autoRaiserUp(),
+                        //MainLift.autoLiftMax(),
                     ),
                     secondBucket.build(),
                 ),
 
-                Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(),
-                Wrist.autoWristGoToPos(Wrist.positions[2]),
+                //Wrist.autoWristGoToPos(Wrist.positions[1]),
+                //Claw.autoClawOpen(),
+                //Wrist.autoWristGoToPos(Wrist.positions[2]),
 
-                MainLift.autoLiftMin(),
+                //MainLift.autoLiftMin(),
                 park.build(),
-                Wrist.autoWristGoToPos(Wrist.initPos)
+                //Wrist.autoWristGoToPos(Wrist.initPos)
             )
         )
     }
