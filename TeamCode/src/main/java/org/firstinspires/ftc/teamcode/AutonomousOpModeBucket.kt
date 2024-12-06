@@ -51,12 +51,12 @@ class AutonomousOpModeBucket : LinearOpMode() {
         runBlocking(
             SequentialAction(
                 ParallelAction(
-                    Raiser.autoRaiserUp(), //this runs
-                    MainLift.autoLiftMax(), //not this?
-                    firstBucket.build(), //not tested, but works probably
+                    firstBucket.build(),
+//                    Raiser.autoRaiserUp(),
+//                    MainLift.autoLiftMax(),
                 ),
 
-                Wrist.autoWristGoToPos(Wrist.positions[1]), //not run
+                Wrist.autoWristGoToPos(Wrist.positions[1]),
                 Claw.autoClawOpen(),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
 
