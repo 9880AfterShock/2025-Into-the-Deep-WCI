@@ -79,6 +79,9 @@ object MainLift { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (encoderTicks*maxPos).toInt()
             lift.power = 1.0
+            while (lift.currentPosition < lift.targetPosition - 50) { //offset
+                sleep(1)
+            }
             return false
         }
     }
@@ -94,7 +97,7 @@ object MainLift { //Prefix for commands
             lift.targetPosition = (encoderTicks*maxLowPos).toInt()
             lift.power = 1.0
             while (lift.currentPosition > (maxHangPos*encoderTicks).toInt() ) {
-                sleep(10)
+                sleep(1)
             }
             return false
         }

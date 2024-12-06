@@ -79,7 +79,7 @@ object Raiser { //Prefix for commands
             motor.targetPosition = upPos
             motor.power = 0.7
             while (motor.currentPosition < motor.targetPosition - 50) { //offset
-                sleep(10)
+                sleep(1)
             }
             return false
         }
