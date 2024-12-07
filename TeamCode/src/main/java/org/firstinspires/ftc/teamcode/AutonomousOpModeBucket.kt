@@ -59,7 +59,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ),
 
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(),
+                Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
 
                 MainLift.autoLiftMaxLow(),

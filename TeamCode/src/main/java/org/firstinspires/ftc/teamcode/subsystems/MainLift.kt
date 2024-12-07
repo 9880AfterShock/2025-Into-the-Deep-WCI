@@ -82,6 +82,9 @@ object MainLift { //Prefix for commands
             while (lift.currentPosition > lift.targetPosition - 50) { //offset
                 sleep(1)
             }
+            while (kotlin.math.abs(lift.currentPosition - lift.targetPosition) > 50){
+                sleep(1)
+            } //from wrist
             return false
         }
     }
