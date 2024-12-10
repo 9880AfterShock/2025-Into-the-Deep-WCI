@@ -11,8 +11,8 @@ public class SampleTypeSensor {
     static float EnemyHue;
     static float Tolerance;
     public static float colorDist(NormalizedRGBA a, TeamColor b) {
-        org.firstinspires.ftc.teamcode.TeamColor hsv2 = org.firstinspires.ftc.teamcode.TeamColor.RGBToHSV(org.firstinspires.ftc.teamcode.TeamColor.fromRGB(a.red,a.green,a.blue));
-        return (float) min(abs(b.hue - hsv2.hue),abs(b.hue - (hsv2.hue+1F)));
+        TeamColor hsv2 = TeamColor.fromRGB(a.red,a.green,a.blue).toHSV();
+        return min(abs(b.hue - hsv2.hue),abs(b.hue - (hsv2.hue+1F)));
     }
     public static void initTypeSensor(float teamHue, float enemyHue, float neutralHue, float tolerance) {
         TeamHue = teamHue;

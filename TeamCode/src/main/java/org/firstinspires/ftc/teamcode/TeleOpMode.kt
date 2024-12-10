@@ -29,7 +29,7 @@ class TeleOpMode : LinearOpMode() {
         MainLift.initLift(this)
         Raiser.initRaiser(this)
         Wrist.initWrist(this)
-        SampleColorSensor.initColorSensor(this, 3.0F)
+        SampleColorSensor.initColorSensor(this, 3.0F, "SampleColorSensor")
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
         SpecimenSwivel.initSwivel(this) //added because changes
@@ -67,7 +67,7 @@ class TeleOpMode : LinearOpMode() {
             } else if (color == SampleType.OPPONENT) {
                 colorstr = "Opposition"
             }
-            telemetry.addData("Hue:", TeamColor.RGBToHSV(TeamColor.fromRGB(colorval.red, colorval.green, colorval.blue)).hue)
+            telemetry.addData("Hue:", TeamColor.fromRGB(colorval.red, colorval.green, colorval.blue).toHSV().hue)
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.addData("TargetedSample:", colorstr)
             telemetry.update()

@@ -21,14 +21,17 @@ public class TeamColor {
     public static TeamColor fromHSV(float h, float s, float v) {
         return new TeamColor(-1F,-1F,-1,h,s,v);
     }
-    public static TeamColor RGBToHSV(TeamColor tc) {
+    public TeamColor toHSV() {
+        if (this.red+this.green+this.blue != 0) {
+            return this;
+        }
         float h, s, v;
 
 
-        // Normalize RGB values to the range [0, 1]
-        float rNorm = tc.red;
-        float gNorm = tc.green;
-        float bNorm = tc.blue;
+        // Normalize this values to the range [0, 1]
+        float rNorm = this.red;
+        float gNorm = this.green;
+        float bNorm = this.blue;
 
         float cMax = Math.max(rNorm, Math.max(gNorm, bNorm));
         float cMin = Math.min(rNorm, Math.min(gNorm, bNorm));
@@ -54,35 +57,44 @@ public class TeamColor {
 
         // Value is simply the maximum component
         v = cMax;
-
-        return fromHSV(h/360,s,v);
+        this.hue = h/360;
+        this.sat = s;
+        this.val = v;
+        this.red = 0;
+        this.green = 0;
+        this.blue = 0;
+        return this;
     }
-    public static TeamColor HSVToRGB(TeamColor color) {
-        TeamColor rgb = new TeamColor(0F,0F,0F,0F,0F,0F);
-        double hh = color.hue / 60;
+    public TeamColor toRGB() {
+        if (this.hue+this.sat+this.val != 0) {
+            return this;
+        }
+        double hh = this.hue / 60;
         int i = ((int) hh) % 6;
 
         double f = hh - i;
-        double p = color.val * (1 - color.sat);
-        double q = color.val * (1 - f * color.sat);
-        double t = color.val * (1 - (1 - f) * color.sat);
+        double p = this.val * (1 - this.sat);
+        double q = this.val * (1 - f * this.sat);
+        double t = this.val * (1 - (1 - f) * this.sat);
 
         switch (i) {
             case 0:
-                rgb.red = color.val; rgb.green = (float) t; rgb.blue = (float) q; break;
+                this.red = this.val; this.green = (float) t; this.blue = (float) q; break;
             case 1:
-                rgb.red = (float) q; rgb.green = color.val; rgb.blue = (float) p; break;
+                this.red = (float) q; this.green = this.val; this.blue = (float) p; break;
             case 2:
-                rgb.red = (float) p; rgb.green = color.val; rgb.blue = (float) t; break;
+                this.red = (float) p; this.green = this.val; this.blue = (float) t; break;
             case 3:
-                rgb.red = (float) p; rgb.green = (float) q; rgb.blue = color.val; break;
+                this.red = (float) p; this.green = (float) q; this.blue = this.val; break;
             case 4:
-                rgb.red = (float) t; rgb.green = (float) p; rgb.blue = color.val; break;
+                this.red = (float) t; this.green = (float) p; this.blue = this.val; break;
             case 5:
-                rgb.red = color.val; rgb.green = (float) p; rgb.blue = (float) q; break;
+                this.red = this.val; this.green = (float) p; this.blue = (float) q; break;
             default:
         }
-
-        return rgb;
+        this.hue = 0;
+        this.sat = 0;
+        this.val = 0;
+        return this;
     }
 }

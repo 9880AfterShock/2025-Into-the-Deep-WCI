@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.SwitchableLight;
 public class SampleColorSensor {
     private static NormalizedColorSensor colorSensor;
     private static NormalizedRGBA color;
-    public static void initColorSensor(OpMode opmode, float gain) {
-        colorSensor = opmode.hardwareMap.get(NormalizedColorSensor.class, "SampleColorSensor");
+    public static void initColorSensor(OpMode opmode, float gain, String deviceName) {
+        colorSensor = opmode.hardwareMap.get(NormalizedColorSensor.class, deviceName);
         if (colorSensor instanceof SwitchableLight) {
             ((SwitchableLight) colorSensor).enableLight(true);
         }
