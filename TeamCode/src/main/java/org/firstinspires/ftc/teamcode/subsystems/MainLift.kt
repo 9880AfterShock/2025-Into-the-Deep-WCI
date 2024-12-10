@@ -79,7 +79,7 @@ object MainLift { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (encoderTicks*maxPos).toInt()
             lift.power = 1.0
-            while (lift.currentPosition > lift.targetPosition - 50) { //offset
+            while (kotlin.math.abs(lift.currentPosition - lift.targetPosition) > 50){ //50 is offset
                 sleep(1)
             }
             return false

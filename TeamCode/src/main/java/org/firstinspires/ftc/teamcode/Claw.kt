@@ -54,10 +54,10 @@ object Claw {
         clawButtonPreviouslyPressed = clawButtonCurrentlyPressed
 
     }
-    class autoClawOpen: Action {
+    class autoClawOpen(var sleepTime: Long): Action {
         override fun run(p: TelemetryPacket): Boolean {
             open()
-            sleep(500)
+            sleep(sleepTime)
             return false
         }
     }

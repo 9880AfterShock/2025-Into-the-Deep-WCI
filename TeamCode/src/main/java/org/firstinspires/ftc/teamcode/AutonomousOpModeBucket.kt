@@ -55,11 +55,11 @@ class AutonomousOpModeBucket : LinearOpMode() {
                     firstBucket.build(),
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
-                    MainLift.autoLiftMax(),
+                    MainLift.autoLiftMaxLow(), //this works, but the max without low does not work. but this has a wrong sign in it? try kotlin abs maybe??? worked, maybe? in wrist
                 ),
 
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(),
+                Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
 
                 MainLift.autoLiftMaxLow(),

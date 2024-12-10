@@ -91,7 +91,7 @@ object Wrist {
         override fun run(p: TelemetryPacket): Boolean {
             updatePosition(autoTargPos)
             while (kotlin.math.abs(wrist.currentPosition - wrist.targetPosition) > 20){
-                sleep(10)
+                sleep(1)
             }
             return false
         }
