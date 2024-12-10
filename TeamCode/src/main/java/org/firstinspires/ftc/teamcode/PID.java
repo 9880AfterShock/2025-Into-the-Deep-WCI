@@ -12,9 +12,9 @@ public class PID {
         d = D;
     }
 
-    public double step(double value,double desvalue) {
+    public double step(double value,double error) {
         double outp = value*this.p;
-        this.prevint = (this.prevint+(desvalue-value))/2;
+        this.prevint = (this.prevint+error)/2;
         double outi = this.prevint*this.i;
         double outd = (this.lval-value)*this.d;
         this.lval = value;
