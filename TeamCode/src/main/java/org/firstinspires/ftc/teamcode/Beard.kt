@@ -39,7 +39,7 @@ object Beard {
     }
     fun updateBeard() {
         opmode.telemetry.addData("Beard Position", state)
-        beardButtonCurrentlyPressed = (opmode.gamepad1.right_trigger.toDouble() > 0.5) //change this to change the button
+        beardButtonCurrentlyPressed = (opmode.gamepad2.right_trigger.toDouble() > 0.5) //change this to change the button
 
         if (beardButtonCurrentlyPressed && !beardButtonPreviouslyPressed) {
             swap()
