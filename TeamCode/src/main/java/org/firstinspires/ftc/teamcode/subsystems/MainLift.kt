@@ -54,6 +54,12 @@ object MainLift { //Prefix for commands
 
         pos += currentSpeed
 
+
+        if (opmode.gamepad2.a) {
+            pos = maxPos
+        }
+
+
         if (pos>maxPos) {
             pos = maxPos
         }
