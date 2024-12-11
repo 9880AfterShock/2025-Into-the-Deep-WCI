@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.hardware.Servo
 object Beard {
     lateinit var beard: Servo
     @JvmField
-    var outPos = 1.0 //the positions
+    var outPos = 0.0 //the positions
     @JvmField
-    var inPos = 0.0 //the positions
+    var inPos = 0.5 //the positions
     private var state = "In"
     private var beardButtonCurrentlyPressed = false
     private var beardButtonPreviouslyPressed = false
