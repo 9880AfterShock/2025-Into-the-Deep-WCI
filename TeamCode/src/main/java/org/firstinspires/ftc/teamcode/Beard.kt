@@ -2,15 +2,15 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
-
+import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 
 object Beard {
     lateinit var beard: Servo
     @JvmField
-    var outPos = 0.0 //the positions
+    var outPos = 0.5 //the positions
     @JvmField
-    var inPos = 0.5 //the positions
+    var inPos = 0.15 //the positions
     private var state = "In"
     private var beardButtonCurrentlyPressed = false
     private var beardButtonPreviouslyPressed = false
@@ -22,8 +22,10 @@ object Beard {
         state = "In"
     }
     fun moveOut() {
-        beard.position = outPos
-        state = "Out"
+        if (MainLift.pos >= 0.9) {
+            beard.position = outPos
+            state = "Out"
+        }
     }
     fun moveIn(){
         beard.position = inPos
