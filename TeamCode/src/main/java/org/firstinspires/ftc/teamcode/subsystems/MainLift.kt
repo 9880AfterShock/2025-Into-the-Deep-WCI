@@ -55,8 +55,12 @@ object MainLift { //Prefix for commands
         pos += currentSpeed
 
 
-        if (opmode.gamepad2.a) {
-            pos = maxPos
+        if (opmode.gamepad2.left_trigger.toDouble() > 0.5) {
+            pos = minPos
+        } else {
+            if (opmode.gamepad2.right_trigger.toDouble() > 0.5) {
+                pos = maxPos
+            }
         }
 
 
