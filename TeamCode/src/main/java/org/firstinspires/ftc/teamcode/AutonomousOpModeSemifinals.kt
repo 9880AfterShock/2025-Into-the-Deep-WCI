@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 
 
 @Config
-@Autonomous(name = "9880 2024 Specimen AND PARK", group = "Autonomous")
+@Autonomous(name = "9880 2024 Semifinals ___Big___ Specimen", group = "Autonomous")
 class AutonomousOpModeSemifinals : LinearOpMode() {
 
 // lift class
@@ -37,13 +37,12 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .splineToSplineHeading(clipPoseBlue, Math.toRadians(-90.0))
             //.waitSeconds(0.2)
         var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-            .setTangent(Math.toRadians(140.0))
-            .splineToSplineHeading(pushPrepPoseBig,Math.toRadians(310.0))
-            .strafeToLinearHeading(pushPrepPoseRightBig,Math.toRadians(90.0))
-            .strafeToLinearHeading(pushPoseRightBig, Math.toRadians(90.0))
-            .strafeToLinearHeading(pushPrepPoseRightBig,Math.toRadians(90.0))
-            .strafeToLinearHeading(pushPrepPoseMidBig,Math.toRadians(90.0))
-            .strafeToLinearHeading(pushPoseMidBig, Math.toRadians(90.0)) // got these
+            .setTangent(Math.toRadians(160.0))
+            .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(230.0))
+            .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0))
+            .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(110.0))
+            .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
+            .splineToSplineHeading(specStartPickupPoseLastBig,Math.toRadians(90.0))
             .setTangent(Math.toRadians(45.0))
             .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
             //.waitSeconds(0.5)
