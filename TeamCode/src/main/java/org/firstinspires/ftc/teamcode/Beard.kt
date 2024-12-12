@@ -8,9 +8,9 @@ import org.firstinspires.ftc.teamcode.subsystems.MainLift
 object Beard {
     lateinit var beard: Servo
     @JvmField
-    var outPos = 0.5 //the positions
+    var outPos = 0.15 //the positions
     @JvmField
-    var inPos = 0.15 //the positions
+    var inPos = 0.5 //the positions
     private var state = "In"
     private var beardButtonCurrentlyPressed = false
     private var beardButtonPreviouslyPressed = false
