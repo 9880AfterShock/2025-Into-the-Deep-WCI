@@ -59,38 +59,39 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ),
 
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(500),
+                Claw.autoClawOpen(1500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
+                Claw.autoClawClose(),
 
                 MainLift.autoLiftMaxLow(),
                 ParallelAction(
                     pickUpNeutral.build(),
                     SequentialAction(
-                        MainLift.autoLiftMin(),
+                        MainLift.autoLiftPickup(1),
                         Raiser.autoRaiserDown(),
                     ),
-                    //Wrist.autoWristGoToPos(Wrist.positions[1]),
+                    Wrist.autoWristGoToPos(Wrist.positions[1]),
                 ),
-                //Claw.autoClawOpen(),
+                Claw.autoClawOpen(300),
                 ParallelAction(
-                    //Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    //Claw.autoClawClose(),
+                    Wrist.autoWristGoToPos(Wrist.positions[0]),
+                    Claw.autoClawClose(),
                 ),
                 ParallelAction(
                     SequentialAction(
-                        //Raiser.autoRaiserUp(),
-                        //MainLift.autoLiftMax(),
+                        Raiser.autoRaiserUp(),
+                        MainLift.autoLiftMax(),
                     ),
                     secondBucket.build(),
                 ),
 
-                //Wrist.autoWristGoToPos(Wrist.positions[1]),
-                //Claw.autoClawOpen(),
-                //Wrist.autoWristGoToPos(Wrist.positions[2]),
+                Wrist.autoWristGoToPos(Wrist.positions[1]),
+                Claw.autoClawOpen(0),
+                Wrist.autoWristGoToPos(Wrist.positions[2]),
 
-                //MainLift.autoLiftMin(),
+                MainLift.autoLiftMin(),
                 park.build(),
-                //Wrist.autoWristGoToPos(Wrist.initPos)
+                Wrist.autoWristGoToPos(Wrist.initPos)
             )
         )
     }
