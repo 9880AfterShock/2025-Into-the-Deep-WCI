@@ -2,6 +2,7 @@ package com.example.meepmeep
 // 1.13.1 ktx version
 
 import com.acmerobotics.roadrunner.Pose2d
+import com.acmerobotics.roadrunner.TranslationalVelConstraint
 import com.acmerobotics.roadrunner.Vector2d
 import com.noahbres.meepmeep.MeepMeep
 import com.noahbres.meepmeep.MeepMeep.Background
@@ -34,11 +35,13 @@ object MeepMeep {
                 .splineToLinearHeading(Pose2d(-5.0,34.8,Math.toRadians(0.0)),Math.PI/-2)
                 .waitSeconds(2.0)
                 .setTangent(Math.toRadians(160.0))
-                .splineToSplineHeading(Pose2d(-43.9,12.1, Math.toRadians(90.0)),Math.toRadians(230.0))
-                .splineToLinearHeading(Pose2d(-43.9, 50.0, Math.toRadians(90.0)),Math.toRadians(-90.0))
-                .splineToLinearHeading(Pose2d(-52.2,12.1,Math.toRadians(90.0)),Math.toRadians(110.0))
-                .splineToLinearHeading(Pose2d(-52.2, 50.0, Math.toRadians(90.0)),Math.toRadians(90.0)) // got these
-                .splineToSplineHeading(Pose2d(-36.2,60.2, Math.toRadians(-180.0)),Math.toRadians(90.0))
+                .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(-90.0))
+                .setTangent(Math.toRadians(180.0))
+                .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(40.0))
+                .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(110.0))
+                .setTangent(Math.toRadians(90.0))
+                .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
+                .splineToSplineHeading(specStartPickupPoseLastBig,Math.toRadians(90.0))
                 .waitSeconds(2.0)
                 .setTangent(Math.toRadians(-35.0))
                 .splineToLinearHeading(Pose2d(0.0,34.8,Math.toRadians(0.0)),Math.toRadians(-80.0))
