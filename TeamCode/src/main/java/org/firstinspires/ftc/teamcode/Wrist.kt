@@ -90,10 +90,7 @@ object Wrist {
     class autoWristGoToPos(var autoTargPos: Int): Action {
         override fun run(p: TelemetryPacket): Boolean {
             updatePosition(autoTargPos)
-            while (kotlin.math.abs(wrist.currentPosition - wrist.targetPosition) > 20){
-                sleep(1)
-            }
-            return false
+            return kotlin.math.abs(wrist.currentPosition - wrist.targetPosition) > 50 //50 is offset
         }
     }
 }

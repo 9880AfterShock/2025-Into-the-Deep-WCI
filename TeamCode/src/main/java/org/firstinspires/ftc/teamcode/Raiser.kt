@@ -4,13 +4,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
-import org.firstinspires.ftc.teamcode.SpecimenLift.encoderTicks
-import org.firstinspires.ftc.teamcode.SpecimenLift.lift
-import org.firstinspires.ftc.teamcode.SpecimenLift.minPos
-import org.firstinspires.ftc.teamcode.SpecimenSwivel.inPos
-import org.firstinspires.ftc.teamcode.SpecimenSwivel.swivel
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
-import java.lang.Thread.sleep
 
 object Raiser { //Prefix for commands
     private lateinit var motor: DcMotor //Init Motor Var
@@ -78,10 +72,7 @@ object Raiser { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             motor.targetPosition = upPos
             motor.power = 0.7
-            while (motor.currentPosition < motor.targetPosition - 50) { //offset
-                sleep(1)
-            }
-            return false
+            return kotlin.math.abs(motor.currentPosition - motor.targetPosition) > 50 //50 is offset
         }
     }
     class autoRaiserDown: Action {
