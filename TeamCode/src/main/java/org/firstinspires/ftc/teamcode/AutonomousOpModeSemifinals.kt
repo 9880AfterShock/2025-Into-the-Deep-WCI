@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
+import com.acmerobotics.roadrunner.TranslationalVelConstraint
 import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
@@ -38,12 +39,14 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             //.waitSeconds(0.2)
         var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .setTangent(Math.toRadians(160.0))
-            .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(230.0))
-            .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0))
+            .setTangent(Math.toRadians(160.0))
+            .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(-90.0))
+            .setTangent(Math.toRadians(180.0))
+            .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(30.0))
             .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(110.0))
+            .setTangent(Math.toRadians(90.0))
             .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
             .splineToSplineHeading(specStartPickupPoseLastBig,Math.toRadians(90.0))
-            .setTangent(Math.toRadians(45.0))
             .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
             //.waitSeconds(0.5)
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
@@ -185,9 +188,9 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                 //ParallelAction(
                     SequentialAction(
                         SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
-                        scoreFinalBackBig.build(),
+                        //scoreFinalBackBig.build(),
                         //waitSecondsFive.build(),
-                        //clipToParkBig.build(),
+                        clipToParkBig.build(),
                         ),
                     //),
 
