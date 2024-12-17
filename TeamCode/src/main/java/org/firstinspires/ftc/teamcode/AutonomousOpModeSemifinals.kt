@@ -42,7 +42,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .setTangent(Math.toRadians(160.0))
             .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(-90.0))
             .setTangent(Math.toRadians(180.0))
-            .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(30.0))
+            .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(25.0))//30 was caden // low is slow
             .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(110.0))
             .setTangent(Math.toRadians(90.0))
             .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
