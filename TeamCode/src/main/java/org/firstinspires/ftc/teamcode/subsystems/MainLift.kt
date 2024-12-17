@@ -18,6 +18,8 @@ object MainLift { //Prefix for commands
     @JvmField
     var minPos = 0.0 //folded all the way in
     @JvmField
+    var pickUpPos = doubleArrayOf(1.0) //poses for pickup during auto
+    @JvmField
     var maxPos = 7.0 //all the way up
     @JvmField
     var maxLowPos = 3.5 //maximum position when lowered
@@ -96,7 +98,14 @@ object MainLift { //Prefix for commands
         override fun run(p: TelemetryPacket): Boolean {
             lift.targetPosition = (encoderTicks*minPos).toInt()
             lift.power = 1.0
-            return false
+            return kotlin.math.abs(lift.currentPosition - lift.targetPosition) > 50 //50 is offset
+        }
+    }
+    class autoLiftPickup(var spikePos: Int): Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            lift.targetPosition = (encoderTicks* pickUpPos[spikePos-1]).toInt()
+            lift.power = 1.0
+            return kotlin.math.abs(lift.currentPosition - lift.targetPosition) > 50 //50 is offset
         }
     }
     class autoLiftMaxLow: Action {
