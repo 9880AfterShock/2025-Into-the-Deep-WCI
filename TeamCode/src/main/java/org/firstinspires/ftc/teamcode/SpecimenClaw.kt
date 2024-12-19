@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
+import java.lang.Thread.sleep
 
 
 object SpecimenClaw {
@@ -72,6 +73,14 @@ object SpecimenClaw {
     }
     class autoSpecClawClose: Action {
         override fun run(p: TelemetryPacket): Boolean {
+            close()
+            p.put("claw done", 1.0)
+            return false
+        }
+    }
+    class autoDelaySpecClawClose: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            sleep(100)
             close()
             p.put("claw done", 1.0)
             return false
