@@ -74,7 +74,7 @@ object SpecimenSwivel {
         swivelPartButtonPreviouslyPressed = swivelPartButtonCurrentlyPressed
     }
 
-    class autoSpecSwivOut: Action {
+    class autoSpecSwivOutStart: Action {
         override fun run(p: TelemetryPacket): Boolean {
             swivel.position = outPos
             sleep(700)
@@ -82,6 +82,15 @@ object SpecimenSwivel {
             return false
         }
     }
+    class autoSpecSwivOut: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            swivel.position = outPos
+            //sleep(700)
+            p.put("swivel done", 1.0)
+            return false
+        }
+    }
+
     class autoSpecSwivIn: Action {
         override fun run(p: TelemetryPacket): Boolean {
             //LiftRun.currTargetInTicks = maxPos.toInt() * encoderTicks.toInt()
