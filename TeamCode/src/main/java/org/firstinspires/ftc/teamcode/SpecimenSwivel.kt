@@ -4,16 +4,13 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
-import org.firstinspires.ftc.teamcode.subsystems.MainLift.LiftRun
-import org.firstinspires.ftc.teamcode.subsystems.MainLift.encoderTicks
-import org.firstinspires.ftc.teamcode.subsystems.MainLift.maxPos
 import java.lang.Thread.sleep
 
 
 object SpecimenSwivel {
     lateinit var swivel: Servo
     @JvmField
-    var outPos = 1.0 //the positions
+    var outPos = 0.93 //the positions
     @JvmField
     var inPos = 0.7 //the positions
     @JvmField
