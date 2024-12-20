@@ -102,8 +102,9 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Drop sample again
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(0),
+                Claw.autoClawOpen(1500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
+                Claw.autoClawClose(),
 
 
                 //Park pos
