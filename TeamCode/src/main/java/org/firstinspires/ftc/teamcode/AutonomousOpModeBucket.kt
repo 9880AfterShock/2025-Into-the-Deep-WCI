@@ -135,7 +135,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
                     Claw.autoClawClose(),
                 ),
-                waitSecondsHalf.build(),
+                waitSecondsFour.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
