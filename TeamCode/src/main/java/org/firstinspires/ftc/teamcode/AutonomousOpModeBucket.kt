@@ -28,14 +28,20 @@ class AutonomousOpModeBucket : LinearOpMode() {
         SpecimenSwivel.initSwivel(this)
 
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
-        var firstBucket = drive.actionBuilder(startPoseBlueBucket)
+        var preloadBucket = drive.actionBuilder(startPoseBlueBucket)
             .splineToLinearHeading(bucketPoseBlue, 0.0)
-        var pickUpNeutral = drive.actionBuilder(bucketPoseBlue)
+        var pickUpNeutralFirst = drive.actionBuilder(bucketPoseBlue)
             .strafeToLinearHeading(Vector2d(35.0, 46.5), 0.0)
-            .strafeToLinearHeading(neutralPoseBlue.position, neutralPoseBlue.heading)
-        var secondBucket = drive.actionBuilder(neutralPoseBlue)
+            .strafeToLinearHeading(neutralPoseBlueFirst.position, neutralPoseBlueFirst.heading)
+        var firstSpikeBucket = drive.actionBuilder(neutralPoseBlueFirst)
             .strafeToLinearHeading(Vector2d(35.0, 46.0), 0.0)
             .splineToLinearHeading(bucketPoseBlue, 0.0)
+        var secondSpikeBucket = drive.actionBuilder(neutralPoseBlueFirst)
+            .strafeToLinearHeading(Vector2d(35.0, 46.0), 0.0)
+            .splineToLinearHeading(bucketPoseBlue, 0.0)
+        var pickUpNeutralSecond = drive.actionBuilder(bucketPoseBlue)
+            .strafeToLinearHeading(Vector2d(35.0, 46.5), 0.0)
+            .strafeToLinearHeading(neutralPoseBlueSecond.position, neutralPoseBlueSecond.heading)
         var park = drive.actionBuilder(bucketPoseBlue)
             .strafeToLinearHeading(Vector2d(35.0, 0.0), Math.toRadians(135.0))
             .strafeToLinearHeading(bucketParkPoseBlue.position, bucketParkPoseBlue.heading)
@@ -55,7 +61,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 //Go to bucket
                 ParallelAction(
                     Claw.autoClawClose(),
-                    firstBucket.build(),
+                    preloadBucket.build(),
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
                     MainLift.autoLiftMax(),
@@ -69,10 +75,10 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 Claw.autoClawClose(),
 
 
-                //Go to pickup
+                //Go to pickup 1
                 MainLift.autoLiftMaxLow(),
                 ParallelAction(
-                    pickUpNeutral.build(),
+                    pickUpNeutralFirst.build(),
                     SequentialAction(
                         MainLift.autoLiftPickup(1),
                         Raiser.autoRaiserDown(),
@@ -96,14 +102,56 @@ class AutonomousOpModeBucket : LinearOpMode() {
                         Raiser.autoRaiserUp(),
                         MainLift.autoLiftMax(),
                     ),
-                    secondBucket.build(),
+                    firstSpikeBucket.build(),
                 ),
 
 
                 //Drop sample again
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(0),
+                Claw.autoClawOpen(1500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
+                Claw.autoClawClose(),
+
+
+                //Go to pickup 2
+                MainLift.autoLiftMaxLow(),
+                ParallelAction(
+                    pickUpNeutralSecond.build(),
+                    SequentialAction(
+                        MainLift.autoLiftPickup(1),
+                        Raiser.autoRaiserDown(),
+                    ),
+                    Wrist.autoWristGoToPos(Wrist.positions[1]),
+                ),
+
+
+                //Pickup Spike 2
+                Claw.autoClawOpen(300),
+                ParallelAction(
+                    Wrist.autoWristGoToPos(Wrist.positions[0]),
+                    Claw.autoClawClose(),
+                ),
+                waitSecondsHalf.build(),
+                Wrist.autoWristGoToPos(Wrist.positions[1]),
+
+
+                //Back to bucket
+                ParallelAction(
+                    SequentialAction(
+                        Raiser.autoRaiserUp(),
+                        MainLift.autoLiftMax(),
+                    ),
+                    secondSpikeBucket.build(),
+                ),
+
+
+                //Drop sample again
+                Wrist.autoWristGoToPos(Wrist.positions[1]),
+                Claw.autoClawOpen(1500),
+                Wrist.autoWristGoToPos(Wrist.positions[2]),
+                Claw.autoClawClose(),
+
+
 
 
                 //Park pos
