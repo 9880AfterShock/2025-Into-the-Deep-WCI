@@ -156,7 +156,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                 ParallelAction(
                     grabToGrabSlide.build(),
                     SpecimenClaw.autoDelaySpecClawClose(),
-                    // telemetry
+                    // telemetry // in a second!!!!
                 ),
                 ParallelAction(
                     SequentialAction(
