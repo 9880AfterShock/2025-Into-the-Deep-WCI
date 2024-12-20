@@ -33,7 +33,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
 
         // actionBuilder builds from the drive steps passed to it
         var startToClipBig: TrajectoryActionBuilder = drive.actionBuilder(startPoseBlue)
-            .waitSeconds(0.2)
+            //.waitSeconds(0.2)
             .setTangent(Math.PI/-2)
             .splineToSplineHeading(clipPoseBlue, Math.toRadians(-90.0))
             //.waitSeconds(0.2)
@@ -57,11 +57,11 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .splineToLinearHeading(clipPoseBlue,Math.toRadians(-80.0))// issue?
         var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
-            .waitSeconds(0.275)
+            //.waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(25.0))// issue?
         var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBig)
             .setTangent(Math.toRadians(-35.0))
-            .waitSeconds(0.275)
+            //.waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
         var clipToGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .setTangent(Math.toRadians(110.0))
