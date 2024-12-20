@@ -39,8 +39,8 @@ class AutonomousOpModeBucket : LinearOpMode() {
         var park = drive.actionBuilder(bucketPoseBlue)
             .strafeToLinearHeading(Vector2d(35.0, 0.0), Math.toRadians(135.0))
             .strafeToLinearHeading(bucketParkPoseBlue.position, bucketParkPoseBlue.heading)
-        var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
-            .waitSeconds(2.0)
+        var waitSecondsHalf: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
+            .waitSeconds(0.5)
 
         while (!isStopRequested && !opModeIsActive()) {
             // Do nothing
@@ -51,18 +51,25 @@ class AutonomousOpModeBucket : LinearOpMode() {
         if (isStopRequested) return
         runBlocking(
             SequentialAction(
+
+                //Go to bucket
                 ParallelAction(
+                    Claw.autoClawClose(),
                     firstBucket.build(),
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
-                    MainLift.autoLiftMax(), //this works, but the max without low does not work. but this has a wrong sign in it? try kotlin abs maybe??? worked, maybe? in wrist
+                    MainLift.autoLiftMax(),
                 ),
 
+
+                //Drop sample
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
                 Claw.autoClawOpen(1500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
                 Claw.autoClawClose(),
 
+
+                //Go to pickup
                 MainLift.autoLiftMaxLow(),
                 ParallelAction(
                     pickUpNeutral.build(),
@@ -72,11 +79,18 @@ class AutonomousOpModeBucket : LinearOpMode() {
                     ),
                     Wrist.autoWristGoToPos(Wrist.positions[1]),
                 ),
+
+                //Pickup Spike 1
                 Claw.autoClawOpen(300),
                 ParallelAction(
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
                     Claw.autoClawClose(),
                 ),
+                waitSecondsHalf.build(),
+                Wrist.autoWristGoToPos(Wrist.positions[1]),
+
+
+                //Back to bucket
                 ParallelAction(
                     SequentialAction(
                         Raiser.autoRaiserUp(),
@@ -85,10 +99,14 @@ class AutonomousOpModeBucket : LinearOpMode() {
                     secondBucket.build(),
                 ),
 
+
+                //Drop sample again
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
                 Claw.autoClawOpen(0),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
 
+
+                //Park pos
                 MainLift.autoLiftMin(),
                 park.build(),
                 Wrist.autoWristGoToPos(Wrist.initPos)
