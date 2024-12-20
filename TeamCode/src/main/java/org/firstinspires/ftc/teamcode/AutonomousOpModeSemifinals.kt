@@ -12,7 +12,9 @@ import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 
-
+// score further right for all 3
+// add 4th spec.
+// slide more to the side for human player
 @Config
 @Autonomous(name = "9880 2024 Semifinals ___Big___ Specimen", group = "Autonomous")
 class AutonomousOpModeSemifinals : LinearOpMode() {
@@ -46,7 +48,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .setTangent(Math.toRadians(90.0))
             .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
             .splineToSplineHeading(specStartPickupPoseLastBig,Math.toRadians(90.0))
-            .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
+            .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(18.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
             //.waitSeconds(0.5)
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))
