@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode
 // RR-specific imports
 // Non-RR imports
 import com.acmerobotics.dashboard.config.Config
-import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder
@@ -47,8 +46,8 @@ class AutonomousOpModeBucket : LinearOpMode() {
             .strafeToLinearHeading(bucketParkPoseBlue.position, bucketParkPoseBlue.heading)
         var waitSecondsHalf: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
             .waitSeconds(0.5)
-        var waitSecondsFour: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
-            .waitSeconds(4.0)
+        var waitSecondsOne: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
+            .waitSeconds(1.0)
 
         while (!isStopRequested && !opModeIsActive()) {
             // Do nothing
@@ -135,7 +134,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
                     Claw.autoClawClose(),
                 ),
-                waitSecondsFour.build(),
+                waitSecondsOne.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
