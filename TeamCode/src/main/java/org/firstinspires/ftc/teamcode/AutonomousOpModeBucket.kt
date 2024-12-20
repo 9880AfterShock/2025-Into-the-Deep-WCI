@@ -47,6 +47,8 @@ class AutonomousOpModeBucket : LinearOpMode() {
             .strafeToLinearHeading(bucketParkPoseBlue.position, bucketParkPoseBlue.heading)
         var waitSecondsHalf: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
             .waitSeconds(0.5)
+        var waitSecondsFour: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
+            .waitSeconds(4.0)
 
         while (!isStopRequested && !opModeIsActive()) {
             // Do nothing
@@ -70,7 +72,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Drop sample
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(1500),
+                Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
                 Claw.autoClawClose(),
 
@@ -94,6 +96,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ),
                 waitSecondsHalf.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
+                Wrist.autoWristGoToPos(Wrist.initPos),
 
 
                 //Back to bucket
@@ -108,9 +111,10 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Drop sample again
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(1500),
+                Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
                 Claw.autoClawClose(),
+                Wrist.autoWristGoToPos(Wrist.initPos),
 
 
                 //Go to pickup 2
@@ -133,6 +137,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ),
                 waitSecondsHalf.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
+                Wrist.autoWristGoToPos(Wrist.initPos),
 
 
                 //Back to bucket
@@ -150,6 +155,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 Claw.autoClawOpen(1500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
                 Claw.autoClawClose(),
+                Wrist.autoWristGoToPos(Wrist.initPos),
 
 
 
