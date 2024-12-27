@@ -13,7 +13,7 @@ var bucketPoseBlue = Pose2d(44.6,50.5, Math.toRadians(45.0))
 var bucketParkPoseBlue = Pose2d(26.0, 0.0, Math.toRadians(180.0))
 var startPoseBlue = Pose2d(-14.0, 61.0, 0.0) // use for big
 //
-var clipPoseBlue = Pose2d(-9.0, 32.0 , 0.0) // use for big
+var clipPoseBlue = Pose2d(-12.0, 32.0 , 0.0) // use for big
 //
 var backPoseBlue = Pose2d(0.0, 40.0, 0.0)
 var parkPoseBlue = Pose2d(-57.0, 57.0, Math.toRadians(-90.0))
@@ -42,10 +42,10 @@ var specEndPickupPoseSecondBig = Pose2d(-44.2, 58.75, Math.PI)//-42.2, 60.1, mat
 var specStartPickupPoseLastBig = Pose2d(-33.2, 58.5, Math.PI)// in need of poses
 var specEndPickupPoseLastBig = Pose2d(-36.2, 55.75, Math.PI)// in need of poses
 //
-var clipPoseBlueTheSecond = Pose2d(-5.0, 30.50, 0.0)//0.0, 31.750, 0.0// 31.250 // 31.000
-var clipPoseBlueTheThird = Pose2d(-1.5, 31.000, 0.0)// 5.0, 32.250, 0.0
-var clipPoseBlueTheFourth = Pose2d(2.0, 31.75, 0.0)// in need of Poses
+var clipPoseBlueTheSecond = Pose2d(-7.0, 30.50, 0.0)//0.0, 31.750, 0.0// 31.250 // 31.000
+var clipPoseBlueTheThird = Pose2d(-2.0, 31.000, 0.0)// 5.0, 32.250, 0.0
+var clipPoseBlueTheFourth = Pose2d(3.0, 31.75, 0.0)// in need of Poses
 //
 var parkPoseBlueBig = Pose2d(-50.0, 57.0, Math.toRadians(0.0)) // use for big
-var backPoseBlueBig = Vector2d(2.0, 100000000.0)
+var backPoseBlueBig = Vector2d(2.0, 45.0)
 // Paths
