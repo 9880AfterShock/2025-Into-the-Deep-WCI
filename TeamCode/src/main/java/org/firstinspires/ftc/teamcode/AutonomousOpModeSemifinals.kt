@@ -54,7 +54,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))
         var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBig)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
-        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBig)
+        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBig)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
@@ -63,7 +63,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .setTangent(Math.toRadians(-35.0))
             //.waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(25.0))// issue?
-        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBig)
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBig)
             .setTangent(Math.toRadians(-35.0))
             //.waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
@@ -80,42 +80,21 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             //.waitSeconds(0.5)
         var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
+            .splineToSplineHeading(specStartPickupPoseLastBig, Math.toRadians(110.0))
         var waitSecondsFive: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(0.90)
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .waitSeconds(30.0)
-//        var backToBlue: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
-//            .setTangent(Math.PI/2)
-//            .splineToSplineHeading(backPoseBlue, Math.PI/2)
-//            //.strafeToConstantHeading(Vector2d(0.0, -30.0)/*backVecBlue*/)
-//            .waitSeconds(0.2)
-        var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
+        var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheFourth)
             .setTangent(Math.toRadians(90.0))// change meEEeeeEE!!!!!!!
             .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(135.0))
+        var clipToBackBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheFourth)
+            .strafeToLinearHeading(backPoseBlueBig,Math.toRadians(0.0))
         var scoreFinalBackBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .strafeToConstantHeading(Vector2d(5.0, 45.0))//was 40
 
 
-        // help!!! get rowan, or look at what they do in github, alt use the prev years github, may be the same?
-        /*var tab2: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
-            .lineToY(37.0)
-            .setTangent(Math.toRadians(0.0))
-            .lineToX(18.0)
-            .waitSeconds(3.0)
-            .setTangent(Math.toRadians(0.0))
-            .lineToXSplineHeading(46.0, Math.toRadians(180.0))
-            .waitSeconds(3.0)
 
-        var tab3: TrajectoryActionBuilder = drive.actionBuilder(initialPose)
-            .lineToYSplineHeading(33.0, Math.toRadians(180.0))
-            .waitSeconds(2.0)
-            .strafeTo(Vector2d(46.0, 30.0))
-            .waitSeconds(3.0)*/
-
-        /*var trajectoryActionCloseOut: Action = tab1.fresh()
-            .strafeTo(Vector2d(48.0, 12.0))
-            .build()*/
 
         while (!isStopRequested && !opModeIsActive()) {
             // Do nothing
@@ -125,22 +104,6 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
 
         if (isStopRequested) return
 
-        // val startPosition = 1
-
-//        ParallelAction(
-//            SequentialAction(
-//                SpecimenSwivel.autoSpecSwivOut(),
-//                SpecimenClaw.autoSpecClawClose(),
-//                //waitSecondsFive.build(),
-//                SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
-//            ),
-//            grabToClipTheSecondBig.build(),
-//        ),
-//        ParallelAction(
-//            SequentialAction(
-//                waitSecondsFive.build(),
-//                clipToGrabTheSecondBig.build(),
-//            ),
         runBlocking(
             SequentialAction(
                 Raiser.autoRaiserReset(),
@@ -148,38 +111,27 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOutStart(),
                         SpecimenClaw.autoSpecClawClose(),
-                        //waitSecondsFive.build(),
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/),
                     ),
                     startToClipBig.build(),
                 ),
                 SequentialAction(
-                    //SequentialAction(
-                        //waitSecondsFive.build(),
-
-                    //),
                     SpecimenLift.autoSpecimenLiftDown(100),
                     clipToPushGrabBig.build(),
                 ),
                 ParallelAction(
                     grabToGrabSlide.build(),
                     SpecimenClaw.autoDelaySpecClawClose(),
-                    // telemetry // in a second!!!!
                 ),
                 ParallelAction(
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
-                        //waitSecondsFive.build(),
                         SpecimenLift.autoSpecimenLiftUp(), // issue spot
                     ),
                     grabToClipTheSecondBig.build(),
                 ),
-                //ParallelAction(
                     SequentialAction(
-                        //waitSecondsFive.build(),
-
-                    //),
                     SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
                         clipToGrabTheSecondBig.build(),
                 ),
@@ -191,17 +143,13 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
-                        //waitSecondsFive.build(),
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
                     ),
                     grabToClipTheThirdBig.build(),
                 ),
-                //ParallelAction(
                     SequentialAction(
                         SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
                         clipToGrabTheThirdBig.build()
-                        //scoreFinalBackBig.build(),
-                        //waitSecondsFive.build(),
 
                         ),
                 ParallelAction(
@@ -212,18 +160,18 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
                         SpecimenClaw.autoSpecClawClose(),
-                        //waitSecondsFive.build(),
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
                     ),
                     grabToClipTheFourthBig.build(),
                 ),
-                clipToParkBig.build(),
+                SequentialAction(
+                    SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
+                    clipToBackBig.build(),
+                ),
                     //),
 
                  // low voltage and ruins everything ::(
-                waitSecondsTwo.build(), // put in sequential within parallel with raiser reset?
-                //trajectoryActionChosen,
-                //trajectoryActionCloseOut
+                waitSecondsTwo.build(),
             )
         )
     }
