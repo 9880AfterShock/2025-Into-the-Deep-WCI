@@ -49,7 +49,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             //.waitSeconds(0.5)
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
             .lineToX(-42.2)
-        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBig)
+        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBig)
             .lineToX(-42.2)//41.2
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
@@ -58,7 +58,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .setTangent(Math.toRadians(-35.0))
             .waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0))// issue?
-        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBig)
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBig)
             .setTangent(Math.toRadians(-35.0))
             .waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
@@ -67,7 +67,7 @@ class AutonomousOpModeLarge : LinearOpMode() {
             .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
         var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecond)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseLastBig, Math.toRadians(110.0))
+            .splineToSplineHeading(specStartPickupPoseSecondBig, Math.toRadians(110.0))
             //.waitSeconds(0.5)
         var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .setTangent(Math.toRadians(110.0))

@@ -47,12 +47,14 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(-160.0), velConstraintOverride = TranslationalVelConstraint(25.0))//30 was caden // low is slow)
             .setTangent(Math.toRadians(90.0))
             .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
-            .splineToSplineHeading(specStartPickupPoseLastBig,Math.toRadians(90.0))
+            .splineToSplineHeading(specStartPickupPoseSecondBig,Math.toRadians(90.0))
             .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(18.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
             //.waitSeconds(0.5)
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))
-        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBig)
+        var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBig)
+            .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
+        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBig)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
             .setTangent(Math.toRadians(-35.0))
@@ -61,16 +63,20 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .setTangent(Math.toRadians(-35.0))
             //.waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(25.0))// issue?
-        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBig)
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBig)
             .setTangent(Math.toRadians(-35.0))
             //.waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
+        var grabToClipTheFourthBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBig)
+            .setTangent(Math.toRadians(-35.0))
+            //.waitSeconds(0.275)
+            .splineToLinearHeading(clipPoseBlueTheFourth,Math.toRadians(-80.0))// issue?
         var clipToGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
             .setTangent(Math.toRadians(110.0))
             .splineToSplineHeading(specStartPickupPoseBig, Math.toRadians(110.0))
         var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecond)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseLastBig, Math.toRadians(110.0))
+            .splineToSplineHeading(specStartPickupPoseSecondBig, Math.toRadians(110.0))
             //.waitSeconds(0.5)
         var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
             .setTangent(Math.toRadians(110.0))
@@ -178,7 +184,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                         clipToGrabTheSecondBig.build(),
                 ),
                 ParallelAction(
-                    grabToGrabSlideLast.build(),
+                    grabToGrabSlideSecond.build(),
                     SpecimenClaw.autoDelaySpecClawClose(),
                 ),
                 ParallelAction(
@@ -193,10 +199,25 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                 //ParallelAction(
                     SequentialAction(
                         SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
+                        clipToGrabTheThirdBig.build()
                         //scoreFinalBackBig.build(),
                         //waitSecondsFive.build(),
-                        clipToParkBig.build(),
+
                         ),
+                ParallelAction(
+                    grabToGrabSlideLast.build(),
+                    SpecimenClaw.autoDelaySpecClawClose(),
+                ),
+                ParallelAction(
+                    SequentialAction(
+                        SpecimenSwivel.autoSpecSwivOut(),
+                        SpecimenClaw.autoSpecClawClose(),
+                        //waitSecondsFive.build(),
+                        SpecimenLift.autoSpecimenLiftUp(/*3500*/), // issue spot
+                    ),
+                    grabToClipTheFourthBig.build(),
+                ),
+                clipToParkBig.build(),
                     //),
 
                  // low voltage and ruins everything ::(
