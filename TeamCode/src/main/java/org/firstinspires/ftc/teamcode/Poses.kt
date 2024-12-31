@@ -13,7 +13,7 @@ var bucketPoseBlue = Pose2d(44.6,50.5, Math.toRadians(45.0))
 var bucketParkPoseBlue = Pose2d(26.0, 0.0, Math.toRadians(180.0))
 var startPoseBlue = Pose2d(-14.0, 61.0, 0.0) // use for big
 //
-var clipPoseBlue = Pose2d(-12.0, 32.0 , 0.0) // use for big
+var clipPoseBlue = Pose2d(-11.0, 32.0 , 0.0) // use for big
 //
 var backPoseBlue = Pose2d(0.0, 40.0, 0.0)
 var parkPoseBlue = Pose2d(-57.0, 57.0, Math.toRadians(-90.0))
@@ -35,16 +35,16 @@ var pushPoseRightBig = Vector2d(-43.9, 50.0) //good
 var pushPrepPoseMidBig = Vector2d(-52.2,12.1) // good
 var pushPoseMidBig = Vector2d(-52.2, 50.0) //good
 //
-var specStartPickupPoseBig = Pose2d(-35.2, 57.0, Math.PI) // good original x is -36.2
-var specEndPickupPoseBig = Pose2d(-42.2,57.15, Math.PI) // test for moving
-var specStartPickupPoseSecondBig = Pose2d(-36.2, 58.5, Math.PI)
-var specEndPickupPoseSecondBig = Pose2d(-44.2, 58.75, Math.PI)//-42.2, 60.1, math.pi
-var specStartPickupPoseLastBig = Pose2d(-33.2, 58.5, Math.PI)// in need of poses
-var specEndPickupPoseLastBig = Pose2d(-36.2, 55.75, Math.PI)// in need of poses
+var specStartPickupPoseBig = Pose2d(-37.7, 57.15, Math.PI) // good original x is -36.2
+var specEndPickupPoseBig = Pose2d(-44.2,56.5, Math.PI) // test for moving
+var specStartPickupPoseSecondBig = Pose2d(-34.85, 58.505, Math.PI)
+var specEndPickupPoseSecondBig = Pose2d(-44.7, 58.5, Math.PI)//-42.2, 60.1, math.pi
+var specStartPickupPoseLastBig = Pose2d(-33.2, 59.25, Math.PI)// in need of poses
+var specEndPickupPoseLastBig = Pose2d(-36.7, 58.25, Math.PI)// in need of poses
 //
-var clipPoseBlueTheSecond = Pose2d(-7.0, 30.50, 0.0)//0.0, 31.750, 0.0// 31.250 // 31.000
-var clipPoseBlueTheThird = Pose2d(-2.0, 31.000, 0.0)// 5.0, 32.250, 0.0
-var clipPoseBlueTheFourth = Pose2d(3.0, 31.75, 0.0)// in need of Poses
+var clipPoseBlueTheSecond = Pose2d(-7.0, 29.00, 0.0)//0.0, 31.750, 0.0// 31.250 // 31.000
+var clipPoseBlueTheThird = Pose2d(-2.0, 29.500, 0.0)// 5.0, 32.250, 0.0
+var clipPoseBlueTheFourth = Pose2d(3.0, 30.25, 0.0)// in need of Poses
 //
 var parkPoseBlueBig = Pose2d(-50.0, 57.0, Math.toRadians(0.0)) // use for big
 var backPoseBlueBig = Vector2d(2.0, 45.0)

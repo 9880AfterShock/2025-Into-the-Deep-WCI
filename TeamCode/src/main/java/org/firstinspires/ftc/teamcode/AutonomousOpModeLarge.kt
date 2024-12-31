@@ -9,9 +9,10 @@ import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 
-
+@Disabled
 @Config
 @Autonomous(name = "9880 2024 ___Big___ Specimen", group = "Autonomous")
 class AutonomousOpModeLarge : LinearOpMode() {

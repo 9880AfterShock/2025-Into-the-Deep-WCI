@@ -9,10 +9,11 @@ import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.Raiser
 
-
+@Disabled
 @Config
 @Autonomous(name = "9880 2024 Blue Specimen", group = "Autonomous")
 class AutonomousOpModeBlue : LinearOpMode() {

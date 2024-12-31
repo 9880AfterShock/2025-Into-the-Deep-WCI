@@ -126,7 +126,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                 ParallelAction(
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
-                        SpecimenClaw.autoSpecClawClose(),
+                        SpecimenClaw.autoDelaySpecClawClose(),
                         SpecimenLift.autoSpecimenLiftUp(), // issue spot
                     ),
                     grabToClipTheSecondBig.build(),
