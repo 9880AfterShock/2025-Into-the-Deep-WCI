@@ -137,6 +137,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                 ),
                 ParallelAction(
                     grabToGrabSlideSecond.build(),
+                    SpecimenSwivel.autoSpecSwivOut(),
                     SpecimenClaw.autoDelaySpecClawCloseSecond(),
                 ),
                 ParallelAction(
