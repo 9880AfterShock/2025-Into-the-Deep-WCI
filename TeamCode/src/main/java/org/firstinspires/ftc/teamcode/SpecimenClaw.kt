@@ -86,4 +86,12 @@ object SpecimenClaw {
             return false
         }
     }
+    class autoDelaySpecClawCloseSecond: Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            sleep(550)//350
+            close()
+            p.put("claw done", 1.0)
+            return false
+        }
+    }
 }

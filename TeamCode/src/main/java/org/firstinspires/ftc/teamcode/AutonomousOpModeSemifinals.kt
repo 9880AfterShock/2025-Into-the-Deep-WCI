@@ -65,7 +65,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
             .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(25.0))// issue?
         var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBig)
             .setTangent(Math.toRadians(-35.0))
-            //.waitSeconds(0.275)
+            .waitSeconds(0.275)
             .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
         var grabToClipTheFourthBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBig)
             .setTangent(Math.toRadians(-35.0))
@@ -137,7 +137,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                 ),
                 ParallelAction(
                     grabToGrabSlideSecond.build(),
-                    SpecimenClaw.autoDelaySpecClawClose(),
+                    SpecimenClaw.autoDelaySpecClawCloseSecond(),
                 ),
                 ParallelAction(
                     SequentialAction(
