@@ -42,6 +42,7 @@ object SpecimenLift { //Prefix for commands
         lift.power = 1.0
         lift.mode = encoderMode //reset encoder
         lift.mode = motorMode //enable motor mode
+        this.opmode = opmode
     }
     fun updateLift(){
 
