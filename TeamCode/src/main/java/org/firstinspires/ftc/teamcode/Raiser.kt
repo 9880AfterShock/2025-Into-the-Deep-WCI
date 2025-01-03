@@ -4,10 +4,12 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotorEx
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 object Raiser { //Prefix for commands
-    private lateinit var motor: DcMotor //Init Motor Var
+    private lateinit var motor: DcMotorEx //Init Motor Var
 
     @JvmField //idke why i neeed this for java but whatever
     var targPos = 0 // in encoder ticks
@@ -26,7 +28,7 @@ object Raiser { //Prefix for commands
     private var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     private var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
     fun initRaiser(opmode: OpMode){ //init motors
-        motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
+        motor = opmode.hardwareMap.get(DcMotorEx::class.java, "raiser") //config name
         targPos = 0
         motor.targetPosition = targPos
         motor.mode = encoderMode //reset encoder
@@ -34,7 +36,7 @@ object Raiser { //Prefix for commands
         this.opmode = opmode
     }
     fun initRaiserAfterAuto(opmode: OpMode){ //init motors
-        motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
+        motor = opmode.hardwareMap.get(DcMotorEx::class.java, "raiser") //config name
         motor.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
@@ -66,6 +68,7 @@ object Raiser { //Prefix for commands
             motor.power = 0.7
         }
         motor.targetPosition = (targPos)
+        opmode.telemetry.addData("Main Lift current", motor.getCurrent(CurrentUnit.AMPS))
         opmode.telemetry.addData("Raiser Position", targPos) //change to enum
     }
     class autoRaiserUp: Action {

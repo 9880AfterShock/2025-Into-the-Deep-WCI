@@ -4,11 +4,13 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotorEx
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import org.firstinspires.ftc.teamcode.Raiser
 import java.lang.Thread.sleep
 
 object MainLift { //Prefix for commands
-    lateinit var lift: DcMotor //Init Motor Var
+    lateinit var lift: DcMotorEx //Init Motor Var
     @JvmField
     var pos = 0.0 //starting Position
     var currentSpeed = 0.0 //Starting speed, WHY ARE YOU MAKING A FALLING LIFT???
@@ -30,14 +32,14 @@ object MainLift { //Prefix for commands
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
     fun initLift(opmode: OpMode){ //init motors
         pos = 0.0
-        lift = opmode.hardwareMap.get(DcMotor::class.java, "mainLift") //config name
+        lift = opmode.hardwareMap.get(DcMotorEx::class.java, "mainLift") //config name
         lift.targetPosition = (pos*encoderTicks).toInt()
         lift.mode = encoderMode //reset encoder
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
     fun initLiftAfterAuto(opmode: OpMode){ //init motors
-        lift = opmode.hardwareMap.get(DcMotor::class.java, "mainLift") //config name
+        lift = opmode.hardwareMap.get(DcMotorEx::class.java, "mainLift") //config name
         lift.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
@@ -81,6 +83,7 @@ object MainLift { //Prefix for commands
 
         lift.power = 1.0 //turn motor on
         lift.targetPosition = (pos*encoderTicks).toInt()
+        opmode.telemetry.addData("Main Lift current", lift.getCurrent(CurrentUnit.AMPS))
         opmode.telemetry.addData("Main Lift target position", pos) //Set telemetry
     }
 
