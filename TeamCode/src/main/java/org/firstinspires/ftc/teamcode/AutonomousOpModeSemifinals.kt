@@ -53,7 +53,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))
         var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBig)
-            .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
+            .lineToX(-43.2, velConstraintOverride = TranslationalVelConstraint(18.0))//42.2
         var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBig)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
         var grabToClipBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
