@@ -26,7 +26,7 @@ var parkPoseRed = Pose2d(57.0, -57.0, Math.toRadians(90.0))
 // big auto
 var pushPrepPoseRightBigFast = Pose2d(-34.8,12.1,Math.toRadians(90.0)) //good // was -35
 var pushPoseRightBigFast = Pose2d(-43.9, 46.0,Math.toRadians(90.0)) //good
-var pushPrepPoseMidBigFast = Pose2d(-52.2,12.1,Math.toRadians(90.0)) // good
+var pushPrepPoseMidBigFast = Pose2d(-53.2,12.1,Math.toRadians(90.0)) // good
 var pushPoseMidBigFast = Pose2d(-52.2, 46.0,Math.toRadians(90.0)) //good
 //
 var pushPrepPoseBig = Pose2d(-34.8,12.1, Math.PI/2)
