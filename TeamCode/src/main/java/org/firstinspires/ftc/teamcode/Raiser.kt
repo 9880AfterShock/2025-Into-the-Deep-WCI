@@ -23,7 +23,12 @@ object Raiser { //Prefix for commands
     /*private*/ var raiserUpButtonCurrentlyPressed = false
     private var upButtonPreviouslyPressed = false
     /*private*/ var raiserHangButtonCurrentlyPressed = false
+    private var raiserResetPreviouslyPressed = false
+    private var raiserResetButtonCurrentlyPressed = false
+    private var raiserManualUpButtonCurrentlyPressed = false
+    private var raiserManualUpButtonPreviouslyPressed = false
     private var hangButtonPreviouslyPressed = false
+    private var manual = false
     lateinit var opmode: OpMode //opmode var innit
     private var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     private var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
@@ -34,6 +39,7 @@ object Raiser { //Prefix for commands
         motor.mode = encoderMode //reset encoder
         motor.mode = motorMode //enable motor mode
         this.opmode = opmode
+        manual = false
     }
     fun initRaiserAfterAuto(opmode: OpMode){ //init motors
         motor = opmode.hardwareMap.get(DcMotorEx::class.java, "raiser") //config name
@@ -45,6 +51,8 @@ object Raiser { //Prefix for commands
         raiserDownButtonCurrentlyPressed = opmode.gamepad2.b //can change controls
         raiserUpButtonCurrentlyPressed = opmode.gamepad2.y //can change controls
         raiserHangButtonCurrentlyPressed = opmode.gamepad2.x //can change controls
+        raiserResetButtonCurrentlyPressed = opmode.gamepad2.right_stick_button //can change controls
+        raiserManualUpButtonCurrentlyPressed = opmode.gamepad2.dpad_right //can change controls
 
         if (!((raiserDownButtonCurrentlyPressed && raiserUpButtonCurrentlyPressed) || (raiserDownButtonCurrentlyPressed && raiserHangButtonCurrentlyPressed) || (raiserUpButtonCurrentlyPressed && raiserHangButtonCurrentlyPressed))) {
             if ((raiserDownButtonCurrentlyPressed && !downButtonPreviouslyPressed) && MainLift.lift.currentPosition/ MainLift.encoderTicks <= MainLift.maxLowPos) { //make so it cannot be lowered beyond the limit of the size constraints
@@ -58,9 +66,17 @@ object Raiser { //Prefix for commands
             }
         }
 
+        if (!raiserResetPreviouslyPressed && raiserResetButtonCurrentlyPressed) {
+            raiserReset()
+        }
+
+        checkManualRaiserUp()
+
         downButtonPreviouslyPressed = raiserDownButtonCurrentlyPressed
         upButtonPreviouslyPressed = raiserUpButtonCurrentlyPressed
         hangButtonPreviouslyPressed = raiserHangButtonCurrentlyPressed
+        raiserResetPreviouslyPressed = raiserResetButtonCurrentlyPressed
+        raiserManualUpButtonPreviouslyPressed = raiserManualUpButtonCurrentlyPressed
 
         if (motor.currentPosition <= downPos + 30 && targPos == downPos) { //30 is margin of error
             motor.power = 0.0
@@ -71,6 +87,24 @@ object Raiser { //Prefix for commands
         opmode.telemetry.addData("Main Lift current", motor.getCurrent(CurrentUnit.AMPS))
         opmode.telemetry.addData("Raiser Position", targPos) //change to enum
     }
+
+    private fun raiserReset(){
+        motor.mode = encoderMode
+        motor.mode = motorMode
+        motor.power = 0.7
+    }
+
+    private fun checkManualRaiserUp(){
+        if (raiserManualUpButtonCurrentlyPressed && !raiserManualUpButtonPreviouslyPressed){
+            targPos = -downPos
+            manual = true
+        }
+        if (manual && !raiserManualUpButtonCurrentlyPressed) {
+            targPos = motor.currentPosition - 20 //offset
+            manual = false
+        }
+    }
+
     class autoRaiserUp: Action {
         override fun run(p: TelemetryPacket): Boolean {
             motor.targetPosition = upPos
