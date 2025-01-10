@@ -47,5 +47,5 @@ var clipPoseBlueTheThird = Pose2d(-2.0, 29.6800, 0.0)// 5.0, 32.250, 0.0
 var clipPoseBlueTheFourth = Pose2d(3.0, 30.5, 0.0)// in need of Poses
 //
 var parkPoseBlueBig = Pose2d(-50.0, 57.0, Math.toRadians(0.0)) // use for big
-var backPoseBlueBig = Vector2d(2.0, 45.0)
+var backPoseBlueBig = Vector2d(2.0, 40.0)// y = 45, 37 not enough. |38 works! we have extra time, so we are going a tad farther|
 // Paths

@@ -77,7 +77,7 @@ object SpecimenSwivel {
     class autoSpecSwivOutStart: Action {
         override fun run(p: TelemetryPacket): Boolean {
             swivel.position = outPos
-            sleep(700)
+            sleep(400)// was 700 adjusted to 400 for time.
             p.put("swivel done", 1.0)
             return false
         }
