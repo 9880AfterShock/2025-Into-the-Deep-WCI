@@ -43,8 +43,8 @@ var specStartPickupPoseLastBig = Pose2d(-33.2, 59.25, Math.PI)// in need of pose
 var specEndPickupPoseLastBig = Pose2d(-36.7, 58.25, Math.PI)// in need of poses
 //
 var clipPoseBlueTheSecond = Pose2d(-7.0, 29.00, 0.0)//0.0, 31.750, 0.0// 31.250 // 31.000
-var clipPoseBlueTheThird = Pose2d(-2.0, 29.6800, 0.0)// 5.0, 32.250, 0.0
-var clipPoseBlueTheFourth = Pose2d(3.0, 30.5, 0.0)// in need of Poses
+var clipPoseBlueTheThird = Pose2d(-2.0, 30.83, 0.0)// 29.6800
+var clipPoseBlueTheFourth = Pose2d(3.0, 31.0, 0.0)// in need of Poses
 //
 var parkPoseBlueBig = Pose2d(-50.0, 57.0, Math.toRadians(0.0)) // use for big
 var backPoseBlueBig = Vector2d(2.0, 40.0)// y = 45, 37 not enough. |38 works! we have extra time, so we are going a tad farther|
