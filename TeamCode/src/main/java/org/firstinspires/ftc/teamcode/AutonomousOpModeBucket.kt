@@ -35,7 +35,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
         var firstSpikeBucket = drive.actionBuilder(neutralPoseBlueFirst)
             .strafeToLinearHeading(Vector2d(35.0, 46.0), 0.0)
             .splineToLinearHeading(bucketPoseBlue, 0.0)
-        var secondSpikeBucket = drive.actionBuilder(neutralPoseBlueFirst)
+        var secondSpikeBucket = drive.actionBuilder(neutralPoseBlueSecond)
             .strafeToLinearHeading(Vector2d(35.0, 46.0), 0.0)
             .splineToLinearHeading(bucketPoseBlue, 0.0)
         var pickUpNeutralSecond = drive.actionBuilder(bucketPoseBlue)
@@ -48,6 +48,8 @@ class AutonomousOpModeBucket : LinearOpMode() {
             .waitSeconds(0.5)
         var waitSecondsOne: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
             .waitSeconds(1.0)
+        var waitSecondsOnePointThree: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
+            .waitSeconds(0.3)
 
         while (!isStopRequested && !opModeIsActive()) {
             // Do nothing
@@ -71,9 +73,11 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Drop sample
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
+                waitSecondsOnePointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
                 Claw.autoClawClose(),
+                Wrist.autoWristGoToPos(Wrist.initPos),
 
 
                 //Go to pickup 1
@@ -110,6 +114,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Drop sample again
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
+                waitSecondsOnePointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
                 Claw.autoClawClose(),
@@ -121,7 +126,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ParallelAction(
                     pickUpNeutralSecond.build(),
                     SequentialAction(
-                        MainLift.autoLiftPickup(1),
+                        MainLift.autoLiftPickup(2),
                         Raiser.autoRaiserDown(),
                     ),
                     Wrist.autoWristGoToPos(Wrist.positions[1]),
@@ -149,9 +154,10 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ),
 
 
-                //Drop sample again
+                //Drop sample for the last time
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Claw.autoClawOpen(1500),
+                waitSecondsOnePointThree.build(),
+                Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
                 Claw.autoClawClose(),
                 Wrist.autoWristGoToPos(Wrist.initPos),

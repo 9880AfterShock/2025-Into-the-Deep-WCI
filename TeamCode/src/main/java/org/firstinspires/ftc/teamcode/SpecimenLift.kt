@@ -51,7 +51,7 @@ object SpecimenLift { //Prefix for commands
         downButtonCurrentlyPressed = opmode.gamepad2.left_bumper
         upManualButton = false //not needed rn
         downManualButton = opmode.gamepad2.dpad_left
-        zeroButtonCurrentlyPressed = opmode.gamepad2.dpad_right
+        zeroButtonCurrentlyPressed = opmode.gamepad2.left_stick_button
 
         if (downManualButton) { //manual
             currentSpeed = -speed
