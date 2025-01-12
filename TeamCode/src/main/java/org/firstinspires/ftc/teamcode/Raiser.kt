@@ -52,7 +52,7 @@ object Raiser { //Prefix for commands
         raiserUpButtonCurrentlyPressed = opmode.gamepad2.y //can change controls
         raiserHangButtonCurrentlyPressed = opmode.gamepad2.x //can change controls
         raiserResetButtonCurrentlyPressed = opmode.gamepad2.right_stick_button //can change controls
-        raiserManualUpButtonCurrentlyPressed = opmode.gamepad2.dpad_right //can change controls
+        raiserManualUpButtonCurrentlyPressed = opmode.gamepad1.dpad_right //can change controls
 
         if (!((raiserDownButtonCurrentlyPressed && raiserUpButtonCurrentlyPressed) || (raiserDownButtonCurrentlyPressed && raiserHangButtonCurrentlyPressed) || (raiserUpButtonCurrentlyPressed && raiserHangButtonCurrentlyPressed))) {
             if ((raiserDownButtonCurrentlyPressed && !downButtonPreviouslyPressed) && MainLift.lift.currentPosition/ MainLift.encoderTicks <= MainLift.maxLowPos) { //make so it cannot be lowered beyond the limit of the size constraints
