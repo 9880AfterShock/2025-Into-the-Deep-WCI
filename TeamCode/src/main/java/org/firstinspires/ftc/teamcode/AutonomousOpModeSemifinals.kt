@@ -34,7 +34,7 @@ class AutonomousOpModeBigFast : LinearOpMode() {
             .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(310.0))//-51
             .setTangent(Math.toRadians(180.0))
             .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(27.0))//30 was caden // low is slow
-            .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(-160.0), velConstraintOverride = TranslationalVelConstraint(25.0))//30 was caden // low is slow)
+            .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(-160.0), velConstraintOverride = TranslationalVelConstraint(25.0))//30 was caden // low is slow) // try -135
             .setTangent(Math.toRadians(90.0))
             .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
             .splineToSplineHeading(specStartPickupPoseSecondBig,Math.toRadians(90.0))

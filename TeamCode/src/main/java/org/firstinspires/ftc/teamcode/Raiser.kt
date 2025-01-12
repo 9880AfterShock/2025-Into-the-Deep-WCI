@@ -28,7 +28,7 @@ object Raiser { //Prefix for commands
     private var raiserManualUpButtonCurrentlyPressed = false
     private var raiserManualUpButtonPreviouslyPressed = false
     private var hangButtonPreviouslyPressed = false
-    private var manual = false
+    var manualRaiser = false
     lateinit var opmode: OpMode //opmode var innit
     private var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     private var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
@@ -39,7 +39,7 @@ object Raiser { //Prefix for commands
         motor.mode = encoderMode //reset encoder
         motor.mode = motorMode //enable motor mode
         this.opmode = opmode
-        manual = false
+        manualRaiser = false
     }
     fun initRaiserAfterAuto(opmode: OpMode){ //init motors
         motor = opmode.hardwareMap.get(DcMotorEx::class.java, "raiser") //config name
@@ -61,12 +61,12 @@ object Raiser { //Prefix for commands
             if (raiserUpButtonCurrentlyPressed && !upButtonPreviouslyPressed) {
                 targPos = upPos
             }
-            if (raiserHangButtonCurrentlyPressed && !hangButtonPreviouslyPressed) {
+            if ((raiserHangButtonCurrentlyPressed && !hangButtonPreviouslyPressed)&& MainLift.lift.currentPosition/ MainLift.encoderTicks <= MainLift.maxHangPos) {
                 targPos = hangPos
             }
         }
 
-        if (!raiserResetPreviouslyPressed && raiserResetButtonCurrentlyPressed) {
+        if (!raiserResetPreviouslyPressed && raiserResetButtonCurrentlyPressed){
             raiserReset()
         }
 
@@ -97,11 +97,12 @@ object Raiser { //Prefix for commands
     private fun checkManualRaiserUp(){
         if (raiserManualUpButtonCurrentlyPressed && !raiserManualUpButtonPreviouslyPressed){
             targPos = -downPos
-            manual = true
+
+            manualRaiser = true
         }
-        if (manual && !raiserManualUpButtonCurrentlyPressed) {
+        if (manualRaiser && !raiserManualUpButtonCurrentlyPressed) {
             targPos = motor.currentPosition - 20 //offset
-            manual = false
+            manualRaiser = false
         }
     }
 
