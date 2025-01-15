@@ -33,7 +33,9 @@ class TeleOpMode : LinearOpMode() {
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
         SpecimenSwivel.initSwivel(this) //added because changes
-        Beard.initBeard(this)
+        //Beard.initBeard(this)
+        Vision.initVision(this)
+        Swivel.initSwivel(this)
         SampleTypeSensor.initTypeSensor(0.1F,0.6F,0.3F,0.1F)
         //Hang.initHang(this)
         // init commands here
@@ -54,7 +56,9 @@ class TeleOpMode : LinearOpMode() {
             SampleColorSensor.updateColorSensor()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
-            Beard.updateBeard()
+            //Beard.updateBeard()
+            Vision.updateVision()
+            Swivel.updateSwivel()
             //SpecimenSwivel.updateSwivel() //not needed rn
             //Hang.checkHang()
           val color: SampleType = SampleTypeSensor.getSampleType()
