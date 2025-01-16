@@ -146,7 +146,7 @@ class AutonomousOpModeState : LinearOpMode() {
                 ),
                 SequentialAction(
                     SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
-                    clipToBackBig.build(),
+                    clipToParkBig.build(),
                 ),
                 //),
 
