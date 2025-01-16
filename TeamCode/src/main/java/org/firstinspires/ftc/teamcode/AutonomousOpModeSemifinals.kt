@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 
 @Config
 @Autonomous(name = "9880 2024 Semifinals ___Big___ Specimen", group = "Autonomous")
-class AutonomousOpModeBigFast : LinearOpMode() {
+class AutonomousOpModeSemifinals : LinearOpMode() {
 
 // lift class
 
