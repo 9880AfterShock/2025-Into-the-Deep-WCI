@@ -99,11 +99,11 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ),
                 waitSecondsHalf.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Wrist.autoWristGoToPos(Wrist.initPos),
 
 
                 //Back to bucket
                 ParallelAction(
+                    Wrist.autoWristGoToPos(Wrist.initPos),
                     SequentialAction(
                         Raiser.autoRaiserUp(),
                         MainLift.autoLiftMax(),
@@ -141,11 +141,11 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 ),
                 waitSecondsOne.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                Wrist.autoWristGoToPos(Wrist.initPos),
 
 
                 //Back to bucket
                 ParallelAction(
+                    Wrist.autoWristGoToPos(Wrist.initPos),
                     SequentialAction(
                         Raiser.autoRaiserUp(),
                         MainLift.autoLiftMax(),
