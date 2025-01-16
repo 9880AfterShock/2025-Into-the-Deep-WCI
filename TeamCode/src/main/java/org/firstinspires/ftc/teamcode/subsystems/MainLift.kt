@@ -24,7 +24,7 @@ object MainLift { //Prefix for commands
     @JvmField
     var maxPos = 7.0 //all the way up
     @JvmField
-    var maxLowPos = 3.5 //maximum position when lowered
+    var maxLowPos = 3.325 //maximum position when lowered
     @JvmField
     var maxHangPos = 3.5 //maximum position when in hanging mode //temp values, CHANGE!
     lateinit var opmode: OpMode //opmode var innit
@@ -71,15 +71,20 @@ object MainLift { //Prefix for commands
         if (pos>maxPos) {
             pos = maxPos
         }
+
         if (pos>maxLowPos && Raiser.targPos == Raiser.downPos) {
             pos = maxLowPos
         }
         if (pos>maxHangPos && Raiser.targPos == Raiser.hangPos) {
             pos = maxHangPos
         }
+        if (Raiser.manualRaiser){
+            pos = minPos + 0.5
+        }
         if (pos<minPos) {
             pos = minPos
         }
+
 
         lift.power = 1.0 //turn motor on
         lift.targetPosition = (pos*encoderTicks).toInt()

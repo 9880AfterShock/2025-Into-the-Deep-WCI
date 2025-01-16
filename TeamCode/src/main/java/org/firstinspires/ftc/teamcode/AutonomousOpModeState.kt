@@ -11,8 +11,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 
 @Config
-@Autonomous(name = "9880 2024 Semifinals ___Big___ Specimen", group = "Autonomous")
-class AutonomousOpModeSemifinals : LinearOpMode() {
+@Autonomous(name = "9880 2024 State ___ASSTRONOMIC___ Specimen", group = "Autonomous")
+class AutonomousOpModeState : LinearOpMode() {
 
 // lift class
 
@@ -89,7 +89,7 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                         ParallelAction(
                             SpecimenSwivel.autoSpecSwivOutStart(),
                             SpecimenClaw.autoSpecClawClose(),
-                            ),
+                        ),
                         SpecimenLift.autoSpecimenLiftUp(/*3500*/),
                     ),
                     startToClipBig.build(),
@@ -110,9 +110,9 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                     ),
                     grabToClipTheSecondBig.build(),
                 ),
-                    SequentialAction(
+                SequentialAction(
                     SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
-                        clipToGrabTheSecondBig.build(),
+                    clipToGrabTheSecondBig.build(),
                 ),
                 ParallelAction(
                     grabToGrabSlideSecond.build(),
@@ -127,11 +127,11 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                     ),
                     grabToClipTheThirdBig.build(),
                 ),
-                    SequentialAction(
-                        SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
-                        clipToGrabTheThirdBig.build()
+                SequentialAction(
+                    SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
+                    clipToGrabTheThirdBig.build()
 
-                        ),
+                ),
                 ParallelAction(
                     grabToGrabSlideLast.build(),
                     SpecimenClaw.autoDelaySpecClawClose(),
@@ -146,11 +146,11 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
                 ),
                 SequentialAction(
                     SpecimenLift.autoSpecimenLiftDown(80),//100 // 90
-                    clipToBackBig.build(),
+                    clipToParkBig.build(),
                 ),
-                    //),
+                //),
 
-                 // low voltage and ruins everything ::(
+                // low voltage and ruins everything ::(
                 waitSecondsTwo.build(),
             )
         )
@@ -254,4 +254,3 @@ class AutonomousOpModeSemifinals : LinearOpMode() {
 
 
 // swearword
-// hey that is mean -Caden
