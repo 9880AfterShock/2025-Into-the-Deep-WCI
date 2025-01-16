@@ -36,7 +36,7 @@ class TeleOpMode : LinearOpMode() {
         //Beard.initBeard(this)
         Vision.initVision(this)
         Swivel.initSwivel(this)
-        SampleTypeSensor.initTypeSensor(0.1F,0.6F,0.3F,0.1F)
+        //SampleTypeSensor.initTypeSensor(0.1F,0.6F,0.3F,0.1F)
         //Hang.initHang(this)
         // init commands here
 
@@ -53,7 +53,7 @@ class TeleOpMode : LinearOpMode() {
             MainLift.updateLift()
             Raiser.updateRaiser()
             Wrist.updateWrist()
-            SampleColorSensor.updateColorSensor()
+            //SampleColorSensor.updateColorSensor()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
             //Beard.updateBeard()
@@ -61,22 +61,22 @@ class TeleOpMode : LinearOpMode() {
             Swivel.updateSwivel()
             //SpecimenSwivel.updateSwivel() //not needed rn
             //Hang.checkHang()
-          val color: SampleType = SampleTypeSensor.getSampleType()
-            val colorval: NormalizedRGBA = SampleColorSensor.getColor()
-            var colorstr = ""
-            if (color == SampleType.NONE) {
-                colorstr = "Unknown"
-            } else if (color == SampleType.FRIENDLY) {
-                colorstr = "Alliance"
-            } else if (color == SampleType.NEUTRAL) {
-                colorstr = "Neutral"
-            } else if (color == SampleType.OPPONENT) {
-                colorstr = "Opposition"
-            }
-            telemetry.addData("Hue:", TeamColor.fromRGB(colorval.red, colorval.green, colorval.blue).toHSV().hue)
-            telemetry.addData("Status", "Run Time: $runtime")
-            telemetry.addData("TargetedSample:", colorstr)
-            telemetry.update()
+//          val color: SampleType = SampleTypeSensor.getSampleType()
+//            val colorval: NormalizedRGBA = SampleColorSensor.getColor()
+//            var colorstr = ""
+//            if (color == SampleType.NONE) {
+//                colorstr = "Unknown"
+//            } else if (color == SampleType.FRIENDLY) {
+//                colorstr = "Alliance"
+//            } else if (color == SampleType.NEUTRAL) {
+//                colorstr = "Neutral"
+//            } else if (color == SampleType.OPPONENT) {
+//                colorstr = "Opposition"
+//            }
+//            telemetry.addData("Hue:", TeamColor.fromRGB(colorval.red, colorval.green, colorval.blue).toHSV().hue)
+//            telemetry.addData("Status", "Run Time: $runtime")
+//            telemetry.addData("TargetedSample:", colorstr)
+//            telemetry.update()
         }
     }
 }

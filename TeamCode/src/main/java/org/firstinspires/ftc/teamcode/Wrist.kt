@@ -13,7 +13,7 @@ object Wrist {
     @JvmField
     var positions = arrayOf (0, 90, 180) //positions, most forward to most backward
     @JvmField
-    var initPos = 205 //innit pos prob 200-220 or so
+    var initPos = 200 //innit pos prob 200-220 or so
     var currentPos = -1 //innit pos placeholder
     private var state = "Init"
     /*private*/ var backwardWristButtonCurrentlyPressed = false

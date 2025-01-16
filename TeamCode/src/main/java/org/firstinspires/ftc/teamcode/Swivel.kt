@@ -25,7 +25,7 @@ object Swivel {
         if ((opmode.gamepad2.right_stick_y.toDouble() == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) || Wrist.currentPos == 2) {
             orientation = 0.5
         } else {
-            orientation = atan2(opmode.gamepad2.right_stick_y, opmode.gamepad2.right_stick_x).toDouble()
+            orientation = atan2(opmode.gamepad2.right_stick_y, -opmode.gamepad2.right_stick_x).toDouble()
             if (orientation < 0.0) {
                 orientation += PI
             }
