@@ -11,7 +11,7 @@ object Claw {
     @JvmField
     var openPos = 1.0 //the positions
     @JvmField
-    var closePos = 0.6 //the positions
+    var closePos = 0.85 //the positions //timo changed from 0.6 to 0.85 for new claw
     private var state = "Closed"
     private var clawButtonCurrentlyPressed = false
     private var clawButtonPreviouslyPressed = false

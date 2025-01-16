@@ -12,6 +12,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -20,7 +21,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @Config
 @Autonomous()
-
+@Disabled()
 public class John extends LinearOpMode {
 
 
