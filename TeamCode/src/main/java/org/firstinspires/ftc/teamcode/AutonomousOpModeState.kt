@@ -83,8 +83,8 @@ class AutonomousOpModeState : LinearOpMode() {
         //
         runBlocking(
             SequentialAction(
-                Raiser.autoRaiserReset(),
                 ParallelAction(
+                    Raiser.autoRaiserReset(),
                     SequentialAction(
                         ParallelAction(
                             SpecimenSwivel.autoSpecSwivOutStart(),
