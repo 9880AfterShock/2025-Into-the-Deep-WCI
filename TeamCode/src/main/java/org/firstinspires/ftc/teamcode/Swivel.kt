@@ -26,11 +26,11 @@ object Swivel {
             orientation = 0.5
         } else {
             orientation = atan2(opmode.gamepad2.right_stick_y, opmode.gamepad2.right_stick_x).toDouble()
+            if (orientation < 0.0) {
+                orientation += PI
+            }
+            orientation = orientation/PI/2 + 0.25
         }
-        if (orientation < 0.0) {
-            orientation += PI
-        }
-        orientation = orientation/PI/2 + 0.25
         moveTo(orientation)
         opmode.telemetry.addData("Claw Swivel Position", orientation)
     }
