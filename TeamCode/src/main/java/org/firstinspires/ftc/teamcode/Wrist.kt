@@ -13,7 +13,7 @@ object Wrist {
     @JvmField
     var positions = arrayOf (0, 90, 180) //positions, most forward to most backward
     @JvmField
-    var initPos = 220 //innit pos prob 200-220 or so
+    var initPos = 205 //innit pos prob 200-220 or so
     var currentPos = -1 //innit pos placeholder
     private var state = "Init"
     /*private*/ var backwardWristButtonCurrentlyPressed = false
@@ -67,9 +67,6 @@ object Wrist {
             if (currentPos != -1) {
                 if (direction == "forward" && positions[currentPos] != positions[0]) {
                     currentPos -= 1
-                    if (currentPos == 0) {
-                        Claw.close()
-                    }
                 }
                 if (direction == "backward" && currentPos != positions.size-1) {
                     currentPos += 1

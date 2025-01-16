@@ -2,9 +2,8 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
-import org.firstinspires.ftc.teamcode.subsystems.MainLift
+import kotlin.math.PI
 import kotlin.math.atan2
-import kotlin.math.cos
 
 
 object Swivel {
@@ -18,12 +17,21 @@ object Swivel {
         this.opmode = opmode
     }
 
-    fun moveTo(orientation: Double) {
-
+    private fun moveTo(orientation: Double) {
+        swivel.position = orientation
     }
 
     fun updateSwivel() {
-        orientation = atan2(opmode.gamepad2.right_stick_y, opmode.gamepad2.right_stick_x).toDouble()
+        if (opmode.gamepad2.right_stick_y.toDouble() == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) {
+            orientation = 0.5
+        } else {
+            orientation = atan2(opmode.gamepad2.right_stick_y, opmode.gamepad2.right_stick_x).toDouble()
+        }
+        if (orientation < 0.0) {
+            orientation += PI
+        }
+        orientation = orientation/PI/2 + 0.25
+        moveTo(orientation)
         opmode.telemetry.addData("Claw Swivel Position", orientation)
     }
 
