@@ -12,20 +12,12 @@ import org.firstinspires.ftc.vision.opencv.ColorRange
 import org.firstinspires.ftc.vision.opencv.ImageRegion
 
 object Vision { //Prefix for commands
-    lateinit var lift: DcMotorEx //Init Motor Var
-    @JvmField
-    var pos = 0.0 //starting Position
-    var currentSpeed = 0.0 //Starting speed, WHY ARE YOU MAKING A FALLING LIFT???
-    @JvmField
-    var speed = 0.05 //update speed
-    val encoderTicks = 751.8 //calculate your own ratio///// old us 537.7
-    @JvmField
-    var minPos = 0.0 //folded all the way in
 
     lateinit var colorLocator: ColorBlobLocatorProcessor
     lateinit var opmode: OpMode //opmode var innit
-    var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
-    var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
+
+    lateinit var portal: VisionPortal
+
     fun initVision(opmode: OpMode){ //init motors
         colorLocator = ColorBlobLocatorProcessor.Builder()
             .setTargetColorRange(ColorRange.YELLOW) // use a predefined color match
@@ -42,7 +34,7 @@ object Vision { //Prefix for commands
             .setBlurSize(5) // Smooth the transitions between different colors in image
             .build()
 
-        val portal = VisionPortal.Builder()
+        portal = VisionPortal.Builder()
             .addProcessor(colorLocator)
             .setCameraResolution(Size(960, 720))
             .setCamera(opmode.hardwareMap.get(WebcamName::class.java, "Webcam"))
@@ -85,4 +77,7 @@ object Vision { //Prefix for commands
 
     }
 
+    fun stopVision() {
+        portal.close()
+    }
 }

@@ -57,7 +57,7 @@ class TeleOpMode : LinearOpMode() {
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
             //Beard.updateBeard()
-            //Vision.updateVision()
+            Vision.updateVision()
             Swivel.updateSwivel()
             //SpecimenSwivel.updateSwivel() //not needed rn
             //Hang.checkHang()
@@ -78,5 +78,7 @@ class TeleOpMode : LinearOpMode() {
 //            telemetry.addData("TargetedSample:", colorstr)
 //            telemetry.update()
         }
+        Vision.stopVision()
+
     }
 }
