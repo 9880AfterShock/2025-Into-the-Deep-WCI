@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.pos
 import java.lang.Thread.sleep
+import kotlin.math.abs
 
 object Wrist {
     private lateinit var wrist: DcMotor
@@ -38,25 +39,28 @@ object Wrist {
         this.opmode = opmode
     }
     fun updateWrist() {
-        // Check the status of the claw button on the game pad
         forwardWristButtonCurrentlyPressed = opmode.gamepad1.right_bumper //change these to change the button
         backwardWristButtonCurrentlyPressed = opmode.gamepad1.left_bumper
 
-        //if (!(forwardWristButtonCurrentlyPressed && backwardWristButtonCurrentlyPressed)) { //safety mechanism
+        if (!(forwardWristButtonCurrentlyPressed && backwardWristButtonCurrentlyPressed)) { //safety mechanism
         if (forwardWristButtonCurrentlyPressed && !forwardWristButtonPreviouslyPressed) {
             changePosition("forward")
         }
         if (backwardWristButtonCurrentlyPressed && !backwardWristButtonPreviouslyPressed) {
             changePosition("backward")
         }
-        //}
+        }
 
+        if (state == positions[0].toString() && abs(wrist.targetPosition - wrist.currentPosition ) < 50) {  //make sure it powers off at lowest, 50 is margin of error
+            wrist.power = 0.0
+        } else {
+            wrist.power = 0.25
+        }
 
         forwardWristButtonPreviouslyPressed = forwardWristButtonCurrentlyPressed
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
-        //right now
     }
 
     private fun changePosition(direction: String){
@@ -82,7 +86,6 @@ object Wrist {
             wrist.targetPosition = ((-encoderTicks*(-targetPosition+initPos))/360).toInt()
         }
         state = targetPosition.toString()
-        wrist.power = 0.25
     }
     class autoWristGoToPos(var autoTargPos: Int): Action {
         override fun run(p: TelemetryPacket): Boolean {

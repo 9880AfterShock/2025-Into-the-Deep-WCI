@@ -18,6 +18,8 @@ object Vision { //Prefix for commands
 
     lateinit var portal: VisionPortal
 
+    var angle = 180.0 //sample for now
+
     fun initVision(opmode: OpMode){ //init motors
         colorLocator = ColorBlobLocatorProcessor.Builder()
             .setTargetColorRange(ColorRange.YELLOW) // use a predefined color match
@@ -68,9 +70,12 @@ object Vision { //Prefix for commands
                     b.density,
                     b.aspectRatio,
                     boxFit.center.x.toInt(),
-                    boxFit.center.y.toInt()
+                    boxFit.center.y.toInt(),
                 )
             )
+
+
+
         }
 
         opmode.telemetry.update()

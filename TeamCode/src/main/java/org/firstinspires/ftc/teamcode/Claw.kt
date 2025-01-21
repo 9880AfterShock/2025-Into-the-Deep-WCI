@@ -9,9 +9,9 @@ import java.lang.Thread.sleep
 object Claw {
     private lateinit var claw: Servo
     @JvmField
-    var openPos = 1.0 //the positions
+    var openPos = 0.98 //the positions
     @JvmField
-    var closePos = 0.83 //the positions //timo changed from 0.6 to 0.82 for new claw
+    var closePos = 0.73 //the positions //timo changed from 0.6 to 0.82 for new claw
     private var state = "Closed"
     private var clawButtonCurrentlyPressed = false
     private var clawButtonPreviouslyPressed = false
