@@ -22,14 +22,14 @@ object Swivel {
     }
 
     fun updateSwivel() {
-        if (opmode.gamepad2.right_stick_y.toDouble() == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) {
+        if ((opmode.gamepad2.right_stick_y.toDouble() == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) || Wrist.currentPos == 2) {
             orientation = 0.5
         } else {
-            orientation = atan2(opmode.gamepad2.right_stick_y, opmode.gamepad2.right_stick_x).toDouble()
+            orientation = atan2(opmode.gamepad2.right_stick_y, -opmode.gamepad2.right_stick_x).toDouble()
             if (orientation < 0.0) {
                 orientation += PI
             }
-            orientation = orientation/PI/2 + 0.25
+            orientation = orientation*0.6/PI + 0.2
         }
         moveTo(orientation)
         opmode.telemetry.addData("Claw Swivel Position", orientation)

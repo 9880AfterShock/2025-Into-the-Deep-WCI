@@ -51,7 +51,7 @@ object Raiser { //Prefix for commands
         raiserDownButtonCurrentlyPressed = opmode.gamepad2.b //can change controls
         raiserUpButtonCurrentlyPressed = opmode.gamepad2.y //can change controls
         raiserHangButtonCurrentlyPressed = opmode.gamepad2.x //can change controls
-        raiserResetButtonCurrentlyPressed = opmode.gamepad2.right_stick_button //can change controls
+        raiserResetButtonCurrentlyPressed = opmode.gamepad1.x //can change controls
         raiserManualUpButtonCurrentlyPressed = opmode.gamepad1.dpad_right //can change controls
 
         if (!((raiserDownButtonCurrentlyPressed && raiserUpButtonCurrentlyPressed) || (raiserDownButtonCurrentlyPressed && raiserHangButtonCurrentlyPressed) || (raiserUpButtonCurrentlyPressed && raiserHangButtonCurrentlyPressed))) {
@@ -66,7 +66,7 @@ object Raiser { //Prefix for commands
             }
         }
 
-        if (!raiserResetPreviouslyPressed && raiserResetButtonCurrentlyPressed){
+        if ((!raiserResetPreviouslyPressed && raiserResetButtonCurrentlyPressed) && raiserManualUpButtonCurrentlyPressed){
             raiserReset()
         }
 

@@ -7,9 +7,11 @@ import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import org.firstinspires.ftc.teamcode.Raiser
+import org.firstinspires.ftc.teamcode.nextftc.PIDCoefficients
+import org.firstinspires.ftc.teamcode.nextftc.PIDFController
 import java.lang.Thread.sleep
 
-object MainLift { //Prefix for commands
+object MainLiftWithNewPID { //Prefix for commands
     lateinit var lift: DcMotorEx //Init Motor Var
     @JvmField
     var pos = 0.0 //starting Position
@@ -24,12 +26,15 @@ object MainLift { //Prefix for commands
     @JvmField
     var maxPos = 7.0 //all the way up
     @JvmField
-    var maxLowPos = 3.325 //maximum position when lowered
+    var maxLowPos = 3.5 //maximum position when lowered
     @JvmField
     var maxHangPos = 3.5 //maximum position when in hanging mode //temp values, CHANGE!
     lateinit var opmode: OpMode //opmode var innit
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
-    var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
+    var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_WITHOUT_ENCODER //set motor mode
+
+    var controller = PIDFController(PIDCoefficients(0.007, 0.0, 0.0))
+
     fun initLift(opmode: OpMode){ //init motors
         pos = 0.0
         lift = opmode.hardwareMap.get(DcMotorEx::class.java, "mainLift") //config name
@@ -71,23 +76,20 @@ object MainLift { //Prefix for commands
         if (pos>maxPos) {
             pos = maxPos
         }
-
         if (pos>maxLowPos && Raiser.targPos == Raiser.downPos) {
             pos = maxLowPos
         }
         if (pos>maxHangPos && Raiser.targPos == Raiser.hangPos) {
             pos = maxHangPos
         }
-        if (Raiser.manualRaiser){
-            pos = minPos + 0.5
-        }
         if (pos<minPos) {
             pos = minPos
         }
 
+        controller.target = (pos* encoderTicks)
+        lift.power = controller.calculate(lift.currentPosition.toDouble())
 
-        lift.power = 1.0 //turn motor on
-        lift.targetPosition = (pos*encoderTicks).toInt()
+        opmode.telemetry.addData("Main Lift current", lift.getCurrent(CurrentUnit.AMPS))
         opmode.telemetry.addData("Main Lift target position", pos) //Set telemetry
     }
 
