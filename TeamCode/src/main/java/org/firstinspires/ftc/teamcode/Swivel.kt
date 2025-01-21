@@ -29,7 +29,7 @@ object Swivel {
             if (orientation < 0.0) {
                 orientation += PI
             }
-            orientation = orientation*0.6/PI + 0.2
+            orientation = orientation*0.6/PI + 0.2 // try 0.8
         }
         moveTo(orientation)
         opmode.telemetry.addData("Claw Swivel Position", orientation)
