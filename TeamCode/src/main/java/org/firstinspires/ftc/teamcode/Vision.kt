@@ -13,7 +13,9 @@ import org.firstinspires.ftc.vision.opencv.ImageRegion
 
 object Vision { //Prefix for commands
 
-    lateinit var colorLocator: ColorBlobLocatorProcessor
+    lateinit var colorLocatorRed: ColorBlobLocatorProcessor
+    lateinit var colorLocatorBlue: ColorBlobLocatorProcessor
+    lateinit var colorLocatorYellow: ColorBlobLocatorProcessor
     lateinit var opmode: OpMode //opmode var innit
 
     lateinit var portal: VisionPortal
@@ -21,23 +23,55 @@ object Vision { //Prefix for commands
     var angle = 180.0 //sample for now
 
     fun initVision(opmode: OpMode){ //init motors
-        colorLocator = ColorBlobLocatorProcessor.Builder()
+        colorLocatorYellow = ColorBlobLocatorProcessor.Builder()
             .setTargetColorRange(ColorRange.YELLOW) // use a predefined color match
             .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
             .setRoi(
                 ImageRegion.asUnityCenterCoordinates(
-                    -0.5,
-                    0.5,
-                    0.5,
-                    -0.5
+                    -0.9,
+                    0.9,
+                    0.9,
+                    -0.9
                 )
-            ) // search central 1/4 of camera view
+            ) // search central main area of camera view
+            .setDrawContours(true) // Show contours on the Stream Preview
+            .setBlurSize(5) // Smooth the transitions between different colors in image
+            .build()
+
+        colorLocatorBlue = ColorBlobLocatorProcessor.Builder()
+            .setTargetColorRange(ColorRange.BLUE) // use a predefined color match
+            .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
+            .setRoi(
+                ImageRegion.asUnityCenterCoordinates(
+                    -0.9,
+                    0.9,
+                    0.9,
+                    -0.9
+                )
+            ) // search central main area of camera view
+            .setDrawContours(true) // Show contours on the Stream Preview
+            .setBlurSize(5) // Smooth the transitions between different colors in image
+            .build()
+
+        colorLocatorRed = ColorBlobLocatorProcessor.Builder()
+            .setTargetColorRange(ColorRange.RED) // use a predefined color match
+            .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
+            .setRoi(
+                ImageRegion.asUnityCenterCoordinates(
+                    -0.9,
+                    0.9,
+                    0.9,
+                    -0.9
+                )
+            ) // search central main area of camera view
             .setDrawContours(true) // Show contours on the Stream Preview
             .setBlurSize(5) // Smooth the transitions between different colors in image
             .build()
 
         portal = VisionPortal.Builder()
-            .addProcessor(colorLocator)
+            .addProcessor(colorLocatorYellow)
+            .addProcessor(colorLocatorBlue)
+            .addProcessor(colorLocatorRed)
             .setCameraResolution(Size(960, 720))
             .setCamera(opmode.hardwareMap.get(WebcamName::class.java, "Webcam"))
             .build()
@@ -50,18 +84,30 @@ object Vision { //Prefix for commands
         opmode.telemetry.addData("preview on/off", "... Camera Stream\n")
 
         // Read the current list
-        val blobs = colorLocator.blobs
+        val yellowBlobs = colorLocatorYellow.blobs
+        val redBlobs = colorLocatorYellow.blobs
+        val blueBlobs = colorLocatorYellow.blobs
 
         ColorBlobLocatorProcessor.Util.filterByArea(
             50.0,
-            20000.0,
-            blobs
+            15000.0,
+            yellowBlobs
+        ) // filter out very small or large blobs.
+        ColorBlobLocatorProcessor.Util.filterByArea(
+            50.0,
+            15000.0,
+            redBlobs
+        ) // filter out very small or large blobs.
+        ColorBlobLocatorProcessor.Util.filterByArea(
+            50.0,
+            15000.0,
+            blueBlobs
         ) // filter out very small or large blobs.
 
         opmode.telemetry.addLine(" Area Density Aspect  Center")
 
         // Display the size (area) and center location for each Blob.
-        for (b in blobs) {
+        for (b in yellowBlobs) {
             val boxFit = b.boxFit
             opmode.telemetry.addLine(
                 String.format(
@@ -73,9 +119,15 @@ object Vision { //Prefix for commands
                     boxFit.center.y.toInt(),
                 )
             )
+        }
 
-
-
+        for (b in redBlobs) {
+            val boxFit = b.boxFit
+            opmode.telemetry.addData(boxFit.angle.toString(), "Red Rotation")
+        }
+        for (b in blueBlobs) {
+            val boxFit = b.boxFit
+            opmode.telemetry.addData(boxFit.angle.toString(), "Blue Rotation")
         }
 
         opmode.telemetry.update()
