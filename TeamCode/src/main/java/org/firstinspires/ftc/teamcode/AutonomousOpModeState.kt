@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 
 @Config
-@Autonomous(name = "9880 2024 State ___ASSTRONOMIC___ Specimen", group = "Autonomous")
+@Autonomous(name = "9880 2024 State ___ASTRONOMIC___ Specimen", group = "Autonomous")
 class AutonomousOpModeState : LinearOpMode() {
 
 // lift class
@@ -28,45 +28,45 @@ class AutonomousOpModeState : LinearOpMode() {
         val drive = MecanumDrive(hardwareMap, startPoseBlue)
         var startToClipBig: TrajectoryActionBuilder = drive.actionBuilder(startPoseBlue)
             .setTangent(Math.PI/-2)
-            .splineToSplineHeading(clipPoseBlue, Math.toRadians(-90.0))
-        var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
+            .splineToSplineHeading(clipPoseBlueAsstronomical, Math.toRadians(-90.0))
+        var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueAsstronomical)
             .setTangent(Math.toRadians(140.0))// bad, maybe 100
-            .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(310.0))//-51
+            .splineToSplineHeading(pushPrepPoseRightBigFastAsstronomical,Math.toRadians(310.0))//-51
             .setTangent(Math.toRadians(180.0))
-            .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(27.0))//30 was caden // low is slow
-            .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(-160.0), velConstraintOverride = TranslationalVelConstraint(25.0))//30 was caden // low is slow) // try -135
+            .splineToLinearHeading(pushPoseRightBigFastAsstronomical,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(27.0))//30 was caden // low is slow
+            .splineToLinearHeading(pushPrepPoseMidBigFastAsstronomical,Math.toRadians(-160.0), velConstraintOverride = TranslationalVelConstraint(25.0))//30 was caden // low is slow) // try -135
             .setTangent(Math.toRadians(90.0))
-            .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
-            .splineToSplineHeading(specStartPickupPoseSecondBig,Math.toRadians(90.0))
-            .splineToSplineHeading(specStartPickupPoseBig,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(18.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
-        var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBig)
+            .splineToLinearHeading(pushPoseMidBigFastAsstronomical,Math.toRadians(90.0)) // got these
+            .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical,Math.toRadians(90.0))
+            .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(18.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
+        var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBigAsstronomical)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))
-        var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBig)
+        var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBigAsstronomical)
             .lineToX(-43.2, velConstraintOverride = TranslationalVelConstraint(18.0))//42.2
-        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBig)
+        var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBigAsstronomical)
             .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
-        var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBig)
+        var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBigAsstronomical)
             .setTangent(Math.toRadians(-35.0))
-            .splineToLinearHeading(clipPoseBlueTheSecond,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(25.0))// issue?
-        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBig)
+            .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(25.0))// issue?
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBigAsstronomical)
             .setTangent(Math.toRadians(-35.0))
             .waitSeconds(0.275)
-            .splineToLinearHeading(clipPoseBlueTheThird,Math.toRadians(-80.0))// issue?
-        var grabToClipTheFourthBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBig)
+            .splineToLinearHeading(clipPoseBlueTheThirdAsstronomical,Math.toRadians(-80.0))// issue?
+        var grabToClipTheFourthBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBigAsstronomical)
             .setTangent(Math.toRadians(-35.0))
-            .splineToLinearHeading(clipPoseBlueTheFourth,Math.toRadians(-80.0))// issue?
-        var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecond)
+            .splineToLinearHeading(clipPoseBlueTheFourthAsstronomical,Math.toRadians(-80.0))// issue?
+        var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecondAsstronomical)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseSecondBig, Math.toRadians(110.0))
-        var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThird)
+            .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical, Math.toRadians(110.0))
+        var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThirdAsstronomical)
             .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseLastBig, Math.toRadians(110.0))
-        var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue)
+            .splineToSplineHeading(specStartPickupPoseLastBigAsstronomical, Math.toRadians(110.0))
+        var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueAsstronomical)
             .waitSeconds(30.0)
-        var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheFourth)// state goals! :) Nerd Emoji
+        var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheFourthAsstronomical)// state goals! :) Nerd Emoji
             .setTangent(Math.toRadians(90.0))// change meEEeeeEE!!!!!!!
             .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(135.0))
-        var clipToBackBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheFourth)
+        var clipToBackBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheFifthAsstronomical)
             .strafeToLinearHeading(backPoseBlueBig,Math.toRadians(0.0))
         //
         //
