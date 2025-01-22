@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.atan2
 
 
@@ -25,13 +26,10 @@ object Swivel {
     }
 
     fun updateSwivel() {
-        if ((opmode.gamepad2.right_stick_y.toDouble() == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) || Wrist.currentPos == 2) {
+        if ((abs(opmode.gamepad2.right_stick_y.toDouble()) == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) || Wrist.currentPos == 2) {
             orientation = restingState
         } else {
             orientation = atan2(opmode.gamepad2.right_stick_y, -opmode.gamepad2.right_stick_x).toDouble()
-            if (orientation < 0.0) {
-                orientation += PI
-            }
             orientation = orientation*0.6/PI + 0.2
             restingState = 0.5
         }
