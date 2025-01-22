@@ -19,46 +19,45 @@ object MeepMeep {
                 .build()
         myBot.runAction(
             //myBot.drive.actionBuilder((Pose2d(32.8, 59.2, 0.0)))
-            myBot.drive.actionBuilder(startPoseBlueBucket)
-                .splineToLinearHeading(bucketPoseBlue,0.0)
-                .waitSeconds(3.0) //drop in bucket
-                .setTangent(Math.toRadians(-110.0))
-                .splineToLinearHeading(Pose2d(35.0,26.0,0.0),Math.toRadians(-70.0))
-                .waitSeconds(3.0) //pick up neutral
-<<<<<<< HEAD
-                .strafeToLinearHeading(Vector2d(35.0,46.0),0.0)
-                .splineToLinearHeading(bucketPoseBlue,0.0)
-=======
-                .splineToLinearHeading(Pose2d(47.1,46.5,Math.toRadians(45.0)),0.0)
->>>>>>> 42b4e2f (MeepMeep Bucket Path)
-                .waitSeconds(3.0) //drop in bucket 2nd
-                .strafeToLinearHeading(Vector2d(35.0,0.0),Math.toRadians(135.0))
-                .strafeToLinearHeading(Vector2d(26.0,0.0), Math.toRadians(180.0))
+            myBot.drive.actionBuilder(startPoseBlue)
+                .setTangent(Math.PI/-2)
+                .splineToSplineHeading(clipPoseBlueAsstronomical, Math.toRadians(-90.0))
+                //
+                .setTangent(Math.toRadians(175.0))// bad, maybe 100
+                .splineToSplineHeading(pushPrepPoseRightBigFastHalfwayAsstronomical, Math.toRadians(-155.0))
+                .splineToSplineHeading(pushPrepPoseRightBigFastAsstronomical,Math.toRadians(-70.0))//-51
+                .splineToSplineHeading(pushPrepPoseRightSlideBigFastAsstronomical, Math.toRadians(90.0))
+                .setTangent(Math.toRadians(90.0))
+                .splineToLinearHeading(pushPoseRightBigFastAsstronomical,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(35.0))//27
+                .splineToLinearHeading(pushPrepPoseMidBigFastAsstronomical,Math.toRadians(110.0), velConstraintOverride = TranslationalVelConstraint(25.0))//25
+                .splineToLinearHeading(pushPoseMidBigFastAsstronomical,Math.toRadians(90.0)) // got these
+                //.splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical,Math.toRadians(90.0))
+                .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(20.0)) // 18
+                //
+                //.lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(24.0))//18
+                //
+                .setTangent(Math.toRadians(-35.0))
+                .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-80.0),/* velConstraintOverride = TranslationalVelConstraint(25.0)*/)// issue?
+                //
+                .setTangent(Math.toRadians(110.0))
+                .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical, Math.toRadians(110.0))
+                //
+                //.lineToX(-43.2, velConstraintOverride = TranslationalVelConstraint(28.0))//20
+                //
+                .setTangent(Math.toRadians(-35.0))
+                //.waitSeconds(0.275)
+                .splineToLinearHeading(clipPoseBlueTheThirdAsstronomical,Math.toRadians(-80.0))// issue?
+                //
+                .setTangent(Math.toRadians(110.0))
+                .splineToSplineHeading(specStartPickupPoseLastBigAsstronomical, Math.toRadians(110.0))
+                //
+                .setTangent(Math.toRadians(-35.0))
+                .splineToLinearHeading(clipPoseBlueTheFourthAsstronomical,Math.toRadians(-80.0))// issue?
+                //
+                .setTangent(Math.toRadians(90.0))// change meEEeeeEE!!!!!!!
+                .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(135.0))
+                //
                 .build()
-
-
-//                .setTangent(Math.PI/-2)
-//                .splineToLinearHeading(Pose2d(-5.0,34.8,Math.toRadians(0.0)),Math.PI/-2)
-//                .waitSeconds(2.0)
-//                .setTangent(Math.toRadians(160.0))
-//                .splineToSplineHeading(pushPrepPoseRightBigFast,Math.toRadians(-90.0))
-//                .setTangent(Math.toRadians(180.0))
-//                .splineToLinearHeading(pushPoseRightBigFast,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(40.0))
-//                .splineToLinearHeading(pushPrepPoseMidBigFast,Math.toRadians(110.0))
-//                .setTangent(Math.toRadians(90.0))
-//                .splineToLinearHeading(pushPoseMidBigFast,Math.toRadians(90.0)) // got these
-//                .splineToSplineHeading(specStartPickupPoseLastBig,Math.toRadians(90.0))
-//                .waitSeconds(2.0)
-//                .setTangent(Math.toRadians(-35.0))
-//                .splineToLinearHeading(Pose2d(0.0,34.8,Math.toRadians(0.0)),Math.toRadians(-80.0))
-//                .waitSeconds(2.0)
-//                .setTangent(Math.toRadians(110.0))
-//                .splineToSplineHeading(Pose2d(-36.2,60.2, Math.PI), Math.toRadians(110.0))
-//                .setTangent(Math.toRadians(-35.0))
-//                .splineToLinearHeading(Pose2d(0.0,34.8,Math.toRadians(0.0)),Math.toRadians(-80.0))
-//                .setTangent(Math.toRadians(110.0))
-//                .splineToSplineHeading(Pose2d(-57.0, 57.0, Math.toRadians(-90.0)), Math.toRadians(110.0))
-//                .build()
         )
 
         meepMeep.setBackground(Background.FIELD_INTO_THE_DEEP_JUICE_DARK)

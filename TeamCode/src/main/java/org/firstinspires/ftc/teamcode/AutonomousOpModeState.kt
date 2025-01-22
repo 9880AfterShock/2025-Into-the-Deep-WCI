@@ -22,32 +22,32 @@ class AutonomousOpModeState : LinearOpMode() {
         SpecimenLift.initLift(this)
         Raiser.initRaiser(this)
 
-        //
-        //
+        //Adjust angles and spline radians.
+        //move more to the side for the push prep pose right halfway big asstronomical.
         //
         val drive = MecanumDrive(hardwareMap, startPoseBlue)
         var startToClipBig: TrajectoryActionBuilder = drive.actionBuilder(startPoseBlue)
             .setTangent(Math.PI/-2)
             .splineToSplineHeading(clipPoseBlueAsstronomical, Math.toRadians(-90.0))
         var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueAsstronomical)
-            .setTangent(Math.toRadians(140.0))// bad, maybe 100
-            .splineToSplineHeading(pushPrepPoseRightBigFastAsstronomical,Math.toRadians(310.0))//-51
-            .setTangent(Math.toRadians(180.0))
-            .splineToLinearHeading(pushPoseRightBigFastAsstronomical,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(27.0))//30 was caden // low is slow
-            .splineToLinearHeading(pushPrepPoseMidBigFastAsstronomical,Math.toRadians(-160.0), velConstraintOverride = TranslationalVelConstraint(25.0))//30 was caden // low is slow) // try -135
+            .setTangent(Math.toRadians(175.0))// bad, maybe 100
+            .splineToSplineHeading(pushPrepPoseRightBigFastHalfwayAsstronomical, Math.toRadians(-155.0))
+            .splineToSplineHeading(pushPrepPoseRightBigFastAsstronomical,Math.toRadians(-70.0),velConstraintOverride = TranslationalVelConstraint(25.0))//-51
+            .splineToSplineHeading(pushPrepPoseRightSlideBigFastAsstronomical, Math.toRadians(90.0))
             .setTangent(Math.toRadians(90.0))
-            .splineToLinearHeading(pushPoseMidBigFastAsstronomical,Math.toRadians(90.0)) // got these
-            .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical,Math.toRadians(90.0))
-            .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(18.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
+            .splineToLinearHeading(pushPoseRightBigFastAsstronomical,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(35.0))//27
+            .splineToLinearHeading(pushPrepPoseMidBigFastAsstronomical,Math.toRadians(110.0), velConstraintOverride = TranslationalVelConstraint(30.0))//25
+            .splineToLinearHeading(pushPoseMidBigFastAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(25.0)) // got these
+            .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0))
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBigAsstronomical)
-            .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))
+            .lineToX(-55.2, velConstraintOverride = TranslationalVelConstraint(24.0))//18
         var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBigAsstronomical)
-            .lineToX(-43.2, velConstraintOverride = TranslationalVelConstraint(18.0))//42.2
+            .lineToX(-43.2, velConstraintOverride = TranslationalVelConstraint(28.0))//20
         var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBigAsstronomical)
-            .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(18.0))//41.2
+            .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(28.0))//20
         var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBigAsstronomical)
             .setTangent(Math.toRadians(-35.0))
-            .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(25.0))// issue?
+            .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-80.0),/* velConstraintOverride = TranslationalVelConstraint(25.0)*/)// issue?
         var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBigAsstronomical)
             .setTangent(Math.toRadians(-35.0))
             .waitSeconds(0.275)
