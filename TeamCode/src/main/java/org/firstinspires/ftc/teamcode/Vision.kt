@@ -18,6 +18,9 @@ object Vision { //Prefix for commands
     lateinit var colorLocatorYellow: ColorBlobLocatorProcessor
     lateinit var opmode: OpMode //opmode var innit
 
+    private var alignSwivelButtonCurrentlyPressed = false
+    private var alignSwivelButtonPreviouslyPressed = false
+
     lateinit var portal: VisionPortal
 
     var angle = 180.0 //sample for now
@@ -81,6 +84,8 @@ object Vision { //Prefix for commands
 
     fun updateVision(){
 
+        alignSwivelButtonCurrentlyPressed = opmode.gamepad2.left_stick_button //can change controls
+
         opmode.telemetry.addData("preview on/off", "... Camera Stream\n")
 
         // Read the current list
@@ -129,6 +134,8 @@ object Vision { //Prefix for commands
             val boxFit = b.boxFit
             opmode.telemetry.addData(boxFit.angle.toString(), "Blue Rotation")
         }
+
+        alignSwivelButtonPreviouslyPressed = alignSwivelButtonCurrentlyPressed
 
         opmode.telemetry.update()
 

@@ -17,10 +17,10 @@ object Wrist {
     var initPos = 200 //innit pos prob 200-220 or so
     var currentPos = -1 //innit pos placeholder
     private var state = "Init"
-    /*private*/ var backwardWristButtonCurrentlyPressed = false
-    /*private*/ var backwardWristButtonPreviouslyPressed = false
-    /*private*/ var forwardWristButtonCurrentlyPressed = false
-    /*private*/ var forwardWristButtonPreviouslyPressed = false
+    private var backwardWristButtonCurrentlyPressed = false
+    private var backwardWristButtonPreviouslyPressed = false
+    private var forwardWristButtonCurrentlyPressed = false
+    private var forwardWristButtonPreviouslyPressed = false
 
     lateinit var opmode:OpMode
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
