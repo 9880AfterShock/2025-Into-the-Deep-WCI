@@ -135,6 +135,17 @@ object Vision { //Prefix for commands
             opmode.telemetry.addData(boxFit.angle.toString(), "Blue Rotation")
         }
 
+
+
+
+        if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
+
+            //align
+
+        }
+
+
+
         alignSwivelButtonPreviouslyPressed = alignSwivelButtonCurrentlyPressed
 
         opmode.telemetry.update()
