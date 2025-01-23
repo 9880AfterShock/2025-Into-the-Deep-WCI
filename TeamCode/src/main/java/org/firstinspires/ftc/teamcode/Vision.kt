@@ -2,14 +2,13 @@ package org.firstinspires.ftc.teamcode
 
 import android.util.Size
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
-import com.qualcomm.robotcore.hardware.DcMotor
-import com.qualcomm.robotcore.hardware.DcMotorEx
+import com.qualcomm.robotcore.util.SortOrder
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor
 import org.firstinspires.ftc.vision.opencv.ColorRange
 import org.firstinspires.ftc.vision.opencv.ImageRegion
+
 
 object Vision { //Prefix for commands
 
@@ -90,62 +89,45 @@ object Vision { //Prefix for commands
 
         // Read the current list
         val yellowBlobs = colorLocatorYellow.blobs
-        val redBlobs = colorLocatorYellow.blobs
-        val blueBlobs = colorLocatorYellow.blobs
+        val redBlobs = colorLocatorRed.blobs
+        val blueBlobs = colorLocatorBlue.blobs
+
+        val allBlobs = colorLocatorYellow.blobs + colorLocatorRed.blobs + colorLocatorBlue.blobs
 
         ColorBlobLocatorProcessor.Util.filterByArea(
             1000.0,
             6000.0,
-            yellowBlobs
+            allBlobs
         ) // filter out very small or large blobs.
-        ColorBlobLocatorProcessor.Util.filterByArea(
-            1000.0,
-            6000.0,
-            redBlobs
-        ) // filter out very small or large blobs.
-        ColorBlobLocatorProcessor.Util.filterByArea(
-            1000.0,
-            6000.0,
-            blueBlobs
-        ) // filter out very small or large blobs.
+
+        ColorBlobLocatorProcessor.Util.sortByArea(
+            SortOrder.DESCENDING,
+            allBlobs
+        )
 
         opmode.telemetry.addLine(" Area Density Aspect  Center")
 
-        // Display the size (area) and center location for each Blob.
-        for (b in yellowBlobs) {
-            val boxFit = b.boxFit
-            opmode.telemetry.addLine(
-                String.format(
-                    "%5d  %4.2f   %5.2f  (%3d,%3d)",
-                    b.contourArea,
-                    b.density,
-                    b.aspectRatio,
-                    boxFit.center.x.toInt(),
-                    boxFit.center.y.toInt(),
-                )
-            )
-        }
-
+//        // Display the size (area) and center location for each Blob.
 //        for (b in yellowBlobs) {
 //            val boxFit = b.boxFit
-//            opmode.telemetry.addData(boxFit.angle.toString(), "Yellow Rotation")
+//            opmode.telemetry.addLine(
+//                String.format(
+//                    "%5d  %4.2f   %5.2f  (%3d,%3d)",
+//                    b.contourArea,
+//                    b.density,
+//                    b.aspectRatio,
+//                    boxFit.center.x.toInt(),
+//                    boxFit.center.y.toInt(),
+//                )
+//            )
 //        }
-//        for (b in redBlobs) {
-//            val boxFit = b.boxFit
-//            opmode.telemetry.addData(boxFit.angle.toString(), "Red Rotation")
-//        }
-//        for (b in blueBlobs) {
-//            val boxFit = b.boxFit
-//            opmode.telemetry.addData(boxFit.angle.toString(), "Blue Rotation")
-//        }
-
 
 
 
         if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
-
-            //align
-
+            if (allBlobs.isNotEmpty()) {
+                Swivel.restingState = 7/1800*(allBlobs[0].boxFit.angle % 180)+0.15
+            }
         }
 
 
