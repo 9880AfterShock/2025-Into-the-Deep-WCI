@@ -31,8 +31,8 @@ object Vision { //Prefix for commands
             .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
             .setRoi(
                 ImageRegion.asUnityCenterCoordinates(
-                    -0.9,
-                    0.9,
+                    -0.8,
+                    0.7,
                     0.9,
                     -0.9
                 )
@@ -46,8 +46,8 @@ object Vision { //Prefix for commands
             .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
             .setRoi(
                 ImageRegion.asUnityCenterCoordinates(
-                    -0.9,
-                    0.9,
+                    -0.8,
+                    0.7,
                     0.9,
                     -0.9
                 )
@@ -61,8 +61,8 @@ object Vision { //Prefix for commands
             .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
             .setRoi(
                 ImageRegion.asUnityCenterCoordinates(
-                    -0.9,
-                    0.9,
+                    -0.8,
+                    0.7,
                     0.9,
                     -0.9
                 )
@@ -94,18 +94,18 @@ object Vision { //Prefix for commands
         val blueBlobs = colorLocatorYellow.blobs
 
         ColorBlobLocatorProcessor.Util.filterByArea(
-            50.0,
-            15000.0,
+            1000.0,
+            6000.0,
             yellowBlobs
         ) // filter out very small or large blobs.
         ColorBlobLocatorProcessor.Util.filterByArea(
-            50.0,
-            15000.0,
+            1000.0,
+            6000.0,
             redBlobs
         ) // filter out very small or large blobs.
         ColorBlobLocatorProcessor.Util.filterByArea(
-            50.0,
-            15000.0,
+            1000.0,
+            6000.0,
             blueBlobs
         ) // filter out very small or large blobs.
 
@@ -126,14 +126,18 @@ object Vision { //Prefix for commands
             )
         }
 
-        for (b in redBlobs) {
-            val boxFit = b.boxFit
-            opmode.telemetry.addData(boxFit.angle.toString(), "Red Rotation")
-        }
-        for (b in blueBlobs) {
-            val boxFit = b.boxFit
-            opmode.telemetry.addData(boxFit.angle.toString(), "Blue Rotation")
-        }
+//        for (b in yellowBlobs) {
+//            val boxFit = b.boxFit
+//            opmode.telemetry.addData(boxFit.angle.toString(), "Yellow Rotation")
+//        }
+//        for (b in redBlobs) {
+//            val boxFit = b.boxFit
+//            opmode.telemetry.addData(boxFit.angle.toString(), "Red Rotation")
+//        }
+//        for (b in blueBlobs) {
+//            val boxFit = b.boxFit
+//            opmode.telemetry.addData(boxFit.angle.toString(), "Blue Rotation")
+//        }
 
 
 
