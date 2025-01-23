@@ -31,7 +31,7 @@ object Swivel {
         } else {
             orientation = atan2(abs(opmode.gamepad2.right_stick_y), -opmode.gamepad2.right_stick_x).toDouble()
             orientation = abs(orientation / PI * (0.85 - 0.15) + 0.15) //boundaries are 0.85 and 0.15
-            if (Wrist.currentPos == 0) {
+            if (Wrist.currentPos == 0 && Raiser.targPos != 0) {
                 restingState = 0.85 //for webcam vision
             } else{
                 restingState = 0.5
