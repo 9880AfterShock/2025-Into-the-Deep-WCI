@@ -26,12 +26,16 @@ object Swivel {
     }
 
     fun updateSwivel() {
-        if ((abs(opmode.gamepad2.right_stick_y.toDouble()) == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) || Wrist.currentPos == 2) {
+        if ((opmode.gamepad2.right_stick_y.toDouble() == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) || Wrist.currentPos == 2) {
             orientation = restingState
         } else {
-            orientation = atan2(opmode.gamepad2.right_stick_y, -opmode.gamepad2.right_stick_x).toDouble()
-            orientation = orientation*0.6/PI + 0.2
-            restingState = 0.5
+            orientation = atan2(abs(opmode.gamepad2.right_stick_y), -opmode.gamepad2.right_stick_x).toDouble()
+            orientation = abs(orientation / PI * (0.85 - 0.15) + 0.15) //boundaries are 0.85 and 0.15
+            if (Wrist.currentPos == 0) {
+                restingState = 0.85 //for webcam vision
+            } else{
+                restingState = 0.5
+            }
         }
         moveTo(orientation)
 
