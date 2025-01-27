@@ -96,7 +96,7 @@ object Vision { //Prefix for commands
 
         ColorBlobLocatorProcessor.Util.filterByArea(
             1000.0,
-            6000.0,
+            8000.0,
             allBlobs
         ) // filter out very small or large blobs.
 
@@ -107,32 +107,40 @@ object Vision { //Prefix for commands
 
         opmode.telemetry.addLine(" Area Density Aspect  Center")
 
-//        // Display the size (area) and center location for each Blob.
-//        for (b in yellowBlobs) {
-//            val boxFit = b.boxFit
-//            opmode.telemetry.addLine(
-//                String.format(
-//                    "%5d  %4.2f   %5.2f  (%3d,%3d)",
-//                    b.contourArea,
-//                    b.density,
-//                    b.aspectRatio,
-//                    boxFit.center.x.toInt(),
-//                    boxFit.center.y.toInt(),
-//                )
-//            )
-//        }
+        // Display the size (area) and center location for each Blob.
+        for (b in allBlobs) {
+            val boxFit = b.boxFit
+            opmode.telemetry.addLine(
+                String.format(
+                    "%5d  %4.2f   %5.2f  (%3d,%3d)",
+                    b.contourArea,
+                    b.density,
+                    b.aspectRatio,
+                    boxFit.center.x.toInt(),
+                    boxFit.center.y.toInt(),
+                )
+            )
+        }
 
-
+        Swivel.restingState = 0.85 //remove, will break stuff if not
 
         if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
             if (allBlobs.isNotEmpty()) {
-                Swivel.restingState = 7/1800*(allBlobs[0].boxFit.angle % 180)+0.15
+                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15
             }
         }
 
 
 
         alignSwivelButtonPreviouslyPressed = alignSwivelButtonCurrentlyPressed
+
+
+        if (allBlobs.isNotEmpty()) {
+            opmode.telemetry.addData(allBlobs[0].boxFit.angle.toString(), "all angles raw")
+            opmode.telemetry.addData((7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15).toString(), "all angles")
+        } else {
+            opmode.telemetry.addData("none", "all angles")
+        }
 
         opmode.telemetry.update()
 
