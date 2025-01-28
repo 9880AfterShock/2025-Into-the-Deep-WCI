@@ -31,10 +31,12 @@ var pushPoseMidBigFast = Pose2d(-52.2, 46.0,Math.toRadians(90.0)) //good
 //
 var pushPrepPoseRightBigFastHalfwayAsstronomical = Pose2d(-34.8,33.5,Math.toRadians(0.0))
 var pushPrepPoseRightBigFastAsstronomical = Pose2d(-34.8,12.1,Math.toRadians(0.0)) //good // was -35
-var pushPrepPoseRightSlideBigFastAsstronomical = Pose2d(-50.0, 12.1, Math.toRadians(0.0))
-var pushPoseRightBigFastAsstronomical = Pose2d(-52.2, 46.0,Math.toRadians(00.0)) //good
-var pushPrepPoseMidBigFastAsstronomical = Pose2d(-58.2,12.1,Math.toRadians(0.0)) // good
-var pushPoseMidBigFastAsstronomical = Pose2d(-60.2, 46.0,Math.toRadians(00.0)) //good
+var pushPrepPoseRightSlideBigFastAsstronomical = Pose2d(-42.0, 12.1, Math.toRadians(0.0))
+var pushPoseRightBigFastAsstronomical = Pose2d(-43.2, 46.0,Math.toRadians(00.0)) //good
+var pushPrepPoseMidBigFastAsstronomical = Pose2d(-50.0, 12.1, Math.toRadians(0.0)) // good
+var pushPoseMidBigFastAsstronomical = Pose2d(-52.2, 46.0,Math.toRadians(0.0)) //good
+var pushPrepPoseLeftBigFastAsstronomical = Pose2d(-60.2,12.1,Math.toRadians(0.0))
+var pushPoseLeftBigFastAsstronomical = Pose2d(-60.7, 46.0,Math.toRadians(00.0))
 //
 var pushPrepPoseBig = Pose2d(-34.8,12.1, Math.PI/2)
 var pushPrepPoseRightBig = Vector2d(-43.9,12.1) //good

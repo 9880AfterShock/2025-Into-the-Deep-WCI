@@ -31,36 +31,38 @@ class AutonomousOpModeState : LinearOpMode() {
             .splineToSplineHeading(clipPoseBlueAsstronomical, Math.toRadians(-90.0))
         var clipToPushGrabBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueAsstronomical)
             .setTangent(Math.toRadians(175.0))// bad, maybe 100
-            .splineToSplineHeading(pushPrepPoseRightBigFastHalfwayAsstronomical, Math.toRadians(-155.0))
+            .splineToSplineHeading(pushPrepPoseRightBigFastHalfwayAsstronomical, Math.toRadians(260.0))
             .splineToSplineHeading(pushPrepPoseRightBigFastAsstronomical,Math.toRadians(-70.0),velConstraintOverride = TranslationalVelConstraint(25.0))//-51
             .splineToSplineHeading(pushPrepPoseRightSlideBigFastAsstronomical, Math.toRadians(90.0))
             .setTangent(Math.toRadians(90.0))
-            .splineToLinearHeading(pushPoseRightBigFastAsstronomical,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(35.0))//27
+            .splineToLinearHeading(pushPoseRightBigFastAsstronomical,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(30.0))//27
             .splineToLinearHeading(pushPrepPoseMidBigFastAsstronomical,Math.toRadians(110.0), velConstraintOverride = TranslationalVelConstraint(30.0))//25
             .splineToLinearHeading(pushPoseMidBigFastAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(25.0)) // got these
+            .splineToSplineHeading(pushPrepPoseLeftBigFastAsstronomical, Math.toRadians(90.0))
+            .splineToSplineHeading(pushPoseLeftBigFastAsstronomical, Math.toRadians(90.0))
             .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0))
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBigAsstronomical)
-            .lineToX(-55.2, velConstraintOverride = TranslationalVelConstraint(24.0))//18
+            .lineToX(-53.2, velConstraintOverride = TranslationalVelConstraint(28.0))//18
         var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBigAsstronomical)
-            .lineToX(-43.2, velConstraintOverride = TranslationalVelConstraint(28.0))//20
+            .lineToX(-36.7, velConstraintOverride = TranslationalVelConstraint(28.0))//20
         var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBigAsstronomical)
-            .lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(28.0))//20
-        var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBigAsstronomical)
-            .setTangent(Math.toRadians(-35.0))
-            .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-80.0),/* velConstraintOverride = TranslationalVelConstraint(25.0)*/)// issue?
-        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseLastBigAsstronomical)
-            .setTangent(Math.toRadians(-35.0))
-            .waitSeconds(0.275)
-            .splineToLinearHeading(clipPoseBlueTheThirdAsstronomical,Math.toRadians(-80.0))// issue?
-        var grabToClipTheFourthBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseSecondBigAsstronomical)
-            .setTangent(Math.toRadians(-35.0))
-            .splineToLinearHeading(clipPoseBlueTheFourthAsstronomical,Math.toRadians(-80.0))// issue?
+            .lineToX(-35.7, velConstraintOverride = TranslationalVelConstraint(28.0))//20
+        var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBigAsstronomical)
+            .setTangent(Math.toRadians(-130.0))
+            .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-130.0),/* velConstraintOverride = TranslationalVelConstraint(25.0)*/)// issue?
+        var grabToClipTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBigAsstronomical)
+            .setTangent(Math.toRadians(-130.0))
+            //.waitSeconds(0.275)//wlkjapfasjflapwoadjfpoahfoaje?!!?!?!??!!??!!?
+            .splineToLinearHeading(clipPoseBlueTheThirdAsstronomical,Math.toRadians(-130.0))// issue?
+        var grabToClipTheFourthBig: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBigAsstronomical)
+            .setTangent(Math.toRadians(-130.0))
+            .splineToLinearHeading(clipPoseBlueTheFourthAsstronomical,Math.toRadians(-130.0))// issue?
         var clipToGrabTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheSecondAsstronomical)
-            .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical, Math.toRadians(110.0))
+            .setTangent(Math.toRadians(130.0))
+            .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical, Math.toRadians(130.0))
         var clipToGrabTheThirdBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheThirdAsstronomical)
-            .setTangent(Math.toRadians(110.0))
-            .splineToSplineHeading(specStartPickupPoseLastBigAsstronomical, Math.toRadians(110.0))
+            .setTangent(Math.toRadians(130.0))
+            .splineToSplineHeading(specStartPickupPoseLastBigAsstronomical, Math.toRadians(130.0))
         var waitSecondsTwo: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueAsstronomical)
             .waitSeconds(30.0)
         var clipToParkBig: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlueTheFourthAsstronomical)// state goals! :) Nerd Emoji
@@ -99,13 +101,13 @@ class AutonomousOpModeState : LinearOpMode() {
                     clipToPushGrabBig.build(),
                 ),
                 ParallelAction(
-                    grabToGrabSlide.build(),
-                    SpecimenClaw.autoDelaySpecClawClose(),
+                    //grabToGrabSlide.build(),
+                    SpecimenClaw.autoSpecClawClose(),
                 ),
                 ParallelAction(
                     SequentialAction(
                         SpecimenSwivel.autoSpecSwivOut(),
-                        SpecimenClaw.autoDelaySpecClawClose(),
+                        SpecimenClaw.autoSpecClawClose(),
                         SpecimenLift.autoSpecimenLiftUp(), // issue spot
                     ),
                     grabToClipTheSecondBig.build(),
@@ -115,9 +117,9 @@ class AutonomousOpModeState : LinearOpMode() {
                     clipToGrabTheSecondBig.build(),
                 ),
                 ParallelAction(
-                    grabToGrabSlideSecond.build(),
+                    //grabToGrabSlideSecond.build(),
                     SpecimenSwivel.autoSpecSwivOut(),
-                    SpecimenClaw.autoDelaySpecClawCloseSecond(),
+                    SpecimenClaw.autoSpecClawClose(),
                 ),
                 ParallelAction(
                     SequentialAction(
@@ -133,8 +135,8 @@ class AutonomousOpModeState : LinearOpMode() {
 
                 ),
                 ParallelAction(
-                    grabToGrabSlideLast.build(),
-                    SpecimenClaw.autoDelaySpecClawClose(),
+                    //grabToGrabSlideLast.build(),
+                    SpecimenClaw.autoSpecClawClose(),
                 ),
                 ParallelAction(
                     SequentialAction(

@@ -25,38 +25,41 @@ object MeepMeep {
                 //
                 .setTangent(Math.toRadians(175.0))// bad, maybe 100
                 .splineToSplineHeading(pushPrepPoseRightBigFastHalfwayAsstronomical, Math.toRadians(-155.0))
-                .splineToSplineHeading(pushPrepPoseRightBigFastAsstronomical,Math.toRadians(-70.0))//-51
+                .splineToSplineHeading(pushPrepPoseRightBigFastAsstronomical,Math.toRadians(-70.0),velConstraintOverride = TranslationalVelConstraint(25.0))//-51
                 .splineToSplineHeading(pushPrepPoseRightSlideBigFastAsstronomical, Math.toRadians(90.0))
                 .setTangent(Math.toRadians(90.0))
                 .splineToLinearHeading(pushPoseRightBigFastAsstronomical,Math.toRadians(-90.0), velConstraintOverride = TranslationalVelConstraint(35.0))//27
-                .splineToLinearHeading(pushPrepPoseMidBigFastAsstronomical,Math.toRadians(110.0), velConstraintOverride = TranslationalVelConstraint(25.0))//25
-                .splineToLinearHeading(pushPoseMidBigFastAsstronomical,Math.toRadians(90.0)) // got these
-                //.splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical,Math.toRadians(90.0))
-                .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(20.0)) // 18
+                .splineToLinearHeading(pushPrepPoseMidBigFastAsstronomical,Math.toRadians(110.0), velConstraintOverride = TranslationalVelConstraint(30.0))//25
+                .splineToLinearHeading(pushPoseMidBigFastAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(25.0)) // got these
+                .splineToSplineHeading(pushPrepPoseLeftBigFastAsstronomical, Math.toRadians(90.0))
+                .splineToSplineHeading(pushPoseLeftBigFastAsstronomical, Math.toRadians(90.0))
+                .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0))
                 //
                 //.lineToX(-42.2, velConstraintOverride = TranslationalVelConstraint(24.0))//18
                 //
-                .setTangent(Math.toRadians(-35.0))
-                .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-80.0),/* velConstraintOverride = TranslationalVelConstraint(25.0)*/)// issue?
+                .setTangent(Math.toRadians(130.0))
+                .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(130.0),/* velConstraintOverride = TranslationalVelConstraint(25.0)*/)// issue?
                 //
-                .setTangent(Math.toRadians(110.0))
-                .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical, Math.toRadians(110.0))
+                .setTangent(Math.toRadians(130.0))
+                .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical, Math.toRadians(130.0))
                 //
                 //.lineToX(-43.2, velConstraintOverride = TranslationalVelConstraint(28.0))//20
                 //
-                .setTangent(Math.toRadians(-35.0))
+                .setTangent(Math.toRadians(130.0))
                 //.waitSeconds(0.275)
-                .splineToLinearHeading(clipPoseBlueTheThirdAsstronomical,Math.toRadians(-80.0))// issue?
+                .splineToLinearHeading(clipPoseBlueTheThirdAsstronomical,Math.toRadians(130.0))// issue?
                 //
-                .setTangent(Math.toRadians(110.0))
-                .splineToSplineHeading(specStartPickupPoseLastBigAsstronomical, Math.toRadians(110.0))
+                .setTangent(Math.toRadians(130.0))
+                .splineToSplineHeading(specStartPickupPoseLastBigAsstronomical, Math.toRadians(130.0))
                 //
-                .setTangent(Math.toRadians(-35.0))
-                .splineToLinearHeading(clipPoseBlueTheFourthAsstronomical,Math.toRadians(-80.0))// issue?
+                .setTangent(Math.toRadians(130.0))
+                .splineToLinearHeading(clipPoseBlueTheFourthAsstronomical,Math.toRadians(130.0))// issue?
                 //
-                .setTangent(Math.toRadians(90.0))// change meEEeeeEE!!!!!!!
-                .splineToSplineHeading(parkPoseBlueBig, Math.toRadians(135.0))
+                .setTangent(Math.toRadians(130.0))
+                .splineToSplineHeading(specStartPickupPoseLastBigAsstronomical, Math.toRadians(130.0))
                 //
+                .setTangent(Math.toRadians(130.0))
+                .splineToLinearHeading(clipPoseBlueTheFifthAsstronomical,Math.toRadians(130.0))// issue?
                 .build()
         )
 
