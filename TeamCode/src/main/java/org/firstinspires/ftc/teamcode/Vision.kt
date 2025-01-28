@@ -40,7 +40,11 @@ import org.firstinspires.ftc.vision.VisionPortal
 import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor
 import org.firstinspires.ftc.vision.opencv.ColorRange
 import org.firstinspires.ftc.vision.opencv.ImageRegion
+import org.opencv.core.Point
 import java.util.concurrent.TimeUnit
+import kotlin.math.PI
+import kotlin.math.atan
+import kotlin.math.pow
 
 
 object Vision { //Prefix for commands
@@ -110,7 +114,7 @@ object Vision { //Prefix for commands
             .addProcessor(colorLocatorBlue)
             .addProcessor(colorLocatorRed)
             .setCameraResolution(Size(960, 720))
-            .setCamera(hardwareMap.get(WebcamName::class.java, "WebCam"))
+            .setCamera(opmode.hardwareMap.get(WebcamName::class.java, "Webcam"))
             .build()
 
         portal.setProcessorEnabled(colorLocatorYellow, true)
@@ -134,7 +138,7 @@ object Vision { //Prefix for commands
         val allBlobs = colorLocatorYellow.blobs + colorLocatorRed.blobs + colorLocatorBlue.blobs
 
         ColorBlobLocatorProcessor.Util.filterByArea(
-            1000.0,
+            100.0,
             8000.0,
             allBlobs
         ) // filter out very small or large blobs.
@@ -161,11 +165,10 @@ object Vision { //Prefix for commands
             )
         }
 
-        Swivel.restingState = 0.85 //remove, will break stuff if not
-
-        if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
+        if (alignSwivelButtonCurrentlyPressed /*&& !alignSwivelButtonPreviouslyPressed*/) {
             if (allBlobs.isNotEmpty()) {
-                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15
+                //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15
+                //Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints,))*180/PI)%180.0)+0.15
             }
         }
 
@@ -175,8 +178,10 @@ object Vision { //Prefix for commands
 
 
         if (allBlobs.isNotEmpty()) {
-            opmode.telemetry.addData(allBlobs[0].boxFit.angle.toString(), "all angles raw")
-            opmode.telemetry.addData((7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15).toString(), "all angles")
+            opmode.telemetry.addData("angles raw", allBlobs[0].boxFit.angle)
+            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15)
+            opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
+            opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
         } else {
             opmode.telemetry.addData("none", "all angles")
         }
@@ -229,5 +234,21 @@ object Vision { //Prefix for commands
     }
     fun waitForSetExposure(timeoutMs: Long, maxAttempts: Int): Boolean {
         return waitForSetExposure(timeoutMs, maxAttempts, exposureMillis)
+    }
+
+
+
+    fun calculateSlope(points: Array<Point>): Double {
+
+        //Calculate the means of x and y
+        val meanX = points.sumOf { it.x } / points.size
+        val meanY = points.sumOf { it.y } / points.size
+
+        //Calculate the numerator and denominator for the slope formula
+        val numerator = points.sumOf { (it.x - meanX) * (it.y - meanY) }
+        val denominator = points.sumOf { (it.x - meanX).pow(2) }
+
+        //Return the slope
+        return numerator / denominator
     }
 }
