@@ -167,8 +167,9 @@ object Vision { //Prefix for commands
 
         if (alignSwivelButtonCurrentlyPressed /*&& !alignSwivelButtonPreviouslyPressed*/) {
             if (allBlobs.isNotEmpty()) {
-                //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15
-                //Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints,))*180/PI)%180.0)+0.15
+                //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
+                //Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints,))*180/PI)%180.0)+0.15 //line of best fit of all points
+                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle+90.0%180)+0.15
             }
         }
 
@@ -179,7 +180,7 @@ object Vision { //Prefix for commands
 
         if (allBlobs.isNotEmpty()) {
             opmode.telemetry.addData("angles raw", allBlobs[0].boxFit.angle)
-            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15)
+            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle+90.0%180)+0.15)
             opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
             opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
         } else {
