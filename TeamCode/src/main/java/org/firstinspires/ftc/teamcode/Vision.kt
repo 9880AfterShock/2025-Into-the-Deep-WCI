@@ -42,6 +42,8 @@ import org.firstinspires.ftc.vision.opencv.ColorRange
 import org.firstinspires.ftc.vision.opencv.ImageRegion
 import org.opencv.core.Point
 import java.util.concurrent.TimeUnit
+import kotlin.math.PI
+import kotlin.math.atan
 import kotlin.math.pow
 
 
@@ -136,7 +138,7 @@ object Vision { //Prefix for commands
         val allBlobs = colorLocatorYellow.blobs + colorLocatorRed.blobs + colorLocatorBlue.blobs
 
         ColorBlobLocatorProcessor.Util.filterByArea(
-            1000.0,
+            100.0,
             8000.0,
             allBlobs
         ) // filter out very small or large blobs.
@@ -163,11 +165,10 @@ object Vision { //Prefix for commands
             )
         }
 
-        Swivel.restingState = 0.85 //remove, will break stuff if not
-
-        if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
+        if (alignSwivelButtonCurrentlyPressed /*&& !alignSwivelButtonPreviouslyPressed*/) {
             if (allBlobs.isNotEmpty()) {
-                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15
+                //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15
+                //Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints,))*180/PI)%180.0)+0.15
             }
         }
 
@@ -177,9 +178,10 @@ object Vision { //Prefix for commands
 
 
         if (allBlobs.isNotEmpty()) {
-            opmode.telemetry.addData(allBlobs[0].boxFit.angle.toString(), "angles raw")
-            opmode.telemetry.addData((7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15).toString(), "angles")
-            opmode.telemetry.addData(calculateSlope(allBlobs[0].contourPoints).toString(), "fit line")
+            opmode.telemetry.addData("angles raw", allBlobs[0].boxFit.angle)
+            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15)
+            opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
+            opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
         } else {
             opmode.telemetry.addData("none", "all angles")
         }
