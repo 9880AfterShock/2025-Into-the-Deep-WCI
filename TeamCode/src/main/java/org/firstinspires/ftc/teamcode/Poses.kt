@@ -29,9 +29,9 @@ var pushPoseRightBigFast = Pose2d(-43.9, 46.0,Math.toRadians(90.0)) //good
 var pushPrepPoseMidBigFast = Pose2d(-53.2,12.1,Math.toRadians(90.0)) // good
 var pushPoseMidBigFast = Pose2d(-52.2, 46.0,Math.toRadians(90.0)) //good
 //
-var pushPrepPoseRightBigFastAsstronomical = Pose2d(-34.8,12.1,Math.toRadians(90.0)) //good // was -35
+var pushPrepPoseRightBigFastAsstronomical = Pose2d(-35.8,12.1,Math.toRadians(90.0)) //good // was -35
 var pushPoseRightBigFastAsstronomical = Pose2d(-43.9, 46.0,Math.toRadians(90.0)) //good
-var pushPrepPoseMidBigFastAsstronomical = Pose2d(-53.2,12.1,Math.toRadians(90.0)) // good
+var pushPrepPoseMidBigFastAsstronomical = Pose2d(-54.2,12.1,Math.toRadians(90.0)) // good
 var pushPoseMidBigFastAsstronomical = Pose2d(-52.2, 46.0,Math.toRadians(90.0)) //good
 //
 var pushPrepPoseBig = Pose2d(-34.8,12.1, Math.PI/2)
@@ -48,9 +48,9 @@ var specStartPickupPoseLastBig = Pose2d(-33.2, 59.25, Math.PI)// in need of pose
 var specEndPickupPoseLastBig = Pose2d(-36.7, 58.25, Math.PI)// in need of poses
 //
 var specStartPickupPoseBigAsstronomical = Pose2d(-37.7, 57.15, Math.PI) // good original x is -36.2
-var specEndPickupPoseBigAsstronomical = Pose2d(-44.2,56.5, Math.PI) // test for moving
+var specEndPickupPoseBigAsstronomical = Pose2d(-40.2,56.5, Math.PI) // test for moving
 var specStartPickupPoseSecondBigAsstronomical = Pose2d(-34.85, 58.155, Math.PI)//505
-var specEndPickupPoseSecondBigAsstronomical = Pose2d(-44.7, 58.3, Math.PI)//-42.2, 60.1, math.pi
+var specEndPickupPoseSecondBigAsstronomical = Pose2d(-41.2, 58.3, Math.PI)//-42.2, 60.1, math.pi
 var specStartPickupPoseLastBigAsstronomical = Pose2d(-33.2, 59.25, Math.PI)// in need of poses
 var specEndPickupPoseLastBigAsstronomical = Pose2d(-36.7, 58.25, Math.PI)// in need of poses
 //
