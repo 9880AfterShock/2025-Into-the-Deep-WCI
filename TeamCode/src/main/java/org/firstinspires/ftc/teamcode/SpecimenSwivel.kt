@@ -15,7 +15,6 @@ object SpecimenSwivel {
     var inPos = 0.7 //the positions
     @JvmField
     var partialPos = 0.85
-    var inited = false
     private var state = "In"
     private var swivelButtonCurrentlyPressed = false
     private var swivelButtonPreviouslyPressed = false
@@ -27,7 +26,6 @@ object SpecimenSwivel {
         swivel = opmode.hardwareMap.get(Servo::class.java, "Specimen Swivel") //config name
         this.opmode = opmode
         state = "In"
-        inited = false
     }
     fun moveOut() {
         swivel.position = outPos
@@ -85,8 +83,6 @@ object SpecimenSwivel {
     class autoSpecSwivOut: Action {
         override fun run(p: TelemetryPacket): Boolean {
             swivel.position = outPos
-            //sleep(700)
-            p.put("swivel done", 1.0)
             return false
         }
     }

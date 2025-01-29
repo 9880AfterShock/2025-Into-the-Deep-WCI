@@ -10,7 +10,7 @@ import kotlin.math.atan2
 object Swivel {
     lateinit var swivel: Servo
     private var orientation = 0.5
-    private var restingState = 0.5
+    var restingState = 0.5
 
     lateinit var opmode:OpMode
 
@@ -26,17 +26,18 @@ object Swivel {
     }
 
     fun updateSwivel() {
-        if (Wrist.currentPos == 0 && Raiser.targPos != 0) {
-            restingState = 0.85 //for webcam vision
-        } else{
-            restingState = 0.5
-        }
-
         if ((opmode.gamepad2.right_stick_y.toDouble() == 0.0 && opmode.gamepad2.right_stick_x.toDouble() == 0.0) || Wrist.currentPos == 2) {
             orientation = restingState
         } else {
             orientation = atan2(abs(opmode.gamepad2.right_stick_y), -opmode.gamepad2.right_stick_x).toDouble()
             orientation = abs(orientation / PI * (0.85 - 0.15) + 0.15) //boundaries are 0.85 and 0.15
+
+            if (Wrist.currentPos == 0 && Raiser.targPos != 0) { //might need to move to make sure it spins when the wrist goes up
+                restingState = 0.85 //for webcam vision
+            } else{
+                restingState = 0.5
+            }
+
         }
         moveTo(orientation)
 
