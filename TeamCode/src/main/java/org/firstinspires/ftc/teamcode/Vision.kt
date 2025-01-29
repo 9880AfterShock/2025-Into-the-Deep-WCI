@@ -58,9 +58,11 @@ object Vision { //Prefix for commands
     private var alignSwivelButtonPreviouslyPressed = false
 
     lateinit var portal: VisionPortal
+    lateinit var pointsOverTime: Array<Point>
 
     var angle = 180.0 //sample for now
-    val exposureMillis = 65
+    val exposureMillis = 5
+    var testTelemetry = 0.0
 
     fun initVision(opmode: OpMode){ //init motors
 
@@ -121,6 +123,8 @@ object Vision { //Prefix for commands
         portal.setProcessorEnabled(colorLocatorRed, true)
         portal.setProcessorEnabled(colorLocatorBlue, true)
 
+        pointsOverTime = emptyArray()
+
         this.opmode = opmode
     }
 
@@ -151,41 +155,54 @@ object Vision { //Prefix for commands
         opmode.telemetry.addLine(" Area Density Aspect  Center")
 
         // Display the size (area) and center location for each Blob.
-        for (b in allBlobs) {
-            val boxFit = b.boxFit
-            opmode.telemetry.addLine(
-                String.format(
-                    "%5d  %4.2f   %5.2f  (%3d,%3d)",
-                    b.contourArea,
-                    b.density,
-                    b.aspectRatio,
-                    boxFit.center.x.toInt(),
-                    boxFit.center.y.toInt(),
-                )
-            )
+//        for (b in allBlobs) {
+//            val boxFit = b.boxFit
+//            opmode.telemetry.addLine(
+//                String.format(
+//                    "%5d  %4.2f   %5.2f  (%3d,%3d)",
+//                    b.contourArea,
+//                    b.density,
+//                    b.aspectRatio,
+//                    boxFit.center.x.toInt(),
+//                    boxFit.center.y.toInt(),
+//                )
+//            )
+//        }
+
+        if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
+            pointsOverTime = emptyArray()
+//            if (allBlobs.isNotEmpty()) {
+//                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
+//                Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)%180.0)+0.15 //line of best fit of all points
+//
+//            }
         }
 
-        if (alignSwivelButtonCurrentlyPressed /*&& !alignSwivelButtonPreviouslyPressed*/) {
-            if (allBlobs.isNotEmpty()) {
-                //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
-                //Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints,))*180/PI)%180.0)+0.15 //line of best fit of all points
-                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle+90.0%180)+0.15
+        if (allBlobs.isNotEmpty()) {
+            pointsOverTime += allBlobs[0].contourPoints
+        }
+
+        if (alignSwivelButtonPreviouslyPressed && !alignSwivelButtonCurrentlyPressed) {
+            if (pointsOverTime.isNotEmpty()) {
+                //Swivel.restingState = 7.0/1800.0*((atan(anglesOverTime.average())*180/PI)%180.0)+0.15
+                //testTelemetry = 7.0/1800.0*((atan(calculateSlope(pointsOverTime))*180/PI)%180.0)+0.15
+                testTelemetry = calculateSlope(pointsOverTime)
             }
         }
-
 
 
         alignSwivelButtonPreviouslyPressed = alignSwivelButtonCurrentlyPressed
 
 
-        if (allBlobs.isNotEmpty()) {
-            opmode.telemetry.addData("angles raw", allBlobs[0].boxFit.angle)
-            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle+90.0%180)+0.15)
-            opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
-            opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
-        } else {
-            opmode.telemetry.addData("none", "all angles")
-        }
+        opmode.telemetry.addData("avg over time", testTelemetry)
+//        if (allBlobs.isNotEmpty()) {
+//            opmode.telemetry.addData("angles raw", allBlobs[0].boxFit.angle)
+//            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle%180)+0.15)
+//            opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
+//            opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
+//        } else {
+//            opmode.telemetry.addData("none", "all angles")
+//        }
 
         opmode.telemetry.update()
 
