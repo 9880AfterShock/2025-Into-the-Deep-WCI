@@ -87,7 +87,7 @@ object Wrist {
         }
         state = targetPosition.toString()
     }
-    class autoWristGoToPos(var autoTargPos: Int): Action {
+    class autoWristGoToPos(var autoTargPos: Int): Action { //not working????
         override fun run(p: TelemetryPacket): Boolean {
             updatePosition(autoTargPos)
             return abs(wrist.currentPosition - wrist.targetPosition) > 50 //50 is offset
