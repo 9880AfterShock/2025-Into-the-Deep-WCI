@@ -123,7 +123,7 @@ object Vision { //Prefix for commands
         portal.setProcessorEnabled(colorLocatorRed, true)
         portal.setProcessorEnabled(colorLocatorBlue, true)
 
-        pointsOverTime = emptyArray()
+        pointsOverTime = arrayOf()
 
         this.opmode = opmode
     }
@@ -170,7 +170,7 @@ object Vision { //Prefix for commands
 //        }
 
         if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
-            pointsOverTime = emptyArray()
+            pointsOverTime = arrayOf()
 //            if (allBlobs.isNotEmpty()) {
 //                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
 //                Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)%180.0)+0.15 //line of best fit of all points
@@ -186,7 +186,7 @@ object Vision { //Prefix for commands
             if (pointsOverTime.isNotEmpty()) {
                 //Swivel.restingState = 7.0/1800.0*((atan(anglesOverTime.average())*180/PI)%180.0)+0.15
                 //testTelemetry = 7.0/1800.0*((atan(calculateSlope(pointsOverTime))*180/PI)%180.0)+0.15
-                testTelemetry = calculateSlope(pointsOverTime)
+                testTelemetry = linearRegression(pointsOverTime)
             }
         }
 
@@ -269,4 +269,18 @@ object Vision { //Prefix for commands
         //Return the slope
         return numerator / denominator
     }
+
+    fun linearRegression(points: Array<Point>): Double {
+        val n = points.size
+        val sumX = points.sumOf { it.x }
+        val sumY = points.sumOf { it.y }
+        val sumXY = points.sumOf { it.x * it.y }
+        val sumXSquare = points.sumOf { it.x * it.x }
+
+        // Calculate the slope (m)
+        val m = (n * sumXY - sumX * sumY) / (n * sumXSquare - sumX * sumX)
+
+        return m
+    }
+
 }
