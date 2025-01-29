@@ -55,18 +55,31 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
         if (isStopRequested) return
         runBlocking(
             SequentialAction(
+
+                //Score Preload
                 ParallelAction(
+                    Claw.autoClawClose(),
                     toHub.build(), //after this move arm up and drop in bucket
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
                     MainLift.autoLiftMax(),
                 ),
+
+                SequentialAction(
+                    Claw.autoClawOpen(400),
+                    //Wrist.autoWristGoToPos(Wrist.positions[1]),
+                    Claw.autoClawClose(),
+                ),
+
+                //Pickup Spike 1
                 one.build(), //after this pick up sample
                 ParallelAction (
                     MainLift.autoLiftMin(),
                     Raiser.autoRaiserDown(),
                     MainLift.autoLiftPickup(3),
                 ),
+
+                //Score Spike 1
                 ParallelAction(
                     bucketOne.build(), //after this move arm up and drop in bucket
                     Raiser.autoRaiserUp(),
@@ -83,7 +96,8 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 
 //                bucketThree.build(), //after this move arm up and drop in bucket
 
-                park.build() //park
+                //Park
+                park.build()
             )
         )
     }
