@@ -40,11 +40,11 @@ class AutonomousOpModeState : LinearOpMode() {
             .splineToSplineHeading(specStartPickupPoseSecondBigAsstronomical,Math.toRadians(90.0))
             .splineToSplineHeading(specStartPickupPoseBigAsstronomical,Math.toRadians(90.0), velConstraintOverride = TranslationalVelConstraint(18.0)) // make it move sideways into the clip to grab it better, at least 2 inches.
         var grabToGrabSlide: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseBigAsstronomical)
-            .lineToX(-40.2, velConstraintOverride = TranslationalVelConstraint(20.0))//18
+            .lineToX(-39.2, velConstraintOverride = TranslationalVelConstraint(20.0))//18
         var grabToGrabSlideSecond: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseSecondBigAsstronomical)
-            .lineToX(-41.2, velConstraintOverride = TranslationalVelConstraint(20.0))//42.2
+            .lineToX(-40.7, velConstraintOverride = TranslationalVelConstraint(20.0))//42.2
         var grabToGrabSlideLast: TrajectoryActionBuilder = drive.actionBuilder(specStartPickupPoseLastBigAsstronomical)
-            .lineToX(-40.2, velConstraintOverride = TranslationalVelConstraint(20.0))//41.2
+            .lineToX(-39.2, velConstraintOverride = TranslationalVelConstraint(20.0))//41.2
         var grabToClipTheSecondBig: TrajectoryActionBuilder = drive.actionBuilder(specEndPickupPoseBigAsstronomical)
             .setTangent(Math.toRadians(-35.0))
             .splineToLinearHeading(clipPoseBlueTheSecondAsstronomical,Math.toRadians(-80.0), velConstraintOverride = TranslationalVelConstraint(85.0))// issue?
