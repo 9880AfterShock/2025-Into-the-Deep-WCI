@@ -58,49 +58,34 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
         runBlocking(
             SequentialAction(
                 ParallelAction(
-                    toHub.build(),
+                    toHub.build(), //after this move arm up and drop in bucket
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
                     MainLift.autoLiftMax(),
                 ),
-                one.build(),
+                one.build(), //after this pick up sample
                 ParallelAction (
                     MainLift.autoLiftMin(),
                     Raiser.autoRaiserDown(),
                     MainLift.autoLiftPickup(3),
                 ),
                 ParallelAction(
-                    bucketOne.build(),
+                    bucketOne.build(), //after this move arm up and drop in bucket
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
                     MainLift.autoLiftMax(),
                 ),
 //
-//                MainLift.autoLiftMaxLow(),
-//                waitOne.build(),
-//                two.build(),
-//                waitOne.build(),
-//                ParallelAction(
-//                    bucketTwo.build(),
-//                    Raiser.autoRaiserUp(),
-//                    SpecimenSwivel.autoSpecSwivOut(),
-//                    MainLift.autoLiftMax(),
-//                ),
 //
-//                MainLift.autoLiftMaxLow(),
-//                waitOne.build(),
-//                three.build(),
-//                waitOne.build(),
-//                ParallelAction(
-//                    bucketThree.build(),
-//                    Raiser.autoRaiserUp(),
-//                    SpecimenSwivel.autoSpecSwivOut(),
-//                    MainLift.autoLiftMax(),
-//                ),
+//                two.build(), //after this pick up sample
 //
-//                MainLift.autoLiftMaxLow(),
-//                waitOne.build(),
-                park.build()
+//                bucketTwo.build(), //after this move arm up and drop in bucket
+//
+//                three.build(), //after this pick up sample
+
+//                bucketThree.build(), //after this move arm up and drop in bucket
+
+                park.build() //park
             )
         )
     }
