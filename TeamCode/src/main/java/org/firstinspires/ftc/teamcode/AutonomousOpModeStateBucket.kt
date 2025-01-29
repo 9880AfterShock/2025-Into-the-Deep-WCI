@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode
 
-// RR-specific imports
-// Non-RR imports
 import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.ParallelAction
@@ -24,7 +22,7 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
         Raiser.initRaiser(this) //does run
         Wrist.initWrist(this)
         Claw.initClaw(this)
-        MainLift.initLiftAuto(this)
+        MainLift.initLift(this)
         SpecimenSwivel.initSwivel(this)
 
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
