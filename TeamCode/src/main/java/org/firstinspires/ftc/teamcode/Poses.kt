@@ -9,11 +9,16 @@ import com.acmerobotics.roadrunner.Vector2d
 var startPoseBlueBucket = Pose2d(32.8, 61.5, 0.0)
 var neutralPoseBlueFirst = Pose2d(34.9, 24.0,0.0)
 var neutralPoseBlueSecond = Pose2d(43.2, 24.0,0.0)
-var bucketPoseBlue = Pose2d(45.4,42.7, Math.toRadians(45.0))
+var bucketPoseBlue = Pose2d(45.4,40.7, Math.toRadians(45.0))
 var bucketParkPoseBlue = Pose2d(26.0, 0.0, Math.toRadians(180.0))
 var startPoseBlue = Pose2d(-14.0, 61.0, 0.0) // use for big
+
+var samplePoseOne = Pose2d(45.1,44.5, Math.toRadians(-90.0))
+var samplePoseTwo = Pose2d(45.1,44.5, Math.toRadians(-60.0))
+var samplePoseThree = Pose2d(45.1,44.5, Math.toRadians(-50.0))
 //
 var clipPoseBlue = Pose2d(-11.0, 32.0 , 0.0) // use for big
+
 //
 var backPoseBlue = Pose2d(0.0, 40.0, 0.0)
 var parkPoseBlue = Pose2d(-57.0, 57.0, Math.toRadians(-90.0))

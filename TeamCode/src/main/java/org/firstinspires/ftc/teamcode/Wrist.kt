@@ -87,10 +87,15 @@ object Wrist {
         }
         state = targetPosition.toString()
     }
-    class autoWristGoToPos(var autoTargPos: Int): Action {
+    class autoWristGoToPos(var autoTargPos: Int): Action { //not working????
         override fun run(p: TelemetryPacket): Boolean {
             updatePosition(autoTargPos)
-            return kotlin.math.abs(wrist.currentPosition - wrist.targetPosition) > 50 //50 is offset
+            if (state == positions[0].toString() && abs(wrist.targetPosition - wrist.currentPosition ) < 50) {  //make sure it powers off at lowest, 50 is margin of error
+                wrist.power = 0.0
+            } else {
+                wrist.power = 0.25
+            }
+            return abs(wrist.currentPosition - wrist.targetPosition) > 50 //50 is offset
         }
     }
 }

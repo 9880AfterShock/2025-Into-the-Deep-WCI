@@ -59,9 +59,10 @@ object Claw {
             return false
         }
     }
-    class autoClawClose: Action {
+    class autoClawClose(var sleepTime: Long): Action {
         override fun run(p: TelemetryPacket): Boolean {
             close()
+            sleep(sleepTime)
             return false
         }
     }

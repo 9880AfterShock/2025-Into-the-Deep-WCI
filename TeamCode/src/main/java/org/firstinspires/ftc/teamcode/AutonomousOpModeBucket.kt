@@ -9,11 +9,13 @@ import com.acmerobotics.roadrunner.TrajectoryActionBuilder
 import com.acmerobotics.roadrunner.Vector2d
 import com.acmerobotics.roadrunner.ftc.*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.subsystems.MainLift
 
 
 @Config
+@Disabled
 @Autonomous(name = "9880 2024 Blue Bucket", group = "Autonomous")
 class AutonomousOpModeBucket : LinearOpMode() {
 
@@ -48,7 +50,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
             .waitSeconds(0.5)
         var waitSecondsOne: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
             .waitSeconds(1.0)
-        var waitSecondsOnePointThree: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
+        var waitSecondsZeroPointThree: TrajectoryActionBuilder = drive.actionBuilder(clipPoseBlue) //fix if clipPoseBLue doesnt work
             .waitSeconds(0.3)
 
         while (!isStopRequested && !opModeIsActive()) {
@@ -63,20 +65,20 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Go to bucket
                 ParallelAction(
-                    Claw.autoClawClose(),
+                    Claw.autoClawClose(0),
                     preloadBucket.build(),
                     Raiser.autoRaiserUp(),
-                    SpecimenSwivel.autoSpecSwivOut(),
-                    MainLift.autoLiftMax(),
+                    SpecimenSwivel.autoSpecSwivOut(), //need to see if works
+                    MainLift.autoLiftMax(), //ditto
                 ),
 
 
                 //Drop sample
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                waitSecondsOnePointThree.build(),
+                waitSecondsZeroPointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
+                Claw.autoClawClose(0),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
 
@@ -95,7 +97,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 Claw.autoClawOpen(300),
                 ParallelAction(
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    Claw.autoClawClose(),
+                    Claw.autoClawClose(0),
                 ),
                 waitSecondsHalf.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
@@ -114,10 +116,10 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Drop sample again
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                waitSecondsOnePointThree.build(),
+                waitSecondsZeroPointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
+                Claw.autoClawClose(0),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
 
@@ -137,7 +139,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 Claw.autoClawOpen(300),
                 ParallelAction(
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    Claw.autoClawClose(),
+                    Claw.autoClawClose(0),
                 ),
                 waitSecondsOne.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
@@ -156,10 +158,10 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Drop sample for the last time
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
-                waitSecondsOnePointThree.build(),
+                waitSecondsZeroPointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
+                Claw.autoClawClose(0),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
 

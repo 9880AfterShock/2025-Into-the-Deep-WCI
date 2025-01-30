@@ -43,6 +43,7 @@ class TeleOpMode : LinearOpMode() {
         //Wait for start
         waitForStart()
         SpecimenSwivel.moveOut()
+        Claw.close()
         runtime.reset()
 
         //Running Loop
