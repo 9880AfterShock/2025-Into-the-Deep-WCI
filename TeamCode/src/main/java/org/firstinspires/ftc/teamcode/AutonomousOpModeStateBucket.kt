@@ -61,30 +61,30 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                 //Score Preload
                 ParallelAction(
                     Claw.autoClawClose(0),
-                    Swivel.autoSwivelRotate(0.5),
+                    Swivel.autoSwivelRotate(90),
                     toHub.build(), //after this move arm up and drop in bucket
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
                     MainLift.autoLiftMax(),
+                    SequentialAction(
+                        Wrist.autoWristGoToPos(Wrist.positions[1]),
+                        Swivel.autoSwivelRotate(180),
+                    ),
                 ),
 
-                SequentialAction(
-                    Wrist.autoWristGoToPos(Wrist.positions[1]),
-                    Swivel.autoSwivelRotate(0.15),
-                    Claw.autoClawOpen(400),
-                ),
+                Claw.autoClawOpen(400),
 
                 //Pickup Spike 1
                 MainLift.autoLiftMin(),
                 Raiser.autoRaiserDown(),
                 one.build(),
                 SequentialAction (
-                    MainLift.autoLiftPickup(3),
+                    MainLift.autoLiftPickup(1),
                     ParallelAction(
                         Wrist.autoWristGoToPos(Wrist.positions[0]),
-                        Swivel.autoSwivelRotate(0.4)
+                        Swivel.autoSwivelRotate(180),
                     ),
-                    Claw.autoClawClose(400)
+                    Claw.autoClawClose(400),
                 ),
 
 

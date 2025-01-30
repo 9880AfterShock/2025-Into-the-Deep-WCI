@@ -45,9 +45,9 @@ object Swivel {
 
         opmode.telemetry.addData("Claw Swivel Position", orientation)
     }
-    class autoSwivelRotate(var autoTargPos: Double): Action {
+    class autoSwivelRotate(var autoTargPos: Int): Action {
         override fun run(p: TelemetryPacket): Boolean {
-            swivel.position = autoTargPos
+            swivel.position = 7.0/1800.0*autoTargPos+0.15
             return false
         }
     }
