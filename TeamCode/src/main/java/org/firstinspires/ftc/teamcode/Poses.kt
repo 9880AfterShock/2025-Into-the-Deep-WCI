@@ -53,11 +53,11 @@ var specStartPickupPoseLastBig = Pose2d(-33.2, 59.25, Math.PI)// in need of pose
 var specEndPickupPoseLastBig = Pose2d(-36.7, 58.25, Math.PI)// in need of poses
 //
 var specStartPickupPoseBigAsstronomical = Pose2d(-37.7, 57.15, Math.PI) // good original x is -36.2
-var specEndPickupPoseBigAsstronomical = Pose2d(-40.2,56.5, Math.PI) // test for moving
-var specStartPickupPoseSecondBigAsstronomical = Pose2d(-34.85, 58.155, Math.PI)//505
-var specEndPickupPoseSecondBigAsstronomical = Pose2d(-39.8, 58.3, Math.PI)//-42.2, 60.1, math.pi
-var specStartPickupPoseLastBigAsstronomical = Pose2d(-33.2, 59.25, Math.PI)// in need of poses
-var specEndPickupPoseLastBigAsstronomical = Pose2d(-36.7, 58.25, Math.PI)// in need of poses
+var specEndPickupPoseBigAsstronomical = Pose2d(-40.2,57.15, Math.PI) // test for moving
+var specStartPickupPoseSecondBigAsstronomical = Pose2d(-34.85, 58.355, Math.PI)//505
+var specEndPickupPoseSecondBigAsstronomical = Pose2d(-39.8, 58.355, Math.PI)//-42.2, 60.1, math.pi
+var specStartPickupPoseLastBigAsstronomical = Pose2d(-33.2, 59.75, Math.PI)// in need of poses
+var specEndPickupPoseLastBigAsstronomical = Pose2d(-36.7, 59.75, Math.PI)// in need of poses
 //
 var clipPoseBlueTheSecond = Pose2d(-7.0, 29.00, 0.0)//0.0, 31.750, 0.0// 31.250 // 31.000
 var clipPoseBlueTheThird = Pose2d(-2.0, 30.83, 0.0)// 29.6800
