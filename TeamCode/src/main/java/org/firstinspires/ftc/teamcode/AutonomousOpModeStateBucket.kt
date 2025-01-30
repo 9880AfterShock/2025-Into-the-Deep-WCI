@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode
 
+import android.service.carrier.CarrierMessagingService.SendMultipartSmsResult
 import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.ParallelAction
@@ -24,6 +25,7 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
         Claw.initClaw(this)
         MainLift.initLift(this)
         SpecimenSwivel.initSwivel(this)
+        Swivel.initSwivel(this)
 
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
         var toHub = drive.actionBuilder(startPoseBlueBucket)
@@ -57,34 +59,43 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
             SequentialAction(
 
                 //Score Preload
-//                ParallelAction(
-//                    Claw.autoClawClose(),
-//                    toHub.build(), //after this move arm up and drop in bucket
-//                    Raiser.autoRaiserUp(),
-//                    SpecimenSwivel.autoSpecSwivOut(),
-//                    MainLift.autoLiftMax(),
-//                ),
-
-                SequentialAction(
-                    Wrist.autoWristGoToPos(Wrist.positions[1]),
-                    Claw.autoClawOpen(400),
-                ),
-
-                //Pickup Spike 1
-                one.build(), //after this pick up sample
-                ParallelAction (
-                    MainLift.autoLiftMin(),
-                    Raiser.autoRaiserDown(),
-                    MainLift.autoLiftPickup(3),
-                ),
-
-                //Score Spike 1
                 ParallelAction(
-                    bucketOne.build(), //after this move arm up and drop in bucket
+                    Claw.autoClawClose(),
+                    Swivel.autoSwivelRotate(0.5),
+                    toHub.build(), //after this move arm up and drop in bucket
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(),
                     MainLift.autoLiftMax(),
                 ),
+
+                SequentialAction(
+                    Wrist.autoWristGoToPos(Wrist.positions[1]),
+                    Swivel.autoSwivelRotate(0.15),
+                    Claw.autoClawOpen(400),
+                ),
+
+                //Pickup Spike 1
+                ParallelAction(
+                    one.build(),
+                    SequentialAction (
+                        MainLift.autoLiftPickup(3),
+                        Raiser.autoRaiserDown(),
+                        ParallelAction(
+                            Wrist.autoWristGoToPos(Wrist.positions[0]),
+                            Swivel.autoSwivelRotate(0.4)
+                        ),
+                        Claw.autoClawClose()
+                    ),
+                ),
+
+                //Score Spike 1
+//                ParallelAction(
+//                    bucketOne.build(), //after this move arm up and drop in bucket
+//                    SequentialAction(
+//                        Raiser.autoRaiserUp(),
+//                        MainLift.autoLiftMax(),
+//                    ),
+//                ),
 //
 //
 //                two.build(), //after this pick up sample

@@ -13,9 +13,9 @@ var bucketPoseBlue = Pose2d(45.4,42.7, Math.toRadians(45.0))
 var bucketParkPoseBlue = Pose2d(26.0, 0.0, Math.toRadians(180.0))
 var startPoseBlue = Pose2d(-14.0, 61.0, 0.0) // use for big
 
-var samplePoseOne = Pose2d(45.1,44.5, Math.toRadians(-80.0))
+var samplePoseOne = Pose2d(45.1,44.5, Math.toRadians(-70.0))
 var samplePoseTwo = Pose2d(45.1,44.5, Math.toRadians(-60.0))
-var samplePoseThree = Pose2d(45.1,44.5, Math.toRadians(-40.0))
+var samplePoseThree = Pose2d(45.1,44.5, Math.toRadians(-50.0))
 //
 var clipPoseBlue = Pose2d(-11.0, 32.0 , 0.0) // use for big
 

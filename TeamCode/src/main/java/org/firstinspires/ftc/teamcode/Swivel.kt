@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode
 
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket
+import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
 import kotlin.math.PI
@@ -42,6 +44,12 @@ object Swivel {
         moveTo(orientation)
 
         opmode.telemetry.addData("Claw Swivel Position", orientation)
+    }
+    class autoSwivelRotate(var autoTargPos: Double): Action {
+        override fun run(p: TelemetryPacket): Boolean {
+            swivel.position = autoTargPos
+            return false
+        }
     }
 
 }

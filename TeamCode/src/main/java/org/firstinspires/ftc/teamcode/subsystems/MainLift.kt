@@ -20,7 +20,7 @@ object MainLift { //Prefix for commands
     @JvmField
     var minPos = 0.0 //folded all the way in
     @JvmField
-    var pickUpPos = doubleArrayOf(0.7, 1.0) //poses for pickup during auto
+    var pickUpPos = doubleArrayOf(0.7, 1.0, 0.9) //poses for pickup during auto //need to be tuned
     @JvmField
     var maxPos = 7.0 //all the way up
     @JvmField
