@@ -60,7 +60,7 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 
                 //Score Preload
                 ParallelAction(
-                    Claw.autoClawClose(),
+                    Claw.autoClawClose(0),
                     Swivel.autoSwivelRotate(0.5),
                     toHub.build(), //after this move arm up and drop in bucket
                     Raiser.autoRaiserUp(),
@@ -75,18 +75,18 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                 ),
 
                 //Pickup Spike 1
-                ParallelAction(
-                    one.build(),
-                    SequentialAction (
-                        MainLift.autoLiftPickup(3),
-                        Raiser.autoRaiserDown(),
-                        ParallelAction(
-                            Wrist.autoWristGoToPos(Wrist.positions[0]),
-                            Swivel.autoSwivelRotate(0.4)
-                        ),
-                        Claw.autoClawClose()
+                MainLift.autoLiftMin(),
+                Raiser.autoRaiserDown(),
+                one.build(),
+                SequentialAction (
+                    MainLift.autoLiftPickup(3),
+                    ParallelAction(
+                        Wrist.autoWristGoToPos(Wrist.positions[0]),
+                        Swivel.autoSwivelRotate(0.4)
                     ),
+                    Claw.autoClawClose(400)
                 ),
+
 
                 //Score Spike 1
 //                ParallelAction(
@@ -107,7 +107,7 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 //                bucketThree.build(), //after this move arm up and drop in bucket
 
                 //Park
-                park.build()
+                //park.build()
             )
         )
     }

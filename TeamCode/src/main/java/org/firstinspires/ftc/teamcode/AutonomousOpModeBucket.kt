@@ -65,7 +65,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
 
                 //Go to bucket
                 ParallelAction(
-                    Claw.autoClawClose(),
+                    Claw.autoClawClose(0),
                     preloadBucket.build(),
                     Raiser.autoRaiserUp(),
                     SpecimenSwivel.autoSpecSwivOut(), //need to see if works
@@ -78,7 +78,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 waitSecondsZeroPointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
+                Claw.autoClawClose(0),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
 
@@ -97,7 +97,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 Claw.autoClawOpen(300),
                 ParallelAction(
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    Claw.autoClawClose(),
+                    Claw.autoClawClose(0),
                 ),
                 waitSecondsHalf.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
@@ -119,7 +119,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 waitSecondsZeroPointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
+                Claw.autoClawClose(0),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
 
@@ -139,7 +139,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 Claw.autoClawOpen(300),
                 ParallelAction(
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    Claw.autoClawClose(),
+                    Claw.autoClawClose(0),
                 ),
                 waitSecondsOne.build(),
                 Wrist.autoWristGoToPos(Wrist.positions[1]),
@@ -161,7 +161,7 @@ class AutonomousOpModeBucket : LinearOpMode() {
                 waitSecondsZeroPointThree.build(),
                 Claw.autoClawOpen(500),
                 Wrist.autoWristGoToPos(Wrist.positions[2]),
-                Claw.autoClawClose(),
+                Claw.autoClawClose(0),
                 Wrist.autoWristGoToPos(Wrist.initPos),
 
 
