@@ -19,7 +19,7 @@ var startPoseBlue = Pose2d(-14.0, 61.0, 0.0) // use for big
 
 var samplePoseOne = Pose2d(45.1,44.5, Math.toRadians(-90.0))
 var samplePoseTwo = Pose2d(45.1,44.5, Math.toRadians(-68.0))
-var samplePoseThree = Pose2d(45.1,44.5, Math.toRadians(-50.0))
+var samplePoseThree = Pose2d(45.1,44.5, Math.toRadians(-53.0))
 //
 var clipPoseBlue = Pose2d(-11.0, 32.0 , 0.0) // use for big
 

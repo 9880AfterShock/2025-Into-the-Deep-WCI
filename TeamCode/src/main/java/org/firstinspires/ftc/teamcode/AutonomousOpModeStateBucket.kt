@@ -45,7 +45,7 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
         var park = drive.actionBuilder(bucketPoseThree)
             .setTangent(-90.0)
             .splineToLinearHeading(bucketParkPoseBlue,90.0)
-        var waitPointTwo = drive.actionBuilder(bucketPoseBlue)
+        var waitPointFour = drive.actionBuilder(bucketPoseBlue)
             .waitSeconds(0.4)
 
         while (!isStopRequested && !opModeIsActive()) {
@@ -82,7 +82,7 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                 SequentialAction (
                     MainLift.autoLiftPickup(1),
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    waitPointTwo.build(),
+                    waitPointFour.build(),
                     Claw.autoClawClose(400),
                 ),
 
@@ -114,7 +114,7 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                 SequentialAction (
                     MainLift.autoLiftPickup(2),
                     Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    waitPointTwo.build(),
+                    waitPointFour.build(),
                     Claw.autoClawClose(400),
                 ),
 
@@ -134,6 +134,42 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 
                 Claw.autoClawOpen(400),
 
+
+
+
+                //Pickup Spike 3
+                MainLift.autoLiftMin(),
+                Swivel.autoSwivelRotate(37),
+                Raiser.autoRaiserDown(),
+                three.build(),
+                SequentialAction (
+                    MainLift.autoLiftPickup(3),
+                    Wrist.autoWristGoToPos(Wrist.positions[0]),
+                    waitPointFour.build(),
+                    Claw.autoClawClose(400),
+                ),
+
+                //Score spike 2
+                ParallelAction(
+                    Swivel.autoSwivelRotate(90),
+                    SequentialAction(
+                        bucketThree.build(),
+                        Raiser.autoRaiserUp(),
+                        MainLift.autoLiftMax(),
+                    ),
+                    SequentialAction(
+                        Wrist.autoWristGoToPos(Wrist.positions[1]),
+                        Swivel.autoSwivelRotate(180),
+                    ),
+                ),
+
+                Claw.autoClawOpen(400),
+
+
+
+
+
+                //reset for teleop
                 MainLift.autoLiftMin(),
                 Swivel.autoSwivelRotate(90),
                 Wrist.autoWristGoToPos(-1),
