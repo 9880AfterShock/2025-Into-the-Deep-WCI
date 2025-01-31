@@ -29,24 +29,24 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 
         val drive = MecanumDrive(hardwareMap, startPoseBlueBucket)
         var toHub = drive.actionBuilder(startPoseBlueBucket)
-            .splineToLinearHeading(bucketPoseBlue,0.0)
+            .splineToLinearHeading(bucketPoseZero,0.0)
         var bucketOne = drive.actionBuilder(samplePoseOne)
-            .splineToLinearHeading(bucketPoseBlue,0.0)
+            .splineToLinearHeading(bucketPoseOne,0.0)
         var bucketTwo = drive.actionBuilder(samplePoseTwo)
-            .splineToLinearHeading(bucketPoseBlue,0.0)
+            .splineToLinearHeading(bucketPoseTwo,0.0)
         var bucketThree = drive.actionBuilder(samplePoseThree)
-            .splineToLinearHeading(bucketPoseBlue,0.0)
-        var one = drive.actionBuilder(bucketPoseBlue)
+            .splineToLinearHeading(bucketPoseThree,0.0)
+        var one = drive.actionBuilder(bucketPoseZero)
             .splineToLinearHeading(samplePoseOne,0.0)
-        var two = drive.actionBuilder(bucketPoseBlue)
+        var two = drive.actionBuilder(bucketPoseOne)
             .splineToLinearHeading(samplePoseTwo,0.0)
-        var three = drive.actionBuilder(bucketPoseBlue)
+        var three = drive.actionBuilder(bucketPoseTwo)
             .splineToLinearHeading(samplePoseThree,0.0)
-        var park = drive.actionBuilder(bucketPoseBlue)
+        var park = drive.actionBuilder(bucketPoseThree)
             .setTangent(-90.0)
             .splineToLinearHeading(bucketParkPoseBlue,90.0)
-        var waitOne = drive.actionBuilder(bucketPoseBlue)
-            .waitSeconds(1.0)
+        var waitPointTwo = drive.actionBuilder(bucketPoseBlue)
+            .waitSeconds(0.4)
 
         while (!isStopRequested && !opModeIsActive()) {
             // Do nothing
@@ -76,26 +76,68 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 
                 //Pickup Spike 1
                 MainLift.autoLiftMin(),
+                Swivel.autoSwivelRotate(180),
                 Raiser.autoRaiserDown(),
                 one.build(),
                 SequentialAction (
                     MainLift.autoLiftPickup(1),
-                    ParallelAction(
-                        Wrist.autoWristGoToPos(Wrist.positions[0]),
-                        Swivel.autoSwivelRotate(180),
-                    ),
+                    Wrist.autoWristGoToPos(Wrist.positions[0]),
+                    waitPointTwo.build(),
                     Claw.autoClawClose(400),
                 ),
 
+                MainLift.autoLiftMin(),
 
-                //Score Spike 1
-//                ParallelAction(
-//                    bucketOne.build(), //after this move arm up and drop in bucket
-//                    SequentialAction(
-//                        Raiser.autoRaiserUp(),
-//                        MainLift.autoLiftMax(),
-//                    ),
-//                ),
+                //Score spike 1
+                ParallelAction(
+                    Swivel.autoSwivelRotate(90),
+                    SequentialAction(
+                        bucketOne.build(),
+                        Raiser.autoRaiserUp(),
+                        MainLift.autoLiftMax(),
+                    ),
+                    SequentialAction(
+                        Wrist.autoWristGoToPos(Wrist.positions[1]),
+                        Swivel.autoSwivelRotate(180),
+                    ),
+                ),
+
+                Claw.autoClawOpen(400),
+
+
+
+                //Pickup Spike 2
+                MainLift.autoLiftMin(),
+                Swivel.autoSwivelRotate(22),
+                Raiser.autoRaiserDown(),
+                two.build(),
+                SequentialAction (
+                    MainLift.autoLiftPickup(2),
+                    Wrist.autoWristGoToPos(Wrist.positions[0]),
+                    waitPointTwo.build(),
+                    Claw.autoClawClose(400),
+                ),
+
+                //Score spike 2
+                ParallelAction(
+                    Swivel.autoSwivelRotate(90),
+                    SequentialAction(
+                        bucketTwo.build(),
+                        Raiser.autoRaiserUp(),
+                        MainLift.autoLiftMax(),
+                    ),
+                    SequentialAction(
+                        Wrist.autoWristGoToPos(Wrist.positions[1]),
+                        Swivel.autoSwivelRotate(180),
+                    ),
+                ),
+
+                Claw.autoClawOpen(400),
+
+                MainLift.autoLiftMin(),
+                Raiser.autoRaiserUp(),
+                Wrist.autoWristGoToPos(-1),
+
 //
 //
 //                two.build(), //after this pick up sample
