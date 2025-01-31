@@ -177,6 +177,8 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                 ParallelAction(
                     SequentialAction(
                         waitPointFour.build(),
+                        waitPointFour.build(),
+                        waitPointFour.build(), //im to lazy to make another one, have a bunch of .4 increments
                         Swivel.autoSwivelRotate(90),
                     ),
                     MainLift.autoLiftMin(),
