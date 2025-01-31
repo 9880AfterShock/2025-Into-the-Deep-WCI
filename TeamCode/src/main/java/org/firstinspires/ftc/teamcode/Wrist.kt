@@ -84,6 +84,11 @@ object Wrist {
         } else {
             wrist.targetPosition = ((-encoderTicks*(-targetPosition+initPos))/360).toInt()
         }
+
+        if (targetPosition == 180) { //re-orient swivel to stop webcam mount from colliding
+            Swivel.restingState == 0.4
+        }
+
         state = targetPosition.toString()
     }
     class autoWristGoToPos(var autoTargPos: Int): Action { //not working????

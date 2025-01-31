@@ -12,14 +12,14 @@ import kotlin.math.atan2
 object Swivel {
     lateinit var swivel: Servo
     private var orientation = 0.5
-    var restingState = 0.4
+    var restingState = 0.5
 
     lateinit var opmode:OpMode
 
     fun initSwivel(opmode: OpMode){
         swivel = opmode.hardwareMap.get(Servo::class.java, "Swivel")
         orientation = 0.5
-        restingState = 0.4
+        restingState = 0.5
         this.opmode = opmode
     }
 
@@ -37,7 +37,7 @@ object Swivel {
             if (Wrist.currentPos == 0 && Raiser.targPos != 0) { //might need to move to make sure it spins when the wrist goes up
                 restingState = 0.85 //for webcam vision
             } else{
-                restingState = 0.4
+                restingState = 0.5
             }
 
         }
