@@ -137,33 +137,33 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 
 
 
-                //Pickup Spike 3
-                MainLift.autoLiftMin(),
-                Swivel.autoSwivelRotate(37),
-                Raiser.autoRaiserDown(),
-                three.build(),
-                SequentialAction (
-                    MainLift.autoLiftPickup(3),
-                    Wrist.autoWristGoToPos(Wrist.positions[0]),
-                    waitPointFour.build(),
-                    Claw.autoClawClose(400),
-                ),
-
-                //Score spike 2
-                ParallelAction(
-                    Swivel.autoSwivelRotate(90),
-                    SequentialAction(
-                        bucketThree.build(),
-                        Raiser.autoRaiserUp(),
-                        MainLift.autoLiftMax(),
-                    ),
-                    SequentialAction(
-                        Wrist.autoWristGoToPos(Wrist.positions[1]),
-                        Swivel.autoSwivelRotate(180),
-                    ),
-                ),
-
-                Claw.autoClawOpen(400),
+//                //Pickup Spike 3
+//                MainLift.autoLiftMin(),
+//                Swivel.autoSwivelRotate(37),
+//                Raiser.autoRaiserDown(),
+//                three.build(),
+//                SequentialAction (
+//                    MainLift.autoLiftPickup(3),
+//                    Wrist.autoWristGoToPos(Wrist.positions[0]),
+//                    waitPointFour.build(),
+//                    Claw.autoClawClose(400),
+//                ),
+//
+//                //Score spike 3
+//                ParallelAction(
+//                    Swivel.autoSwivelRotate(90),
+//                    SequentialAction(
+//                        bucketThree.build(),
+//                        Raiser.autoRaiserUp(),
+//                        MainLift.autoLiftMax(),
+//                    ),
+//                    SequentialAction(
+//                        Wrist.autoWristGoToPos(Wrist.positions[1]),
+//                        Swivel.autoSwivelRotate(180),
+//                    ),
+//                ),
+//
+//                Claw.autoClawOpen(400),
 
 
 
