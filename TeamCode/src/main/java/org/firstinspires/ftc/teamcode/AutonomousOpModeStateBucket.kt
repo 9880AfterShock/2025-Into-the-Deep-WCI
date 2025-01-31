@@ -135,8 +135,9 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                 Claw.autoClawOpen(400),
 
                 MainLift.autoLiftMin(),
-                Raiser.autoRaiserUp(),
+                Swivel.autoSwivelRotate(90),
                 Wrist.autoWristGoToPos(-1),
+                Raiser.autoRaiserUp(),
 
 //
 //
