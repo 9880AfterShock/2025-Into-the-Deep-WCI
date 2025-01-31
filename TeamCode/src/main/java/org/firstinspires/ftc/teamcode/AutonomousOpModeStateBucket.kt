@@ -118,6 +118,8 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                     Claw.autoClawClose(400),
                 ),
 
+                MainLift.autoLiftMin(),
+
                 //Score spike 2
                 ParallelAction(
                     Swivel.autoSwivelRotate(90),
@@ -148,6 +150,8 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 //                    waitPointFour.build(),
 //                    Claw.autoClawClose(400),
 //                ),
+//
+//                MainLift.autoLiftMin(),
 //
 //                //Score spike 3
 //                ParallelAction(
