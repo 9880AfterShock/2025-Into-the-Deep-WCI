@@ -174,9 +174,8 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
 
 
                 //reset for teleop
-                MainLift.autoLiftMin(),
                 Swivel.autoSwivelRotate(90),
-                waitPointFour.build(),
+                MainLift.autoLiftMin(),
                 Wrist.autoWristGoToPos(-1),
                 Raiser.autoRaiserUp(),
 
