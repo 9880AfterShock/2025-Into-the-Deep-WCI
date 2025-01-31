@@ -47,6 +47,8 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
             .splineToLinearHeading(bucketParkPoseBlue,90.0)
         var waitPointFour = drive.actionBuilder(bucketPoseBlue)
             .waitSeconds(0.4)
+        var waitSecond = drive.actionBuilder(bucketPoseBlue)
+            .waitSeconds(1.0)
 
         while (!isStopRequested && !opModeIsActive()) {
             // Do nothing
@@ -176,10 +178,8 @@ class AutonomousOpModeStateBucket : LinearOpMode() {
                 //reset for teleop
                 ParallelAction(
                     SequentialAction(
-                        waitPointFour.build(),
-                        waitPointFour.build(),
-                        waitPointFour.build(), //im to lazy to make another one, have a bunch of .4 increments
-                        Swivel.autoSwivelRotate(90),
+                        waitSecond.build(),
+                        Swivel.autoSwivelRotate(75),
                     ),
                     MainLift.autoLiftMin(),
                 ),
