@@ -5,7 +5,6 @@ import com.acmerobotics.roadrunner.Action
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import org.firstinspires.ftc.teamcode.subsystems.MainLift.pos
-import java.lang.Thread.sleep
 import kotlin.math.abs
 
 object Wrist {
