@@ -11,14 +11,14 @@ import kotlin.math.atan2
 
 object Swivel {
     lateinit var swivel: Servo
-    private var orientation = 0.4
+    private var orientation = 0.5
     var restingState = 0.4
 
     lateinit var opmode:OpMode
 
     fun initSwivel(opmode: OpMode){
         swivel = opmode.hardwareMap.get(Servo::class.java, "Swivel")
-        orientation = 0.4
+        orientation = 0.5
         restingState = 0.4
         this.opmode = opmode
     }
