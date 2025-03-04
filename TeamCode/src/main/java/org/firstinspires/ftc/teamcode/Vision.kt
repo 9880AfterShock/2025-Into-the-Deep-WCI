@@ -170,39 +170,39 @@ object Vision { //Prefix for commands
 //        }
 
         if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
-            pointsOverTime = arrayOf()
-//            if (allBlobs.isNotEmpty()) {
-//                Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
+//            pointsOverTime = arrayOf()
+            if (allBlobs.isNotEmpty()) {
+                //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
 //                Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)%180.0)+0.15 //line of best fit of all points
-//
-//            }
-        }
 
-        if (allBlobs.isNotEmpty()) {
-            pointsOverTime += allBlobs[0].contourPoints
-        }
-
-        if (alignSwivelButtonPreviouslyPressed && !alignSwivelButtonCurrentlyPressed) {
-            if (pointsOverTime.isNotEmpty()) {
-                //Swivel.restingState = 7.0/1800.0*((atan(anglesOverTime.average())*180/PI)%180.0)+0.15
-                //testTelemetry = 7.0/1800.0*((atan(calculateSlope(pointsOverTime))*180/PI)%180.0)+0.15
-                testTelemetry = linearRegression(pointsOverTime)
             }
         }
+
+//        if (allBlobs.isNotEmpty()) {
+//            pointsOverTime += allBlobs[0].contourPoints
+//        }
+
+//        if (alignSwivelButtonPreviouslyPressed && !alignSwivelButtonCurrentlyPressed) {
+//            if (pointsOverTime.isNotEmpty()) {
+//                //Swivel.restingState = 7.0/1800.0*((atan(anglesOverTime.average())*180/PI)%180.0)+0.15
+//                //testTelemetry = 7.0/1800.0*((atan(calculateSlope(pointsOverTime))*180/PI)%180.0)+0.15
+//                testTelemetry = linearRegression(pointsOverTime)
+//            }
+//        }
 
 
         alignSwivelButtonPreviouslyPressed = alignSwivelButtonCurrentlyPressed
 
 
         opmode.telemetry.addData("avg over time", testTelemetry)
-//        if (allBlobs.isNotEmpty()) {
-//            opmode.telemetry.addData("angles raw", allBlobs[0].boxFit.angle)
-//            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle%180)+0.15)
-//            opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
-//            opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
-//        } else {
-//            opmode.telemetry.addData("none", "all angles")
-//        }
+        if (allBlobs.isNotEmpty()) {
+            opmode.telemetry.addData("angles raw", allBlobs[0].boxFit.angle) //need to adjust
+            opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle%180)+0.15)
+            opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
+            opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
+        } else {
+            opmode.telemetry.addData("none", "all angles")
+        }
 
         opmode.telemetry.update()
 
