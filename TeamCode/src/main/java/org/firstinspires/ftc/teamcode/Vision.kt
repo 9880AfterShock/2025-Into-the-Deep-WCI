@@ -33,7 +33,6 @@ import android.util.Log
 import android.util.Size
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.util.SortOrder
-import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
 import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.ExposureControl
 import org.firstinspires.ftc.vision.VisionPortal
@@ -41,6 +40,8 @@ import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor
 import org.firstinspires.ftc.vision.opencv.ColorRange
 import org.firstinspires.ftc.vision.opencv.ImageRegion
 import org.opencv.core.Point
+import org.opencv.core.Rect
+import org.opencv.core.RotatedRect
 import java.util.concurrent.TimeUnit
 import kotlin.math.PI
 import kotlin.math.atan
@@ -58,7 +59,7 @@ object Vision { //Prefix for commands
     private var alignSwivelButtonPreviouslyPressed = false
 
     lateinit var portal: VisionPortal
-    lateinit var pointsOverTime: Array
+    lateinit var pointsOverTime: IntArray
 
     var angle = 180.0 //sample for now
     val exposureMillis = 5
@@ -178,10 +179,13 @@ object Vision { //Prefix for commands
             }
         }
 
+        //yoinked from example code, might not work
         if (allBlobs.isNotEmpty()) {
-            pointsOverTime += allBlobs[0].boxfit
+            val boxFit: RotatedRect = allBlobs[0].boxFit
+            val myHorizontalBoxFit: Rect = boxFit.boundingRect()
+            val angleOfSample = 0
+            //pointsOverTime.add(angleOfSample)
         }
-
 //        if (alignSwivelButtonPreviouslyPressed && !alignSwivelButtonCurrentlyPressed) {
 //            if (pointsOverTime.isNotEmpty()) {
 //                //Swivel.restingState = 7.0/1800.0*((atan(anglesOverTime.average())*180/PI)%180.0)+0.15
