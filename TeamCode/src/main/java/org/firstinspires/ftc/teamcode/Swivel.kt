@@ -35,7 +35,7 @@ object Swivel {
             orientation = abs(orientation / PI * (0.85 - 0.15) + 0.15) //boundaries are 0.85 and 0.15
 
             if (Wrist.currentPos == 0 && Raiser.targPos != 0) { //might need to move to make sure it spins when the wrist goes up
-                restingState = 0.85 //for webcam vision
+                restingState = 0.85 //for while its down
             } else{
                 restingState = 0.5
             }

@@ -58,7 +58,7 @@ object Vision { //Prefix for commands
     private var alignSwivelButtonPreviouslyPressed = false
 
     lateinit var portal: VisionPortal
-    lateinit var pointsOverTime: Array<Point>
+    lateinit var pointsOverTime: Array
 
     var angle = 180.0 //sample for now
     val exposureMillis = 5
@@ -123,7 +123,7 @@ object Vision { //Prefix for commands
         portal.setProcessorEnabled(colorLocatorRed, true)
         portal.setProcessorEnabled(colorLocatorBlue, true)
 
-        pointsOverTime = arrayOf()
+        pointsOverTime = intArrayOf()
 
         this.opmode = opmode
     }
@@ -170,7 +170,7 @@ object Vision { //Prefix for commands
 //        }
 
         if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
-//            pointsOverTime = arrayOf()
+            pointsOverTime = intArrayOf()
             if (allBlobs.isNotEmpty()) {
                 //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
 //                Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)%180.0)+0.15 //line of best fit of all points
@@ -178,9 +178,9 @@ object Vision { //Prefix for commands
             }
         }
 
-//        if (allBlobs.isNotEmpty()) {
-//            pointsOverTime += allBlobs[0].contourPoints
-//        }
+        if (allBlobs.isNotEmpty()) {
+            pointsOverTime += allBlobs[0].boxfit
+        }
 
 //        if (alignSwivelButtonPreviouslyPressed && !alignSwivelButtonCurrentlyPressed) {
 //            if (pointsOverTime.isNotEmpty()) {
@@ -211,6 +211,11 @@ object Vision { //Prefix for commands
     fun stopVision() {
         portal.close()
     }
+
+
+
+
+
 
 
 
