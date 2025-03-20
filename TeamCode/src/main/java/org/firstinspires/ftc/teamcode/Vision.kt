@@ -175,6 +175,26 @@ object Vision { //Prefix for commands
 //            )
 //        }
 
+        if (allBlobs.isNotEmpty()) {
+            val boxFit: RotatedRect = allBlobs[0].boxFit
+
+            val leftMost = getMostLeftPoint(allBlobs[0].contourPoints)
+            val rightMost = getMostRightPoint(allBlobs[0].contourPoints)
+
+            if (leftMost != null) {
+                if (rightMost != null) {
+                    degreeAngle = if (leftMost.y < rightMost.y) { //angled this way //
+                        boxFit.angle
+                    } else { //angled this way \\
+                        boxFit.angle + 90
+
+                    }
+                }
+            }
+            opmode.telemetry.addData("real angle ======",7.0/1800.0*(degreeAngle%180)+0.15)
+        }
+
+
         if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
             pointsOverTime = intArrayOf()
             if (allBlobs.isNotEmpty()) {
@@ -199,20 +219,7 @@ object Vision { //Prefix for commands
             //pointsOverTime (angleOfSample)
 
 
-            val leftMost = getMostLeftPoint(allBlobs[0].contourPoints)
-            val rightMost = getMostRightPoint(allBlobs[0].contourPoints)
 
-            if (leftMost != null) {
-                if (rightMost != null) {
-                    degreeAngle = if (leftMost.y < rightMost.y) { //angled this way //
-                        boxFit.angle
-                    } else { //angled this way \\
-                        boxFit.angle + 90
-
-                    }
-                }
-            }
-            opmode.telemetry.addData("real angle ======",7.0/1800.0*(degreeAngle%180)+0.15)
 
 
         }
