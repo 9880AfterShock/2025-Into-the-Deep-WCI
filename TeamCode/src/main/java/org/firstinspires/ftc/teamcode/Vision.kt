@@ -184,9 +184,9 @@ object Vision { //Prefix for commands
             if (leftMost != null) {
                 if (rightMost != null) {
                     degreeAngle = if (leftMost.y < rightMost.y) { //angled this way //
-                        boxFit.angle
-                    } else { //angled this way \\
                         boxFit.angle + 90
+                    } else { //angled this way \\
+                        boxFit.angle
 
                     }
                 }
