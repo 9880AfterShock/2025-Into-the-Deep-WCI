@@ -63,14 +63,11 @@ object Vision { //Prefix for commands
     lateinit var pointsOverTime: IntArray
 
     var angle = 180.0 //sample for now
-    var lastAngle = 0
     val exposureMillis = 5
     var testTelemetry = 0.0
     var degreeAngle = 0.0
 
     fun initVision(opmode: OpMode){ //init motors
-
-        lastAngle = 0
 
         colorLocatorYellow = ColorBlobLocatorProcessor.Builder()
             .setTargetColorRange(ColorRange.YELLOW) // use a predefined color match
