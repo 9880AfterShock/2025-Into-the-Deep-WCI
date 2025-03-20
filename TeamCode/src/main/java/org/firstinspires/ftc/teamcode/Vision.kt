@@ -46,6 +46,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.PI
 import kotlin.math.atan
 import kotlin.math.pow
+import kotlin.collections.plus
 
 
 object Vision { //Prefix for commands
@@ -62,10 +63,14 @@ object Vision { //Prefix for commands
     lateinit var pointsOverTime: IntArray
 
     var angle = 180.0 //sample for now
+    var lastAngle = 0
     val exposureMillis = 5
     var testTelemetry = 0.0
+    var degreeAngle = 0.0
 
     fun initVision(opmode: OpMode){ //init motors
+
+        lastAngle = 0
 
         colorLocatorYellow = ColorBlobLocatorProcessor.Builder()
             .setTargetColorRange(ColorRange.YELLOW) // use a predefined color match
@@ -144,7 +149,7 @@ object Vision { //Prefix for commands
 
         ColorBlobLocatorProcessor.Util.filterByArea(
             100.0,
-            8000.0,
+            15000.0,
             allBlobs
         ) // filter out very small or large blobs.
 
@@ -183,8 +188,30 @@ object Vision { //Prefix for commands
         if (allBlobs.isNotEmpty()) {
             val boxFit: RotatedRect = allBlobs[0].boxFit
             val myHorizontalBoxFit: Rect = boxFit.boundingRect()
-            val angleOfSample = 0
-            //pointsOverTime.add(angleOfSample)
+            val angleOfSample = myHorizontalBoxFit.size()
+            opmode.telemetry.addData("angles rotated size", angleOfSample)
+
+            opmode.telemetry.addData("top left X", myHorizontalBoxFit.x);
+            opmode.telemetry.addData("top left Y", myHorizontalBoxFit.y);
+            opmode.telemetry.addData("width", myHorizontalBoxFit.width);
+            opmode.telemetry.addData("height", myHorizontalBoxFit.height);
+            //pointsOverTime (angleOfSample)
+
+
+            val leftMost = getMostLeftPoint(allBlobs[0].contourPoints)
+            val rightMost = getMostRightPoint(allBlobs[0].contourPoints)
+
+            if (leftMost != null) {
+                if (rightMost != null) {
+                    degreeAngle = if (leftMost.y < rightMost.y) { //angled this way //
+                        boxFit.angle
+                    } else { //angled this way \\
+                        boxFit.angle + 90
+
+                    }
+                }
+            }
+
         }
 //        if (alignSwivelButtonPreviouslyPressed && !alignSwivelButtonCurrentlyPressed) {
 //            if (pointsOverTime.isNotEmpty()) {
@@ -204,11 +231,12 @@ object Vision { //Prefix for commands
             opmode.telemetry.addData("angles",7.0/1800.0*(allBlobs[0].boxFit.angle%180)+0.15)
             opmode.telemetry.addData("fit line", calculateSlope(allBlobs[0].contourPoints))
             opmode.telemetry.addData("fit line calced", atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)
+            opmode.telemetry.update()
         } else {
-            opmode.telemetry.addData("none", "all angles")
+            //opmode.telemetry.addData("none", "all angles")
         }
 
-        opmode.telemetry.update()
+//        opmode.telemetry.update()
 
     }
 
@@ -292,4 +320,16 @@ object Vision { //Prefix for commands
         return m
     }
 
+    private fun getHighestPoint(points: Array<out Point?>): Point? {
+        return points.filterNotNull() // Filter out the null points
+            .maxByOrNull { it.y } // Find the point with the highest y value
+    }
+    private fun getMostLeftPoint(points: Array<out Point?>): Point? {
+        return points.filterNotNull() // Filter out the null points
+            .minByOrNull { it.x } // Find the point with the highest y value
+    }
+    private fun getMostRightPoint(points: Array<out Point?>): Point? {
+        return points.filterNotNull() // Filter out the null points
+            .maxByOrNull { it.x } // Find the point with the highest y value
+    }
 }
