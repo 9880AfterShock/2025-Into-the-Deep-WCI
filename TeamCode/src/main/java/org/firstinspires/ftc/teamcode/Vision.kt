@@ -77,10 +77,10 @@ object Vision { //Prefix for commands
             .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
             .setRoi(
                 ImageRegion.asUnityCenterCoordinates(
-                    -0.8,
-                    0.7,
-                    0.9,
-                    -0.9
+                    -0.7,
+                    0.6,
+                    0.8,
+                    -0.8
                 )
             ) // search central main area of camera view
             .setDrawContours(true) // Show contours on the Stream Preview
@@ -92,10 +92,10 @@ object Vision { //Prefix for commands
             .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
             .setRoi(
                 ImageRegion.asUnityCenterCoordinates(
-                    -0.8,
-                    0.7,
-                    0.9,
-                    -0.9
+                    -0.7,
+                    0.6,
+                    0.8,
+                    -0.8
                 )
             ) // search central main area of camera view
             .setDrawContours(true) // Show contours on the Stream Preview
@@ -107,10 +107,10 @@ object Vision { //Prefix for commands
             .setContourMode(ColorBlobLocatorProcessor.ContourMode.EXTERNAL_ONLY) // exclude blobs inside blobs
             .setRoi(
                 ImageRegion.asUnityCenterCoordinates(
-                    -0.8,
-                    0.7,
-                    0.9,
-                    -0.9
+                    -0.7,
+                    0.6,
+                    0.8,
+                    -0.8
                 )
             ) // search central main area of camera view
             .setDrawContours(true) // Show contours on the Stream Preview
