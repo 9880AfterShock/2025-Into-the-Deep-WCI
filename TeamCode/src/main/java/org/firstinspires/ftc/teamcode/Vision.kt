@@ -178,6 +178,7 @@ object Vision { //Prefix for commands
         if (alignSwivelButtonCurrentlyPressed && !alignSwivelButtonPreviouslyPressed) {
             pointsOverTime = intArrayOf()
             if (allBlobs.isNotEmpty()) {
+                Swivel.restingState = 7.0/1800.0*(degreeAngle%180)+0.15
                 //Swivel.restingState = 7.0/1800.0*(allBlobs[0].boxFit.angle%180.0)+0.15 //box of best fit
 //                Swivel.restingState = 7.0/1800.0*((atan(calculateSlope(allBlobs[0].contourPoints))*180/PI)%180.0)+0.15 //line of best fit of all points
 
@@ -211,6 +212,8 @@ object Vision { //Prefix for commands
                     }
                 }
             }
+            opmode.telemetry.addData("real angle ======",7.0/1800.0*(degreeAngle%180)+0.15)
+
 
         }
 //        if (alignSwivelButtonPreviouslyPressed && !alignSwivelButtonCurrentlyPressed) {
