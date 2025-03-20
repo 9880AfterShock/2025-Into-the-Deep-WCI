@@ -141,8 +141,13 @@ object Vision { //Prefix for commands
         val yellowBlobs = colorLocatorYellow.blobs
         val redBlobs = colorLocatorRed.blobs
         val blueBlobs = colorLocatorBlue.blobs
+        //val allBlobs = colorLocatorYellow.blobs + colorLocatorRed.blobs + colorLocatorBlue.blobs
 
-        val allBlobs = colorLocatorYellow.blobs + colorLocatorRed.blobs + colorLocatorBlue.blobs
+        val allBlobs = if (opmode.gamepad1.left_stick_x.toDouble() > 0.0) { //filter by driver input
+            colorLocatorYellow.blobs
+        } else {
+            colorLocatorRed.blobs + colorLocatorBlue.blobs
+        }
 
         ColorBlobLocatorProcessor.Util.filterByArea(
             100.0,
