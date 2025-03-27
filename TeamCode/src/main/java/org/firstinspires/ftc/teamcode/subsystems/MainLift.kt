@@ -22,11 +22,11 @@ object MainLift { //Prefix for commands
     @JvmField
     var pickUpPos = doubleArrayOf(2.0, 2.6, 2.7) //poses for pickup during auto
     @JvmField
-    var maxPos = 7.0 //all the way up
+    var maxPos = 3.25 //7.0 //all the way up
     @JvmField
-    var maxLowPos = 3.325 //maximum position when lowered
+    var maxLowPos = 3.25 //3.325 //maximum position when lowered
     @JvmField
-    var maxHangPos = 3.5 //maximum position when in hanging mode //temp values, CHANGE!
+    var maxHangPos = 3.25 //3.5 //maximum position when in hanging mode //temp values, CHANGE!
     lateinit var opmode: OpMode //opmode var innit
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
