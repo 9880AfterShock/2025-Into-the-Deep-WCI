@@ -30,7 +30,7 @@ class TeleOpMode : LinearOpMode() {
         MainLift.initLift(this)
         Raiser.initRaiser(this)
         Wrist.initWrist(this)
-        SampleColorSensor.initColorSensor(this, 3.0F, "SampleColorSensor")
+        //SampleColorSensor.initColorSensor(this, 3.0F, "SampleColorSensor")
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
         SpecimenSwivel.initSwivel(this) //added because changes
