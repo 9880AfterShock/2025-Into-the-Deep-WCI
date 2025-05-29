@@ -60,7 +60,7 @@ public final class MecanumDrive {
         public RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection =
                 RevHubOrientationOnRobot.LogoFacingDirection.UP;
         public RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection =
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+                RevHubOrientationOnRobot.UsbFacingDirection.LEFT;
 
         // drive model parameters
         public double inPerTick = 1;
@@ -282,10 +282,10 @@ public final class MecanumDrive {
         public boolean run(@NonNull TelemetryPacket p) {
             double t;
             if (beginTs < 0) {
-                beginTs = Actions.now();
+                beginTs = Actions.INSTANCE.now();
                 t = 0;
             } else {
-                t = Actions.now() - beginTs;
+                t = Actions.INSTANCE.now() - beginTs;
             }
 
             if (t >= timeTrajectory.duration) {
@@ -374,10 +374,10 @@ public final class MecanumDrive {
         public boolean run(@NonNull TelemetryPacket p) {
             double t;
             if (beginTs < 0) {
-                beginTs = Actions.now();
+                beginTs = Actions.INSTANCE.now();
                 t = 0;
             } else {
-                t = Actions.now() - beginTs;
+                t = Actions.INSTANCE.now() - beginTs;
             }
 
             if (t >= turn.duration) {
