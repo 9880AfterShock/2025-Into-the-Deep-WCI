@@ -1,11 +1,14 @@
-package Mechanisms.Scoring;
+package org.firstinspires.ftc.teamcode.Mechanisms.Scoring;
 
-import static Mechanisms.Pickup.Claw.lastDropTimestamp;
+
+import static org.firstinspires.ftc.teamcode.Mechanisms.Pickup.Claw.lastDropTimestamp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import Mechanisms.Transfer.PipeWrench;
+import org.firstinspires.ftc.teamcode.Mechanisms.Transfer.PipeWrench;
+
+
 
 public class BasketLift { // Prefix for commands
     private static DcMotor lift; // Init Motor Var

@@ -1,9 +1,10 @@
-package Sensors;
+package org.firstinspires.ftc.teamcode.Sensors;
 
 import android.util.Size;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.SortOrder;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Mechanisms.Pickup.Swivel;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor;
 import org.firstinspires.ftc.vision.opencv.ColorRange;
@@ -14,7 +15,6 @@ import org.opencv.core.RotatedRect;
 import java.util.ArrayList;
 import java.util.List;
 
-import Mechanisms.Pickup.Swivel;
 
 public class Vision { //Prefix for commands
 

@@ -1,7 +1,8 @@
-package Mechanisms.Pickup;
+package org.firstinspires.ftc.teamcode.Mechanisms.Pickup;
 
-import static Mechanisms.Pickup.Claw.lastDropTimestamp;
-import static Mechanisms.Scoring.BasketLift.dropDelay;
+
+import static org.firstinspires.ftc.teamcode.Mechanisms.Pickup.Claw.lastDropTimestamp;
+import static org.firstinspires.ftc.teamcode.Mechanisms.Scoring.BasketLift.dropDelay;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;

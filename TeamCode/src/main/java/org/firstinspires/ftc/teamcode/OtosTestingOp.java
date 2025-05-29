@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+@Disabled
 @TeleOp(name = "Otos testing opmode of DOOOOOOOOM")
 public class OtosTestingOp extends LinearOpMode {
     // Create an instance of the sensor

@@ -1,4 +1,4 @@
-package Mechanisms.Scoring;
+package org.firstinspires.ftc.teamcode.Mechanisms.Scoring;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;

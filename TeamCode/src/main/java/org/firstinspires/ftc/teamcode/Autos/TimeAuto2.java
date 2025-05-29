@@ -1,4 +1,4 @@
-package Autos;
+package org.firstinspires.ftc.teamcode.Autos;
 
 import static java.lang.Math.abs;
 
@@ -14,8 +14,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
-//@Disabled
-@Autonomous(name="Time Auto 2 Spec + Park")
+@Disabled
+@Autonomous(name="Time Auto 2 Spec + Park INCONSISTEND")
 public class TimeAuto2 extends LinearOpMode {
     private DcMotor frontLeftDrive   = null;
     private DcMotor frontRightDrive  = null;

@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.teamcode.primary
+package org.firstinspires.ftc.teamcode
 
 //import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.NormalizedRGBA
@@ -24,7 +25,7 @@ import org.firstinspires.ftc.teamcode.TeamColor
 
 @TeleOp(name = "9880 TeleOpMode Into-the-Deep") //change string for display name
 //Toggle Disabled to make appear in list or not.
-//@Disabled
+@Disabled
 class TeleOpMode : LinearOpMode() {
     private val runtime = ElapsedTime()
     //Make Motor Vars
